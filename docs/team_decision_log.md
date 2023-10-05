@@ -27,7 +27,7 @@ you like the best.
 |   |	- Heroku (suitable for FE, BE, & Postgres) | | | | | | |
 |   |	- Railway (works with most DBs)  | | | | | | |
 |   |	- Mongo Atlas (suitable only for MongoDB) | | | | | | |
-|   | - Add additional options here | | | | | | |
+|   | - Vercel | | | | | | x |
 | 5	| BE/FE repos organization | | | | | | |
 |   |	- Separate GitHub repos for each | | | | | | |
 |   |	- Single GitHub repo for both | | | | | | |
