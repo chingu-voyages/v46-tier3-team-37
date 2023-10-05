@@ -18,7 +18,7 @@ you like the best.
 | 2	| Project Backlog Tool | | | | | | |
 |   |	- GitHub Project | | | | | | |
 | 3	| Technical Stack (vote by adding your pref. in the cell under your name) | | | | | | |
-|   |	- BE Language | | | | | |PostgreSQL|
+|   |	- BE Language | | | | | |PostgreSQL with Prisma ORM|
 |   |	- FE Language | | | | | |TypeScript|
 |   |	- FE Framework | | | | | |Next.js with app router|
 |   |	- ML Framework | | | | | | |
