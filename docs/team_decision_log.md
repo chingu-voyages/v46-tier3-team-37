@@ -37,9 +37,10 @@ you like the best.
 |   |	- Balsamiq |X| | | | | |
 |   |	- Figma | |X| | | |X|
 |   |	- Wireframe.cc | | | | | | |
-
 | 7	| Who works in which part of the app? | | | | | | |
 |   | - BE (not applicable for Tier 1 teams) | | | | | |X|
 |   |	- FE | |X| | | |X|
-| 8	| ... | | | | | | |
+| 8	| Dev/Prod repos organization | | | | | | |
+|   |	- Separate GitHub repos for each | | | | | |X|
+|   |	- Single GitHub repo for both | | | | | ||
 | n | ... | | | | | | |
