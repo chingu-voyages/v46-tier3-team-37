@@ -28,6 +28,7 @@ you like the best.
 |   |	- Railway (works with most DBs)  | | | | | | |
 |   |	- Mongo Atlas (suitable only for MongoDB) | | | | | | |
 |   | - Vercel | | | | | |X|
+|   | - Render | | | | | |X|
 | 5	| BE/FE repos organization | | | | | | |
 |   |	- Separate GitHub repos for each | | | | | | |
 |   |	- Single GitHub repo for both | | | | | |X|
