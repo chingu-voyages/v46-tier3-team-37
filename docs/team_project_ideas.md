@@ -12,7 +12,7 @@ you like the best.
 
 | Project Idea | Description | teammate name | teammate name | teammate name | teammate name | teammate name | teammate name |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| First idea | Description |test | | | | | |
-| Second idea | Description | | | | | | |
+| First idea | An app to output project cost estimates. For instace, you are a contractor and want to provide an estimate for your client. The contractor would input items, their original cost, overhead, tax rate, % add-on based on the total price, and any other expenses the contractor would want to add-on and the from would generate a card of invoice details. Maybe implement different file formats to download the invoice. |Yong | | | | | |
+| Second idea | An app to provide details about different react frameworks/UI libraries and distinguish which work best with next.js, etc.  | Yong | | | | | |
 | ... | Description | | | | | | |
 | Last idea | Description | | | | | | |
