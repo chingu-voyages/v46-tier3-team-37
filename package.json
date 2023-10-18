@@ -4,7 +4,9 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "prisma generate && prisma db push && prisma db seed && next build",
+    "build": "next build",
+    "seed": "prisma generate && prisma db push && prisma db seed",
+    "reset-db": "npx prisma migrate reset --force --skip-seed && npm run seed",
     "start": "next start",
     "lint": "next lint"
   },
