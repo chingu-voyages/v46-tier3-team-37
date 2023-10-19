@@ -17,6 +17,7 @@
     "next": "13.5.4",
     "react": "^18",
     "react-dom": "^18",
+    "tailwind-merge": "^1.14.0",
     "ts-node": "^10.9.1"
   },
   "devDependencies": {
