@@ -4,6 +4,7 @@ import menu from '../icons/menu.png';
 import shoppingCart from '../icons/shopping-cart.png';
 import magnifyingGlass from '../icons/magnifying-glass.png';
 import s from "./navbar.module.css";
+import Link from 'next/link';
 
 
 const NavBar: React.FC = () => {
@@ -15,13 +16,19 @@ const NavBar: React.FC = () => {
             </div>
             <div className={s.homeAboutContact}>
                 <div className={s.home}>
-                    Home
+                    <Link href="/">
+                        Home
+                    </Link>
                 </div>
                 <div className={s.about}>
-                    About
+                    <Link href="/about">
+                        About
+                    </Link>
                 </div>
                 <div className={s.contact}>
-                    Contact
+                    <Link href="/contact">
+                        Contact
+                    </Link>
                 </div>
             </div>
             <div className={s.logoContainer}>
