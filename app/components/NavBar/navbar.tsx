@@ -9,6 +9,7 @@ import Link from 'next/link';
 
 const NavBar: React.FC = () => {
 
+
     return (
         <div className={s.navbarContainer}>
             <div className={s.menuContainer}>
@@ -37,13 +38,22 @@ const NavBar: React.FC = () => {
             <div className={s.searchBarContainer}>
                 <div className={s.searchBar}>
                     <div className={s.searchIcon}>
-                        <div><Image src={magnifyingGlass} className={s.magnifyingGlassIcon} alt="" /></div>
-                        <div>Search for tools</div>
+                        <input className={s.searchInput}
+                            type="search"
+                            placeholder="Search for tools"
+                        // value={searchInput}
+                        // onChange={(e) => setSearchInput(e.target.value)} 
+                        />
+                        <div>
+                            <Image src={magnifyingGlass} className={s.magnifyingGlassIcon} alt="" />
+                        </div>
                     </div>
                 </div>
             </div>
             <div className={s.shoppingCartContainer}>
-                <Image src={shoppingCart} className={s.shoppingCartIcon} alt="" />
+                <Link href="/cart">
+                    <Image src={shoppingCart} className={s.shoppingCartIcon} alt="" />
+                </Link>
             </div>
         </div>
     )

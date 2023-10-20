@@ -37,11 +37,15 @@
 .searchBar {
     width: 90px;
     height: 20px;
-    background-color:rgb(230, 230, 230);
+    background-color:rgb(240, 239, 239);
     border-radius: 4px;
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.searchInput {
+    background-color:rgb(240, 239, 239);
 }
 
 .searchIcon {
