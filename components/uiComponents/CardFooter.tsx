@@ -2,12 +2,12 @@ import { cva, type VariantProps } from "class-variance-authority";
 import React from 'react';
 
 const CardFooterVariants = cva(
-    "flex px-5 ",
+    "flex dark:bg-foregroundPrimary",
     {
         variants: {
             variant: {
                 default: "my-3 justify-end gap-5",
-                detailed: "bg-[white] flex-col gap-4 shadow-md dark:bg-foregroundPrimary font-normal text-sm py-4",
+                detailed: "bg-[white] flex-col gap-4 shadow-md font-normal text-sm py-4",
             },
             size: {
                 default: "w-full",
@@ -45,7 +45,7 @@ export default function CardFooter({ variant, parentVariant, size, price, childr
     return (
         <div className={CardFooterVariants({ variant, size })}>
             {
-                 show ?
+                 show && parentVariant === 'detailed' ?
                     <div className={`bg-[white] flex flex-col w-full gap-4 shadow-md dark:bg-foregroundPrimary font-normal text-sm px-5 py-4`}>
                         <span>
                             <p><b>price:</b> {price}</p>
