@@ -14,7 +14,7 @@ const buttonVariants = cva(
       variant: {
         default: "dark:text-[#FFFFFF] border-4 text-sm font-semibold text-black dark:bg-backgroundPrimary dark:hover:bg-[#424242] dark:border-[#2F2F2F]",
         icon: "text-sm font-light border-1 border ",
-        sm: "border border-1",
+        thin: "border border-1",
         warning: "text-red dark:text-pink"
       },
       size: {
@@ -42,10 +42,11 @@ const buttonVariants = cva(
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
   VariantProps<typeof buttonVariants> {
-  }
+    cardType?: 'default' | 'detailed'
+}
 
-export default function Button({className, variant, size, children, ...props }: ButtonProps) {
+export default function Button({ className, variant, size, cardType, children, ...props }: ButtonProps) {
   return (
-    <button className={buttonVariants({variant, size, className})} {...props} >{children}</button>
+    <button className={buttonVariants({ variant, size, className })} {...props} >{children}</button>
   )
 }

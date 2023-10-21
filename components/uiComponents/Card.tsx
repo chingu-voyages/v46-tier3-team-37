@@ -1,10 +1,11 @@
 'use client';
 
 import React, { useState } from "react";
-import { cva, cx, type VariantProps } from "class-variance-authority";
-import { twMerge as cm } from "tailwind-merge";
-import Image from "next/image";
+import { cva, type VariantProps } from "class-variance-authority";
 import Button from "./Button";
+import CardImage from "./CardImage";
+import CardBody from "./CardBody";
+import CardFooter from "./CardFooter";
 // import { twMerge as cnm } from "tailwind-merge";
 
 
@@ -46,7 +47,7 @@ const cardVariants = cva(
     }
 );
 
-export interface cardProps
+interface cardProps
     extends React.HTMLAttributes<HTMLDivElement>,
     VariantProps<typeof cardVariants> {
     imageSrc?: string,
@@ -56,12 +57,7 @@ export interface cardProps
     description?: string,
 }
 
-const ImageContainerVariants = {
-    variants: {
-        default: "flex border border-x-0 border-t-0 border-b-1 border-[lightgray] h-1/2 w-full bg-[white]",
-        detailed: "border-0  basis-1/4 bg-[white]"
-    }
-}
+
 
 export default function Card({
     className,
@@ -78,52 +74,25 @@ export default function Card({
 }: cardProps) {
 
 
+
     const [show, setShow] = useState(false);
     const handleClick = () => {
         setShow(!show)
     }
 
+  
+
     return (
         <>
             <div onClick={handleClick} className={cardVariants({ className, variant, size })} {...props}>
-                <div className={`${variant === 'default' ? ImageContainerVariants.variants.default : ImageContainerVariants.variants.detailed}`}>
-                    < Image
-                        src={imageSrc}
-                        alt="Product Preview"
-                        height={400}
-                        width={100}
-                        priority
-                        className="relative m-auto"
-                    />
-                </div>
-                <div className="flex flex-row justify-center shrink-0 basis-3/4 grow text-center text-clip bg-[#F6F6F6] dark:bg-foregroundPrimary w-full border-b-1 border-[black]">
-                    {variant === 'detailed' ? <div className={`m-1 p-1 h-2 w-2 rounded-full ${active ? 'bg-[#12ad12]' : 'bg-[red]'}`} /> : null}
-                    <span >
-                        <h4>{title}</h4>
-                        <p className="font-normal text-xs text-ellipsis text-[black] dark:text-[white] ">{description}</p>
-                    </span>
-                </div>
-                {
-                    variant === 'default' ? <div className="w-full px-5 my-3 flex justify-end gap-5 max-h-5" >
-                        <Button size={'sm'} variant={'sm'}>Cancel</Button>
-                        <Button size={'icon'} variant={'icon'}>I</Button>
-                    </div> : null
-                }
-                {
-                    variant === 'detailed' && show ?
-                        <div className={`bg-[white] flex flex-col w-full gap-4 shadow-md dark:bg-foregroundPrimary font-normal text-sm border border-1 border-[white] px-5 py-4`}>
-                            <span>
-                                <p><b>price:</b> {price}</p>
-                                <p>other details TODO</p>
-                            </span>
-                            <Button className="self-end" variant={'sm'} size={'sm'}>Edit</Button>
-                        </div>
-
-                        : null
-
-                }
+                <CardImage variant={variant} size={'default'} imageSrc={imageSrc} />
+                <CardBody active={active} variant={variant} size={'default'} description={description} title={title} />
+                <CardFooter parentVariant={variant} show={show} >
+                    {children}
+                </CardFooter>
             </div >
 
         </>
     )
 }
+
