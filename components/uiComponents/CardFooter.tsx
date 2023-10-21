@@ -6,7 +6,7 @@ const CardFooterVariants = cva(
     {
         variants: {
             variant: {
-                default: "my-3 justify-end gap-5 max-h-5",
+                default: "my-3 justify-end gap-5",
                 detailed: "bg-[white] flex-col gap-4 shadow-md dark:bg-foregroundPrimary font-normal text-sm py-4",
             },
             size: {
@@ -41,16 +41,17 @@ export default function CardFooter({ variant, parentVariant, size, price, childr
             defaultBtn = child
         } else { return }
     })
+    console.log(show)
     return (
         <div className={CardFooterVariants({ variant, size })}>
             {
-                variant === 'detailed' && show ?
+                 show ?
                     <div className={`bg-[white] flex flex-col w-full gap-4 shadow-md dark:bg-foregroundPrimary font-normal text-sm px-5 py-4`}>
                         <span>
                             <p><b>price:</b> {price}</p>
                             <p>other details TODO</p>
                         </span>
-                        {React.Children.map(detailedBtn, (child) => <>{child}</>)}
+                        <div className="flex justify-end gap-3">{React.Children.map(detailedBtn, (child) => <>{child}</>)}</div>
                     </div>
                     :
                     <>{defaultBtn}</>

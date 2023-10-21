@@ -58,7 +58,22 @@ interface cardProps
 }
 
 
-
+/**
+ * 
+ * @param className
+* @param   variant
+* @param   size
+* @param   imageSrc = '/2516402-21-base-v2.webp'
+* @param   description = 'No Description Provided'
+* @param   title
+* @param   active = false
+* @param   price
+* @param   children only excepts button children
+ * @returns Card Element
+ * 
+ * @description < Card >< Button >btn 1</ Button ></ Card >
+ * card in default mode only uses the first button passed.
+ */
 export default function Card({
     className,
     variant,
