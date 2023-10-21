@@ -20,7 +20,7 @@ const cardVariants = cva(
         variants: {
             variant: {
                 default: "items-center my-2",
-                detailed: "justify-center bg-[lightgray]"
+                detailed: "justify-center"
             },
             size: {
                 default: "w-full",
