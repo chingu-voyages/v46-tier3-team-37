@@ -3,7 +3,7 @@ import Image from "next/image";
 
 export default function Settings() {
     return (
-        <div className="h-screen flex items-center lg:px-40 flex-col mt-10">
+        <div className="h-screen flex items-center lg:w-3/4 lg:mx-auto flex-col mt-10">
             <section aria-labelledby="User Info" className="w-3/4 text-center ">
                 <h4 className="border-b-2 border-b-[lightgray] dark:border-b-[#3d3d3d]">User Info</h4>
                 <ul className="my-10 md:mx-32 lg:mx-0">
