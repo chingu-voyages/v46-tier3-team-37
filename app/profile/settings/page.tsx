@@ -25,11 +25,11 @@ export default function Settings() {
                 <h4 className="border-b-2 border-b-[lightgray] dark:border-b-[#3d3d3d]">User Credentials</h4>
                 <ul className="my-10 md:mx-32 lg:bg-blue">
                     <li className="flex lg:justify-around justify-between my-10">
-                        <Image src={'/facebook.png'} height={30} width={30} alt='facebook logo' />
+                        Email
                         <Button className="basis-1/2" variant={'thin'} size={'sm'}>change email</Button>
                     </li>
                     <li className="flex lg:justify-around justify-between my-10">
-                        <Image src={'/facebook.png'} height={30} width={30} alt='facebook logo' />
+                        Password
                         <Button className="basis-1/2" variant={'thin'} size={'sm'}>change password</Button>
                     </li>
                 </ul>
