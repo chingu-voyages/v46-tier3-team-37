@@ -20,6 +20,8 @@ const config: Config = {
     colors: {
       foregroundPrimary: "var(--foreground-primary)",
       backgroundPrimary: "var(--background-primary)",
+      fontPrimary: "var(--font-primary)",
+      fontSecondary: "var(--font-secondary)",
     },
   },
   plugins: [],
