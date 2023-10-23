@@ -2,8 +2,13 @@ import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import NavBar from './components2/NavBar/navbar'
+import { Lexend_Deca } from 'next/font/google'
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Lexend_Deca({
+  subsets: ['latin'],
+  weight: ['100', '300', '400', '500', '600', '700'],
+  variable: '--font-lexend-Deca'
+})
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -21,6 +26,7 @@ export default function RootLayout({
         <NavBar />
         {children}
       </body>
+      <body className={`${inter.variable} font-sans`}>{children}</body>
     </html>
 
   )
