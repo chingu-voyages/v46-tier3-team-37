@@ -15,7 +15,7 @@ const NavBar: React.FC = () => {
     const router = useRouter();
 
     const [searchInput, setSearchInput] = React.useState<string>("");
-    let [showCart, setShowCart] = useState<boolean>(false);
+    const [showCart, setShowCart] = React.useState<boolean>(false);
 
 
 

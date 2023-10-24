@@ -1,7 +1,8 @@
 "use client"
-
 import { useSearchParams } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
+import Button from "@/components/uiComponents/Button";
+import Card from "@/components/uiComponents/Card";
 
 type Tool = {
     id: string,
@@ -37,10 +38,23 @@ const SearchResults: React.FC = () => {
 
     return (
         <div>
-            <div>SEARCH RESULTS</div>
-            {toolsByName.map(tool => (
-                <div key={tool.id}>{tool.name}</div>
-            ))
+            {toolsByName.length > 0
+                ?
+                <div>
+                    {toolsByName.map(tool => (
+                        <div className="flex justify-center mt-4" key={tool.id}>
+                            <div className="flex gap-2 flex-col md:w-1/2">
+                                <div key={tool.id}>
+                                    <Card active={true} variant={'detailed'} title={tool.name} description={tool.description}>
+                                        <Button variant={'thin'} size={'sm'} cardType='detailed'>More info</Button>
+                                    </Card>
+                                </div>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+                :
+                <div>No tools found</div>
             }
         </div>
     )
