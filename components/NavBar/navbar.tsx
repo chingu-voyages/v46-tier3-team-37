@@ -1,4 +1,5 @@
 "use client"
+
 import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 import Image from 'next/image';
@@ -14,12 +15,21 @@ const NavBar: React.FC = () => {
     const router = useRouter();
 
     const [searchInput, setSearchInput] = React.useState<string>("");
+    let [showCart, setShowCart] = useState<boolean>(false);
+
 
 
     const routeToSearchResults = () => {
         router.push(`/searchResults/${searchInput}`)
     }
 
+    const openCart = () => {
+        setShowCart(true);
+    }
+
+    const closeCart = () => {
+        setShowCart(false);
+    }
 
     return (
         <div className={s.navbarContainer}>
@@ -64,10 +74,17 @@ const NavBar: React.FC = () => {
                 </div>
             </div>
             <div className={s.shoppingCartContainer}>
-                <Link href="/cart">
+                <div onClick={openCart}>
                     <Image src={shoppingCart} className={s.shoppingCartIcon} alt="" />
-                </Link>
+                </div>
             </div>
+            {showCart &&
+                <div>
+                    <div onClick={closeCart}>
+                        X
+                    </div>
+                    HELLO
+                </div>}
         </div>
     )
 };

@@ -1,7 +1,7 @@
 import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
-import NavBar from '../components/navbar/navbar'
+import NavBar from '../components/NavBar/navbar'
 import { Lexend_Deca } from 'next/font/google'
 
 const inter = Lexend_Deca({
