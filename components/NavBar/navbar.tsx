@@ -19,8 +19,8 @@ const NavBar: React.FC = () => {
 
 
 
-    const routeToSearchResults = () => {
-        router.push(`/searchResults?toolName=${searchInput}`)
+    const routeToSearchResults = (toolName: string) => {
+        router.push(`/searchResults?toolName=${toolName}`)
     }
 
     const openCart = () => {

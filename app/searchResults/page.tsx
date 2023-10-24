@@ -20,7 +20,8 @@ const SearchResults: React.FC = () => {
     const [toolsData, setToolsData] = React.useState<Tool[]>([]);
     const [isLoading, setLoading] = React.useState<boolean>(true);
 
-    let toolsByName: Tool[];
+    let toolsByName: Tool[] = [];
+    
     if (toolName) {
         toolsByName = toolsData
             .filter(tool => tool.name.toLowerCase().includes(toolName.toLowerCase()));
