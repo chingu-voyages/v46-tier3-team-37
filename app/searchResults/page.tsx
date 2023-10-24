@@ -12,7 +12,6 @@ type Tool = {
     price: number
 }
 
-
 const SearchResults: React.FC = () => {
     const searchParams = useSearchParams();
     const toolName = searchParams.get('toolName');
@@ -36,13 +35,13 @@ const SearchResults: React.FC = () => {
     }, [])
 
 
-    console.log('data', toolsData)
-    console.log('toolsByName', toolsByName)
-
-
     return (
         <div>
             <div>SEARCH RESULTS</div>
+            {toolsByName.map(tool => (
+                <div key={tool.id}>{tool.name}</div>
+            ))
+            }
         </div>
     )
 }
