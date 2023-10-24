@@ -20,7 +20,7 @@ const NavBar: React.FC = () => {
 
 
     const routeToSearchResults = () => {
-        router.push(`/searchResults/${searchInput}`)
+        router.push(`/searchResults?toolName=${searchInput}`)
     }
 
     const openCart = () => {
