@@ -1,3 +1,6 @@
+"use client"
+import { useRouter } from 'next/navigation';
+import React, { useState } from 'react';
 import Image from 'next/image';
 import logo from '../icons/logo.png';
 import menu from '../icons/menu.png';
@@ -8,6 +11,14 @@ import Link from 'next/link';
 
 
 const NavBar: React.FC = () => {
+    const router = useRouter();
+
+    const [searchInput, setSearchInput] = React.useState<string>("");
+
+
+    const routeToSearchResults = () => {
+        router.push(`/searchResults/${searchInput}`)
+    }
 
 
     return (
@@ -41,11 +52,13 @@ const NavBar: React.FC = () => {
                         <input className={s.searchInput}
                             type="search"
                             placeholder="Search for tools"
-                        // value={searchInput}
-                        // onChange={(e) => setSearchInput(e.target.value)} 
+                            value={searchInput}
+                            onChange={(e) => setSearchInput(e.target.value)}
                         />
                         <div>
-                            <Image src={magnifyingGlass} className={s.magnifyingGlassIcon} alt="" />
+                            <button onClick={() => routeToSearchResults(searchInput)}>
+                                <Image src={magnifyingGlass} className={s.magnifyingGlassIcon} alt="" />
+                            </button>
                         </div>
                     </div>
                 </div>
