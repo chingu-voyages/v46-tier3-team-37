@@ -3,6 +3,8 @@ import { useSearchParams } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 import Button from "@/components/uiComponents/Button";
 import Card from "@/components/uiComponents/Card";
+import s from "./page.module.css";
+
 
 type Tool = {
     id: string,
@@ -21,7 +23,7 @@ const SearchResults: React.FC = () => {
     const [isLoading, setLoading] = React.useState<boolean>(true);
 
     let toolsByName: Tool[] = [];
-    
+
     if (toolName) {
         toolsByName = toolsData
             .filter(tool => tool.name.toLowerCase().includes(toolName.toLowerCase()));
@@ -38,15 +40,16 @@ const SearchResults: React.FC = () => {
 
 
     return (
-        <div>
+        <div className={s.searchResultsContainer}>
             {toolsByName.length > 0
                 ?
-                <div>
+                <div className={s.searchResults}>
+                    <div>Search results for &apos;'{toolName}'&apos;</div>
                     {toolsByName.map(tool => (
                         <div className="flex justify-center mt-4" key={tool.id}>
                             <div className="flex gap-2 flex-col md:w-1/2">
                                 <div key={tool.id}>
-                                    <Card active={true} variant={'detailed'} title={tool.name} description={tool.description}>
+                                    <Card active={true} variant={'default'} title={tool.name} description={tool.description} >
                                         <Button variant={'thin'} size={'sm'} cardType='detailed'>More info</Button>
                                     </Card>
                                 </div>
@@ -55,7 +58,7 @@ const SearchResults: React.FC = () => {
                     ))}
                 </div>
                 :
-                <div>No tools found</div>
+                <div>No tools found for `{toolName}`</div>
             }
         </div>
     )
