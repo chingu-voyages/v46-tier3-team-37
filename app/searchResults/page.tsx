@@ -37,7 +37,7 @@ const SearchResults: React.FC = () => {
             {toolsByName.length > 0
                 ?
                 <div className={s.searchResults}>
-                    <div>Search results for &apos;'{toolName}'&apos;</div>
+                    <div>Search results for &apos;&apos;{toolName}&apos;&apos;</div>
                     {toolsByName.map(tool => (
                         <div className="flex justify-center mt-4" key={tool.id}>
                             <div className="flex gap-2 flex-col md:w-1/2">
