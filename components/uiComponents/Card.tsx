@@ -2,7 +2,6 @@
 
 import React, { useState } from "react";
 import { cva, type VariantProps } from "class-variance-authority";
-import Button from "./Button";
 import CardImage from "./CardImage";
 import CardBody from "./CardBody";
 import CardFooter from "./CardFooter";
@@ -15,7 +14,7 @@ import CardFooter from "./CardFooter";
  * If you need to make changes or create a new button add a variant with the tailwind classes you need the warning variant is there as an example. feel free to add more sizes also. 
  */
 const cardVariants = cva(
-    "group flex h-auto flex-wrap text-sm font-semibold text-black shadow-md shadow-[#797979] bg-white dark:text-[#FFFFFF] dark:bg-foregroundPrimary dark:hover:bg-[#424242] ",
+    "group flex h-auto flex-wrap text-sm font-semibold text-black shadow-md shadow-[#797979] dark:shadow-[#0b0b0b] bg-[#f6f6f6] dark:text-[#FFFFFF] dark:bg-foregroundPrimary",
     {
         variants: {
             variant: {
@@ -99,7 +98,7 @@ export default function Card({
 
     return (
         <>
-            <div onClick={handleClick} className={cardVariants({ className, variant, size })} {...props}>
+            <div onClick={handleClick} className={`${variant === 'detailed' && 'hover:cursor-pointer'} ${cardVariants({ className, variant, size })}`} {...props}>
                 <CardImage variant={variant} size={'default'} imageSrc={imageSrc} />
                 <CardBody active={active} variant={variant} size={'default'} description={description} title={title} />
                 <CardFooter parentVariant={variant} show={show} >

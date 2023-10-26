@@ -55,13 +55,14 @@ const NavBar: React.FC = () => {
         return () => document.removeEventListener("click", closeMenu);
     }, [showMenu]);
 
+
     return (
-        <div className={s.navbarContainer}>
-            <div className={s.menuSearchBarContainer}>
-                <div className={s.menuContainer} onClick={openMenu}>
+        <section className={s.navbarContainer}>
+            <ul className={s.menuSearchBarContainer}>
+                <li className={s.menuContainer} onClick={openMenu}>
                     <Image src={menu} className={s.menuIcon} alt="" />
-                </div>
-                <div className={s.searchBarContainer}>
+                </li>
+                <li className={s.searchBarContainer}>
                     <div className={s.searchBar}>
                         <div className={s.searchIcon}>
                             <input className={s.searchInput}
@@ -77,37 +78,37 @@ const NavBar: React.FC = () => {
                             </div>
                         </div>
                     </div>
-                </div>
+                </li>
                 {showMenu &&
-                    <div className={s.menuOptionsContainer}>
-                        <div>
+                    <ul className={s.menuOptionsContainer}>
+                        <li>
                             <Link href="/">
                                 Home
                             </Link>
-                        </div>
-                        <div>
+                        </li>
+                        <li>
                             <Link href='/profile'>
                                 My profile
                             </Link>
-                        </div>
-                        <div>
+                        </li>
+                        <li>
                             <Link href='/list'>
                                 List a tool
                             </Link>
-                        </div>
-                        <div>
+                        </li>
+                        <li>
                             <Link href='/about'>
                                 About
                             </Link>
-                        </div>
-                        <div>
+                        </li>
+                        <li>
                             <Link href='/contact'>
                                 Contact
                             </Link>
-                        </div>
-                    </div>
+                        </li>
+                    </ul>
                 }
-            </div>
+            </ul>
             <div className={s.logoContainer}>
                 <Image src={logo} className={s.logo} onClick={() => routeToLandingPage()} alt="" />
             </div>
@@ -117,38 +118,17 @@ const NavBar: React.FC = () => {
                 </div>
                 {showToolBox &&
                     <div className={s.toolBoxDropDownContainer}>
-                        <div>
-                            <div>Item1 - price</div>
-                            <div>Item2 - price</div>
-                            <div>Item3 - price</div>
-                        </div>
+                        <ul>
+                            <ul>Item1 - price</ul>
+                            <ul>Item2 - price</ul>
+                            <ul>Item3 - price</ul>
+                        </ul>
                     </div>
                 }
             </div>
-        </div>
-
-
-
+        </section>
     )
 };
-
-{/* <div className={s.homeAboutContact}>
-                <div className={s.home}>
-                    <Link href="/">
-                        Home
-                    </Link>
-                </div>
-                <div className={s.about}>
-                    <Link href="/about">
-                        About
-                    </Link>
-                </div>
-                <div className={s.contact}>
-                    <Link href="/contact">
-                        Contact
-                    </Link>
-                </div>
-            </div> */}
 
 
 export default NavBar;

@@ -4,17 +4,9 @@ import React, { useEffect, useState } from 'react';
 // import { Tool } from "@/types/schemaTypes";
 import Button from "@/components/uiComponents/Button";
 import Card from "@/components/uiComponents/Card";
+import { Tool } from "@/types/schemaTypes";
 import s from "./page.module.css";
 
-
-type Tool = {
-    id: string,
-    description: string,
-    location: string,
-    name: string,
-    ownerId: string,
-    price: number
-}
 
 const SearchResults: React.FC = () => {
     const searchParams = useSearchParams();
@@ -38,7 +30,6 @@ const SearchResults: React.FC = () => {
                 setLoading(false)
             })
     }, [])
-
 
     return (
         <div className={s.searchResultsContainer}>
