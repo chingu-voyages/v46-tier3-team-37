@@ -1,0 +1,127 @@
+/* @tailwind base;
+@tailwind components;
+@tailwind utilities; */
+
+.navbarContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    background-color: white;
+    color: black;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid;
+    position: sticky;
+    top: 0;
+    z-index: 5;
+}
+
+.logoContainer {
+    width: 80px;
+}
+
+.logo {
+    height: 80px;
+    width: 80px;
+    border-radius: 10px;
+}
+
+.menuSearchBarContainer {
+    display: flex;
+    margin-left: 10px;
+}
+
+.menu-container {
+    width: 10px;
+}
+
+.menuIcon {
+    height: 15px;
+    width: 15px;
+}
+
+.searchBarContainer {
+    margin-left: 20px;
+    width: 70px;
+}
+
+.searchBar {
+    width: 70px;
+    height: 20px;
+    background-color:rgb(240, 239, 239);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.searchInput {
+    background-color:rgb(240, 239, 239);
+    width: 60px;
+    padding-left: 5px;
+}
+
+.searchIcon {
+    font-size: 0.4rem;;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.magnifyingGlassIcon {
+    height: 10px;
+    width: 10px;
+}
+
+.toolBoxContainer {
+    margin-right: 10px;
+    margin-left: 50px;
+    width: 50px;
+}
+
+.toolBoxIcon {
+    height: 40px;
+    width: 40px;
+}
+
+.homeAboutContact {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border-color: red;
+    width: 70px;
+}
+
+.home {
+    font-size: 0.4rem;
+}
+
+.about {
+    font-size: 0.4rem;
+}
+
+.contact {
+    font-size: 0.4rem;
+}
+
+.toolBoxDropDownContainer {
+    border: 1px solid;
+    position: absolute;
+    z-index: 10;
+    background-color: white;
+    width: 150px;
+    right: 0;
+}
+
+.menuOptionsContainer {
+    width: 120px;
+    /* height: 100px; */
+    position: absolute;
+    left: 0.5;
+    border: 1px solid;
+    margin-top: 30px;
+    background-color: white;
+    z-index: 10;
+}

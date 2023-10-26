@@ -1,5 +1,7 @@
 import './globals.css'
 import type { Metadata } from 'next'
+import { Inter } from 'next/font/google'
+import NavBar from '../components/NavBar/navbar'
 import { Lexend_Deca } from 'next/font/google'
 
 const inter = Lexend_Deca({
@@ -20,7 +22,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`dark:bg-backgroundPrimary ${inter.variable} font-sans`}>{children}</body>
+      <body className={`dark:bg-backgroundPrimary ${inter.variable} font-sans`}>
+        <NavBar />
+        {children}
+      </body>
     </html>
   )
 }
