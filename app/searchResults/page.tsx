@@ -17,6 +17,8 @@ const SearchResults: React.FC = () => {
 
     let toolsByName: Tool[] = [];
 
+    console.log('toolsData', toolsData)
+
     if (toolName) {
         toolsByName = toolsData
             .filter(tool => tool.name.toLowerCase().includes(toolName.toLowerCase()));
@@ -32,7 +34,7 @@ const SearchResults: React.FC = () => {
     }, [])
 
     return (
-        <div className={s.searchResultsContainer}>
+        <section className={s.searchResultsContainer}>
             {toolsByName.length > 0
                 ?
                 <div className={s.searchResults}>
@@ -52,7 +54,7 @@ const SearchResults: React.FC = () => {
                 :
                 <div>No tools found for `{toolName}`</div>
             }
-        </div>
+        </section>
     )
 }
 
