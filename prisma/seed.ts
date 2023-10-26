@@ -23,7 +23,6 @@ twoDaysAfterOneWeek.setDate(oneWeekLater.getDate() + 2);
 
   const user1 = await prisma.user.create({
     data: {
-      name: 'James',
       email: 'james@raw.com',
       username: 'james',
       password: '123',
@@ -32,7 +31,6 @@ twoDaysAfterOneWeek.setDate(oneWeekLater.getDate() + 2);
 
   const user2 = await prisma.user.create({
     data: {
-      name: 'Sean',
       email: 'sean@raw.com',
       username: 'sean',
       password: '123',
@@ -41,7 +39,6 @@ twoDaysAfterOneWeek.setDate(oneWeekLater.getDate() + 2);
 
   const user3 = await prisma.user.create({
     data: {
-      name: 'Yong',
       email: 'yong@raw.com',
       username: 'yong',
       password: '123',
@@ -50,7 +47,6 @@ twoDaysAfterOneWeek.setDate(oneWeekLater.getDate() + 2);
 
   const user4 = await prisma.user.create({
     data: {
-      name: 'Harrison',
       email: 'harrison@raw.com',
       username: 'harrison',
       password: '123',
