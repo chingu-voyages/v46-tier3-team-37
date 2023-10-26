@@ -45,7 +45,6 @@ model Session {
 
 model User {
   id               String        @id @default(cuid())
-  name             String?
   email            String?       @unique
   emailVerified    DateTime?
   username         String        @unique @db.VarChar(255)
@@ -101,6 +100,7 @@ enum Status {
   OPEN
   ACTIVE
   COMPLETED
+  HOLD
 }
 
 model Message {
