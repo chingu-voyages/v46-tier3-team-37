@@ -30,10 +30,10 @@ const SearchResults: React.FC = () => {
                 setToolsData(data)
                 setLoading(false)
             })
-    }, [])
+    }, []);
 
     return (
-        <section className={s.searchResultsContainer}>
+        <div className={s.searchResultsContainer}>
             {toolsByName.length > 0
                 ?
                 <div className={s.searchResults}>
@@ -42,7 +42,7 @@ const SearchResults: React.FC = () => {
                         <div className="flex justify-center mt-4" key={tool.id}>
                             <div className="flex gap-2 flex-col md:w-1/2">
                                 <div key={tool.id}>
-                                    <Card active={true} variant={'default'} title={tool.name} description={tool.description} >
+                                    <Card active={true} variant={'detailed'} title={tool.name} description={tool.description} price={tool.price.toString()}>
                                         <Button variant={'thin'} size={'sm'} cardType='detailed'>More info</Button>
                                     </Card>
                                 </div>
@@ -53,7 +53,7 @@ const SearchResults: React.FC = () => {
                 :
                 <div>No tools found for `{toolName}`</div>
             }
-        </section>
+        </div>
     )
 }
 
