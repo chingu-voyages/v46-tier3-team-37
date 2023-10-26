@@ -38,7 +38,6 @@ const SearchResults: React.FC = () => {
             })
     }, [])
 
-
     return (
         <div className={s.searchResultsContainer}>
             {toolsByName.length > 0
