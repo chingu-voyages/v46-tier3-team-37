@@ -85,9 +85,10 @@ const NavBar: React.FC = () => {
                                 Home
                             </Link>
                         </div>
-                        <div><Link href='/profile'>
-                            My profile
-                        </Link>
+                        <div>
+                            <Link href='/profile'>
+                                My profile
+                            </Link>
                         </div>
                         <div>
                             <Link href='/list'>
