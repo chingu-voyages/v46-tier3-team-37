@@ -8,11 +8,11 @@ import { cva, type VariantProps } from "class-variance-authority";
  * If you need to make changes or create a new button add a variant with the tailwind classes you need the warning variant is there as an example. feel free to add more sizes also. 
  */
 const buttonVariants = cva(
-  "rounded-full bg-white border-[#DADADA] hover:bg-[#e6e6e6]  ",
+  "rounded-full bg-white border-[#DADADA] hover:bg-[#e6e6e6] hover:dark:bg-[#0f0f0f] dark:border-[#2F2F2F]",
   {
     variants: {
       variant: {
-        default: "dark:text-[#FFFFFF] border-4 text-sm font-semibold text-black dark:bg-backgroundPrimary dark:hover:bg-[#424242] dark:border-[#2F2F2F]",
+        default: "dark:text-[#FFFFFF] border-4 text-sm font-semibold text-black dark:bg-backgroundPrimary ",
         icon: "text-sm font-light border-1 border ",
         thin: "border border-1",
         warning: "text-red dark:text-pink"
