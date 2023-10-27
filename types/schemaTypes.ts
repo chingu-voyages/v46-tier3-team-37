@@ -1,11 +1,9 @@
-export type Tool = {
-  id: string;
-  name: string;
-  description: string;
-  price: number;
-  locationId: string;
-  ownerId: string;
-};
+import type { User as UserP, Item } from "@prisma/client";
+
+export type Tool = Item
+
+export type User = UserP
+
 
 export function isValidBody<T extends Record<string, unknown>>(
   body: any,
