@@ -2,7 +2,6 @@
 
 import React, { useState } from 'react'
 import { signIn } from 'next-auth/react'
-import Link from 'next/link'
 import Button from '@/components/uiComponents/Button'
 
 const Login = () => {
@@ -39,18 +38,15 @@ const Login = () => {
         <h2 className='mt-6 text-center text-3xl font-extrabold text-[#D3CAB0]'>
           Sign in to your account
         </h2>
-        <p className='mt-2 text-center text-sm text-[#D3CAB0] max-w'>
+        <p className='mt-4 text-center text-sm text-[#D3CAB0] max-w'>
           Or {}
-          <a
-            href='/signup'
-            className='font-medium text-blue-600 hover:text-blue-500'
-          >
+          <a href='/signup' className='font-medium'>
             create an account
           </a>
         </p>
       </div>
       <div className='mt-8 sm:mx-auto sm:w-full sm:max-w-md'>
-        <div className='bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10'>
+        <div className='bg-white py-8 px-4 shadow-xl sm:rounded-lg sm:px-10'>
           <form className='space-y-6' onSubmit={handleLogin}>
             <div>
               <label
@@ -66,7 +62,7 @@ const Login = () => {
                   value={formValue.username}
                   onChange={handleChange}
                   type='text'
-                  className='appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm'
+                  className='rounded-md w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 sm:text-sm'
                   placeholder='Enter your username'
                 />
               </div>
@@ -86,7 +82,7 @@ const Login = () => {
                   value={formValue.password}
                   onChange={handleChange}
                   type='password'
-                  className='appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm'
+                  className='rounded-md w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 sm:text-sm'
                   placeholder='Enter your password'
                 />
               </div>
@@ -112,7 +108,7 @@ const Login = () => {
               <Button
                 onClick={() => loginWithOAuth('google')}
                 name='oauth'
-                className='w-full max-w-xs font-bold shadow-sm rounded-lg py-3 bg-indigo-100 text-gray-800 flex items-center justify-center transition-all duration-300 ease-in-out focus:outline-none hover:shadow focus:shadow-sm focus:shadow-outline'
+                className='w-full max-w-xs rounded-lg py-3 flex items-center justify-center'
               >
                 <div className='p-2 rounded-full'>
                   <svg className='w-4' viewBox='0 0 533.5 544.3'>
@@ -139,7 +135,7 @@ const Login = () => {
               <Button
                 onClick={() => loginWithOAuth('github')}
                 name='oauth'
-                className='w-full max-w-xs font-bold shadow-sm rounded-lg py-3 bg-indigo-100 text-gray-800 flex items-center justify-center transition-all duration-300 ease-in-out focus:outline-none hover:shadow focus:shadow-sm focus:shadow-outline mt-5'
+                className='w-full max-w-xs rounded-lg py-3 flex items-center justify-center mt-5'
               >
                 <div className='bg-white p-1 rounded-full'>
                   <svg className='w-8' viewBox='0 0 32 32'>
