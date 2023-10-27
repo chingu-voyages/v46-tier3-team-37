@@ -1,8 +1,3 @@
-export type Image = {
-  id: string;
-  url: string;
-}
-
 export type Tool = {
   id: string;
   name: string;
@@ -10,7 +5,6 @@ export type Tool = {
   price: number;
   locationId: string;
   ownerId: string;
-  image: Image[];
 };
 
 export function isValidBody<T extends Record<string, unknown>>(
