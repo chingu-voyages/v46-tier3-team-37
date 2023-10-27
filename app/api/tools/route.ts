@@ -3,7 +3,11 @@ import prisma from "@/lib/prisma";
 import { Tool } from "@/types/schemaTypes";
 
 export async function GET(req: NextRequest) {
-  const tools:Tool[] = await prisma?.item.findMany({ take: 10 });
+  const tools:Tool[] = await prisma?.item.findMany({ 
+    include: {
+      images: true
+    }
+   });
   return NextResponse.json(tools);
 }
 

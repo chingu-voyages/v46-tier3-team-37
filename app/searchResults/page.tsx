@@ -23,6 +23,8 @@ const SearchResults: React.FC = () => {
             .filter(tool => tool.name.toLowerCase().includes(toolName.toLowerCase()));
     }
 
+    console.log('toolsData', toolsData)
+
     useEffect(() => {
         fetch('api/tools')
             .then((res) => res.json())
@@ -47,7 +49,7 @@ const SearchResults: React.FC = () => {
                             <div className="flex gap-2 flex-col md:w-1/2">
                                 <div onClick={() => routeToItemPage(tool.id)} key={tool.id}>
                                     <Card size={'md'} active={true} variant={'default'} title={tool.name} description={tool.description} price={tool.price.toString()} >
-                                        <Button variant={'thin'} size={'sm'} cardType='detailed'>More info</Button>
+                                        {/* <Button variant={'thin'} size={'sm'} cardType='detailed'>More info</Button> */}
                                     </Card>
                                 </div>
                             </div>
