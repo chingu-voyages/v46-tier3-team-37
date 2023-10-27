@@ -103,6 +103,7 @@ export default function Card({
                 <CardBody active={active} variant={variant} size={'default'} description={description} title={title} />
                 <CardFooter parentVariant={variant} show={show} >
                     {children}
+                    <button style={{display: 'none'}}></button>
                 </CardFooter>
             </div >
 
