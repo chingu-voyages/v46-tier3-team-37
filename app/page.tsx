@@ -2,8 +2,6 @@ import Card from '@/components/uiComponents/Card'
 import Button from '@/components/uiComponents/Button'
 import Image from 'next/image'
 
-const itemDescription = 'Text items details description text items details description text items details description text items details description tails description text items details description text items details description text items details description '
-const itemTitle = 'Green Lawn Mower'
 export default function Home() {
   return (
     <main className="flex min-h-screen flex-col gap-4 items-center">
@@ -12,7 +10,7 @@ export default function Home() {
           <Image src='/heroImage.png' alt='image of tools' width='379' height='220' className='rounded-md' />
         </div>
         <h1 className='font-bold text-center text-lg'>Find tools to rent here on Rent A Wrench!</h1>
-        {/* <search by location and date component */}
+        {/* <search by location and date form component will need to be split into a separate Component */}
         <div >
           <form className='flex flex-col gap-6 justify-center my-4'>
             <input readOnly type='text' value={'Texas'} className='border border-[lightgray] rounded-sm w-full' placeholder='Location' />
@@ -25,6 +23,7 @@ export default function Home() {
           </form>
         </div>
       </section>
+        {/* <Listings component will need to be split into a separate Component */}
       <section className='w-full lg:px-56 p-4 text-center'>
         <h1 className='font-bold text-2xl mb-8'>Featured Listings</h1>
         <div className='flex justify-center gap-4 flex-wrap'>
