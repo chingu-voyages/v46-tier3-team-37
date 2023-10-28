@@ -1,6 +1,8 @@
 'use client'
+
 import React, { useState } from 'react'
 import { signIn } from 'next-auth/react'
+import Button from '@/components/uiComponents/Button'
 
 const SignUp = () => {
   const [formValue, setFormValue] = useState({
@@ -53,23 +55,19 @@ const SignUp = () => {
   return (
     <>
       <form onSubmit={handleSignup}>
-        <div className='min-h-screen bg-gray-100 text-gray-900 flex justify-center'>
-          <div className='max-w-screen-xl m-0 sm:m-10 bg-white shadow sm:rounded-lg flex justify-center flex-1'>
-            <div className='lg:w-1/2 xl:w-5/12 p-6 sm:p-12'>
-              <div>
-                {/* <img
-                  src='https://storage.googleapis.com/devitary-image-host.appspot.com/15846435184459982716-LogoMakr_7POjrN.png'
-                  className='w-32 mx-auto'
-                /> */}
-              </div>
+        <div className='min-h-screen flex justify-center'>
+          <div className='max-w-screen-xl m-0 sm:m-10 sm:rounded-lg flex justify-center flex-1'>
+            <div className='lg:w-1/2 xl:w-5/12 p-6 sm:p-12 shadow-xl'>
               <div className='mt-12 flex flex-col items-center'>
-                <h1 className='text-2xl xl:text-3xl font-extrabold'>Sign up</h1>
+                <h1 className='text-2xl xl:text-3xl font-extrabold text-[#D3CAB0]'>
+                  Sign up
+                </h1>
                 <div className='w-full flex-1 mt-8'>
                   <div className='flex flex-col items-center'>
-                    <button
+                    <Button
                       onClick={() => signUpWithOAuth('google')}
                       name='oauth'
-                      className='w-full max-w-xs font-bold shadow-sm rounded-lg py-3 bg-indigo-100 text-gray-800 flex items-center justify-center transition-all duration-300 ease-in-out focus:outline-none hover:shadow focus:shadow-sm focus:shadow-outline'
+                      className='w-full mx-6 max-w-xs rounded-lg flex items-center justify-center'
                     >
                       <div className='bg-white p-2 rounded-full'>
                         <svg className='w-4' viewBox='0 0 533.5 544.3'>
@@ -92,12 +90,11 @@ const SignUp = () => {
                         </svg>
                       </div>
                       <span className='ml-4'>Sign Up with Google</span>
-                    </button>
-
-                    <button
+                    </Button>
+                    <Button
                       onClick={() => signUpWithOAuth('github')}
                       name='oauth'
-                      className='w-full max-w-xs font-bold shadow-sm rounded-lg py-3 bg-indigo-100 text-gray-800 flex items-center justify-center transition-all duration-300 ease-in-out focus:outline-none hover:shadow focus:shadow-sm focus:shadow-outline mt-5'
+                      className='w-full mx-6 max-w-xs rounded-lg flex items-center justify-center mt-5'
                     >
                       <div className='bg-white p-1 rounded-full'>
                         <svg className='w-6' viewBox='0 0 32 32'>
@@ -108,18 +105,16 @@ const SignUp = () => {
                         </svg>
                       </div>
                       <span className='ml-4'>Sign Up with GitHub</span>
-                    </button>
+                    </Button>
                   </div>
-
                   <div className='my-12 text-center'>
-                    <div className='leading-none px-2 inline-block text-sm text-gray-600 tracking-wide font-medium bg-white transform translate-y-1/2'>
+                    <div className='leading-none px-2 text-sm tracking-wide font-medium text-[#D3CAB0]'>
                       Or sign up with e-mail
                     </div>
                   </div>
-
                   <div className='mx-auto max-w-xs'>
                     <input
-                      className='w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white'
+                      className='w-full px-6 py-3 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white'
                       type='text'
                       name='username'
                       placeholder='Username'
@@ -127,7 +122,7 @@ const SignUp = () => {
                       value={formValue.username}
                     />
                     <input
-                      className='w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white mt-5'
+                      className='w-full px-6 py-3 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white mt-5'
                       type='email'
                       name='email'
                       placeholder='e-mail'
@@ -135,29 +130,19 @@ const SignUp = () => {
                       value={formValue.email}
                     />
                     <input
-                      className='w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white mt-5'
+                      className='w-full px-6 py-3 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white mt-5'
                       type='password'
                       name='password'
                       placeholder='Password'
                       onChange={handleChange}
                       value={formValue.password}
                     />
-                    <button className='mt-5 tracking-wide font-semibold bg-indigo-500 text-gray-100 w-full py-4 rounded-lg hover:bg-indigo-700 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none'>
+                    <Button className='mt-5 w-full py-4 rounded-lg flex items-center justify-center'>
                       <span className='ml-3'>Sign Up</span>
-                    </button>
+                    </Button>
                   </div>
                 </div>
               </div>
-            </div>
-            <div className='flex-1 bg-indigo-100 text-center hidden lg:flex'>
-              <div
-                className='m-12 xl:m-16 w-full bg-contain bg-center bg-no-repeat'
-                style={{
-                  backgroundImage: `url(
-                  'https://storage.googleapis.com/devitary-image-host.appspot.com/15848031292911696601-undraw_designer_life_w96d.svg'
-                )`,
-                }}
-              ></div>
             </div>
           </div>
         </div>
