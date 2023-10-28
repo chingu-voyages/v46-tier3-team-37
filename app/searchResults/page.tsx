@@ -1,5 +1,5 @@
 "use client"
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { useRouter } from 'next/navigation';
 import Button from "@/components/uiComponents/Button";
@@ -48,7 +48,7 @@ const SearchResults: React.FC = () => {
                         <div className="flex justify-center mt-4" key={tool.id}>
                             <div className="flex gap-2 flex-col md:w-1/2">
                                 <div onClick={() => routeToItemPage(tool.id)} key={tool.id}>
-                                    <Card size={'md'} active={true} variant={'default'} title={tool.name} description={tool.description} price={tool.price.toString()} >
+                                    <Card size={'md'} active={true} variant={'default'} title={tool.name} description={tool.description} price={tool.price.toString()} imageSrc={tool.images.length ? tool.images[0].url : 'https://www.harborfreight.com/media/catalog/product/cache/9fc4a8332f9638515cd199dd0f9238da/6/7/67716_W3.jpg'}>
                                         {/* <Button variant={'thin'} size={'sm'} cardType='detailed'>More info</Button> */}
                                     </Card>
                                 </div>
