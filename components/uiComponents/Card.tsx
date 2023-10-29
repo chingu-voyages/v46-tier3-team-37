@@ -14,7 +14,7 @@ import CardFooter from "./CardFooter";
  * If you need to make changes or create a new button add a variant with the tailwind classes you need the warning variant is there as an example. feel free to add more sizes also. 
  */
 const cardVariants = cva(
-    "group flex h-auto flex-wrap text-sm font-semibold text-black shadow-md shadow-[#797979] dark:shadow-[#0b0b0b] bg-[#f6f6f6] dark:text-[#FFFFFF] dark:bg-foregroundPrimary",
+    "group flex h-auto min-h-[168px] flex-wrap text-sm font-semibold text-black hover:cursor-pointer shadow-md shadow-[#797979] dark:shadow-[#0b0b0b] bg-[#f6f6f6] dark:text-[#FFFFFF] dark:bg-foregroundPrimary",
     {
         variants: {
             variant: {

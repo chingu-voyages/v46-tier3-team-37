@@ -1,9 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
 import { Tool } from "@/types/schemaTypes";
+import { getFeaturedTodos } from "@/app/actions";
 
 export async function GET(req: NextRequest) {
-  const tools:Tool[] = await prisma?.item.findMany({ take: 10 });
+  const tools = await getFeaturedTodos();
   return NextResponse.json(tools);
 }
 

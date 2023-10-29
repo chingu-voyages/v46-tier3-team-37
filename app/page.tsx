@@ -1,10 +1,15 @@
 import Card from '@/components/uiComponents/Card'
 import Button from '@/components/uiComponents/Button'
 import Image from 'next/image'
+import { getFeaturedTodos } from './actions';
 
-export default function Home() {
+export default async function Home() {
+
+  const featuredTools = await getFeaturedTodos();
+  console.log(featuredTools);
+
   return (
-    <main className="flex min-h-screen flex-col gap-4 items-center">
+    <main className="flex min-h-screen dark:text-fontPrimary flex-col gap-4 items-center">
       <section >
         <div className='my-8'>
           <Image src='/heroImage.png' alt='image of tools' width='379' height='220' className='rounded-md' />
@@ -27,14 +32,16 @@ export default function Home() {
       <section className='w-full lg:px-56 p-4 text-center'>
         <h1 className='font-bold text-2xl mb-8'>Featured Listings</h1>
         <div className='flex justify-center gap-4 flex-wrap'>
-          <Card className='md:basis-1/4' title='hammer'/>
-          <Card className='md:basis-1/4' title='hammer'/>
-          <Card className='md:basis-1/4' title='hammer'/>
-          <Card className='md:basis-1/4' title='hammer'/>
-          <Card className='md:basis-1/4' title='hammer'/>
-          <Card className='md:basis-1/4' title='hammer'/>
-          <Card className='md:basis-1/4' title='hammer'/>
-          <Card className='md:basis-1/4' title='hammer'/>
+          {featuredTools && featuredTools.map((tool) => (
+            <Card 
+            key={tool.id}
+            className='md:basis-1/4'
+            variant='detailed'
+            title={tool.name} 
+            size={'lg'}
+            description={tool.description} 
+            />
+          ))}
         </div>
       </section>
     </main>
