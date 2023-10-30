@@ -1,10 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
 import { Tool } from "@/types/schemaTypes";
-import { getFeaturedTodos } from "@/app/actions";
+import { getFeaturedTools } from "@/app/actions";
 
 export async function GET(req: NextRequest) {
-  const tools = await getFeaturedTodos();
+  const tools = await getFeaturedTools();
   return NextResponse.json(tools);
 }
 

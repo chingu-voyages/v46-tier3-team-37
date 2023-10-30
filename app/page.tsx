@@ -1,11 +1,11 @@
 import Card from '@/components/uiComponents/Card'
 import Button from '@/components/uiComponents/Button'
 import Image from 'next/image'
-import { getFeaturedTodos } from './actions';
+import { getFeaturedTools } from './actions';
 
 export default async function Home() {
 
-  const featuredTools = await getFeaturedTodos();
+  const featuredTools = await getFeaturedTools();
   console.log(featuredTools);
 
   return (
