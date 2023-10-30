@@ -50,27 +50,3 @@ export default async function Home() {
     </main>
   )
 }
-
-
-{/* <Card 
-            key={featuredTools[7].id}
-            className='md:basis-1/4'
-            variant='detailed'
-            title={featuredTools[7].name} 
-            size={'lg'}
-            price='20'
-            description={featuredTools[7].description} 
-            >
-              <Button variant='thin' size='sm'>button</Button>
-            </Card>
-            <Card 
-            key={featuredTools[7].id}
-            className='md:basis-1/4'
-            variant='default'
-            title={featuredTools[7].name} 
-            size={'lg'}
-            price='20'
-            description={featuredTools[7].description} 
-            >
-              <Button variant='thin' size='sm'>button</Button>
-            </Card> */}
