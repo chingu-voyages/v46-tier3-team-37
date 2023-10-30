@@ -1,15 +1,16 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
-import { Tool } from "@/types/schemaTypes";
+import { Item } from "@/types/schemaTypes";
 import { getAllToolsWithImages, getFeaturedTools } from "@/app/actions";
 
 export async function GET(req: NextRequest) {
   const tools = await getAllToolsWithImages();
+
   return NextResponse.json(tools);
 }
 
 export async function POST(req: NextRequest) {
-  const data: Tool = await req.json();
+  const data:Item = await req.json();
 
   try {
     const newTool = await prisma?.item.create({ data });

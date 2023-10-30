@@ -24,7 +24,7 @@ interface CardBodyVariantProps
     VariantProps<typeof CardBodyVariants> {
     active: boolean,
     title: string,
-    description: string
+    description: string,
 }
 
 export default function CardBody({ variant, size, active, title, description }: CardBodyVariantProps) {
