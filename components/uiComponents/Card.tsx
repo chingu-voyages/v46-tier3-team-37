@@ -14,12 +14,13 @@ import CardFooter from "./CardFooter";
  * If you need to make changes or create a new button add a variant with the tailwind classes you need the warning variant is there as an example. feel free to add more sizes also. 
  */
 const cardVariants = cva(
-    "group flex h-auto min-h-[168px] flex-wrap text-sm font-semibold text-black hover:cursor-pointer shadow-md shadow-[#797979] dark:shadow-[#0b0b0b] bg-[#f6f6f6] dark:text-[#FFFFFF] dark:bg-foregroundPrimary",
+    // "flex h-auto min-h-[168px] flex-wrap text-sm font-semibold text-black hover:cursor-pointer shadow-md shadow-[#797979] dark:shadow-[#0b0b0b] bg-[#f6f6f6] dark:text-[#FFFFFF] dark:bg-foregroundPrimary",
+    'flex flex-col dark:bg-foregroundPrimary h-fit',
     {
         variants: {
             variant: {
-                default: "items-center my-2",
-                detailed: "justify-center"
+                default: "",
+                detailed: ""
             },
             size: {
                 default: "w-full",
@@ -94,16 +95,18 @@ export default function Card({
         setShow(!show)
     }
 
-  
+
 
     return (
         <>
-            <div onClick={handleClick} className={`${variant === 'detailed' && 'hover:cursor-pointer'} ${cardVariants({ className, variant, size })}`} {...props}>
-                <CardImage variant={variant} size={'default'} imageSrc={imageSrc} />
-                <CardBody active={active} variant={variant} size={'default'} description={description} title={title} />
-                <CardFooter parentVariant={variant} show={show} >
+            <div onClick={handleClick} className={cardVariants({ className, variant, size })} {...props}>
+                <div className={`${variant === 'detailed' ? 'flex' : 'flex flex-col'}`}>
+                    <CardImage variant={variant} size={'default'} imageSrc={imageSrc} />
+                    <CardBody active={active} variant={variant} size={'default'} description={description} title={title} />
+                </div>
+                <CardFooter price={price} parentVariant={variant} show={show} >
                     {children}
-                    <button style={{display: 'none'}}></button>
+                    <button style={{ display: 'none' }}></button>
                 </CardFooter>
             </div >
 

@@ -29,21 +29,47 @@ export default async function Home() {
         </div>
       </section>
         {/* <Listings component will need to be split into a separate Component */}
-      <section className='w-full lg:px-56 p-4 text-center'>
+      <section className='w-full lg:px-42 p-4 px-0 text-center'>
         <h1 className='font-bold text-2xl mb-8'>Featured Listings</h1>
         <div className='flex justify-center gap-4 flex-wrap'>
           {featuredTools && featuredTools.map((tool) => (
             <Card 
             key={tool.id}
             className='md:basis-1/4'
-            variant='detailed'
+            variant='default'
             title={tool.name} 
-            size={'lg'}
+            size={'default'}
             description={tool.description} 
-            />
+            >
+              <Button variant={'thin'} size={'sm'}>button</Button>
+            </Card>
           ))}
         </div>
       </section>
     </main>
   )
 }
+
+
+{/* <Card 
+            key={featuredTools[7].id}
+            className='md:basis-1/4'
+            variant='detailed'
+            title={featuredTools[7].name} 
+            size={'lg'}
+            price='20'
+            description={featuredTools[7].description} 
+            >
+              <Button variant='thin' size='sm'>button</Button>
+            </Card>
+            <Card 
+            key={featuredTools[7].id}
+            className='md:basis-1/4'
+            variant='default'
+            title={featuredTools[7].name} 
+            size={'lg'}
+            price='20'
+            description={featuredTools[7].description} 
+            >
+              <Button variant='thin' size='sm'>button</Button>
+            </Card> */}

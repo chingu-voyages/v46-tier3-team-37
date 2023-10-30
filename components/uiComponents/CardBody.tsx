@@ -11,9 +11,6 @@ const CardBodyVariants = cva(
             size: {
                 default: "w-full",
             },
-            // active: {
-
-            // }
         },
         defaultVariants: {
             variant: "default",
