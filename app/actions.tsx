@@ -1,9 +1,11 @@
-import { ItemWithImages, Tool } from "@/types/schemaTypes";
 import prisma from "@/lib/prisma"
 
 export async function getFeaturedTools() {
 try {
-    const tools = await prisma?.item.findMany({ take: 10 });
+    const tools = await prisma?.item.findMany({
+        take: 10,
+        include: {images: true} 
+    });
     return tools;
 
 } catch(e: any) {

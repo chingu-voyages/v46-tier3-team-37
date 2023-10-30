@@ -39,9 +39,10 @@ export default async function Home() {
             variant='default'
             title={tool.name} 
             size={'default'}
+            imageSrc={tool.images[0] && tool.images[0].url}
             description={tool.description} 
             >
-              <Button variant={'thin'} size={'sm'}>button</Button>
+              <Button variant={'thin'} size={'sm'}>Details</Button>
             </Card>
           ))}
         </div>
