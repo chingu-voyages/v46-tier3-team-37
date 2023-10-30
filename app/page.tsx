@@ -28,8 +28,9 @@ export default async function Home() {
           </form>
         </div>
       </section>
-        {/* <Listings component will need to be split into a separate Component */}
+        
       <section className='w-full lg:px-42 p-4 px-0 text-center'>
+        {/* <Listings component will need to be split into a separate Component */}
         <h1 className='font-bold text-2xl mb-8'>Featured Listings</h1>
         <div className='flex justify-center gap-4 flex-wrap'>
           {featuredTools && featuredTools.map((tool) => (

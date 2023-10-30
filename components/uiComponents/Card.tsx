@@ -15,7 +15,7 @@ import CardFooter from "./CardFooter";
  */
 const cardVariants = cva(
     // "flex h-auto min-h-[168px] flex-wrap text-sm font-semibold text-black hover:cursor-pointer shadow-md shadow-[#797979] dark:shadow-[#0b0b0b] bg-[#f6f6f6] dark:text-[#FFFFFF] dark:bg-foregroundPrimary",
-    'flex flex-col dark:bg-foregroundPrimary h-fit',
+    'flex flex-col dark:bg-foregroundPrimary h-fit hover:cursor-pointer',
     {
         variants: {
             variant: {
