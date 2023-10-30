@@ -6,7 +6,6 @@ import { getFeaturedTools } from './actions';
 export default async function Home() {
 
   const featuredTools = await getFeaturedTools();
-  console.log(featuredTools);
 
   return (
     <main className="flex min-h-screen dark:text-fontPrimary flex-col gap-4 items-center">
