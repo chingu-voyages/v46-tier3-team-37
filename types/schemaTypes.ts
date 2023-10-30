@@ -1,21 +1,15 @@
-export type Image = {
-  id: string;
-  url: string;
-}
+// these imports prisma types created by the schema so we dont have to manually create new types every time the shcema changes
 
-export type Tool = {
-  id: string;
-  name: string;
-  description: string;
-  price: number;
-  locationId: string;
-  ownerId: string;
-  images: any
-};
+import { User as UserPrismaGeneratedType, Item as ItemPrismaGeneratedType, Prisma } from "@prisma/client";
+//create a default Tool type
+export type Item = ItemPrismaGeneratedType
 
-export function isValidBody<T extends Record<string, unknown>>(
-  body: any,
-  fields: (keyof T)[]
-): body is T {
-  return Object.keys(body).every((key) => fields.includes(key));
-}
+export type User = UserPrismaGeneratedType
+
+// prisma helper function that creates and validates a joined type
+const itemWithImages = Prisma.validator<Prisma.ItemDefaultArgs>()({
+  include: { images: true }
+})
+
+// create a type with another prisma helper function to create a join type for itemsWithImages
+export type ItemWithImages = Prisma.ItemGetPayload<typeof itemWithImages>;
