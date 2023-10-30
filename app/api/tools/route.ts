@@ -8,6 +8,7 @@ export async function GET(req: NextRequest) {
       images: true,
       Transaction: {
         select: {
+          status: true,
           startDate: true,
           endDate: true
         },
