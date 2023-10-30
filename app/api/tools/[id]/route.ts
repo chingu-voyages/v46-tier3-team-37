@@ -13,12 +13,33 @@ export async function GET(
         images: true,
         Transaction: {
           select: {
+            status: true,
             startDate: true,
             endDate: true
+          },
+          where: {
+            NOT: {
+              status: 'COMPLETED'
+            }
           }
         }
       }
     });
+
+    const hasTransactions = tool?.Transaction?.length ?? 0 > 0;
+
+    if (!hasTransactions) {
+      const toolWithAvailability = { ...tool, available: true };
+      return NextResponse.json(toolWithAvailability);
+    }
+
+    const activeTransactionExists = tool?.Transaction.some(
+      (transaction) => transaction.status !== 'ACTIVE'
+    );
+    const toolWithAvailability = {
+      ...tool,
+      available: activeTransactionExists
+    };
 
     return NextResponse.json(tool);
   } catch (error) {

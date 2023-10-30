@@ -8,13 +8,32 @@ export async function GET(req: NextRequest) {
       images: true,
       Transaction: {
         select: {
+          status: true,
           startDate: true,
           endDate: true
+        },
+        where: {
+          NOT: {
+            status: 'COMPLETED'
+          }
         }
       }
     }
-   });
-  return NextResponse.json(tools);
+  });
+
+  const toolsWithAvailability = tools.map(tool => {
+    const hasTransactions = tool.Transaction.length > 0;
+
+    if (!hasTransactions) {
+      return { ...tool, available: true };
+    }
+    const activeTransactionExists = hasTransactions && tool.Transaction.some(
+      transaction => transaction.status !== 'ACTIVE'
+    );
+    return { ...tool, available: activeTransactionExists };
+  });
+
+  return NextResponse.json(toolsWithAvailability);
 }
 
 export async function POST(req: NextRequest) {
