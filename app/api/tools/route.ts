@@ -5,7 +5,13 @@ import { Item } from "@/types/schemaTypes";
 export async function GET(req: NextRequest) {
   const tools = await prisma?.item.findMany({ 
     include: {
-      images: true
+      images: true,
+      Transaction: {
+        select: {
+          startDate: true,
+          endDate: true
+        }
+      }
     }
    });
   return NextResponse.json(tools);

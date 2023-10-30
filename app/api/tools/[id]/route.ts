@@ -9,7 +9,15 @@ export async function GET(
     const tool = await prisma?.item.findUnique({
       where: {
         id: params.id,
-      },
+      }, include: {
+        images: true,
+        Transaction: {
+          select: {
+            startDate: true,
+            endDate: true
+          }
+        }
+      }
     });
 
     return NextResponse.json(tool);
