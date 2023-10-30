@@ -13,7 +13,6 @@ export async function GET(
         images: true,
         Transaction: {
           select: {
-            status: true,
             startDate: true,
             endDate: true
           },
