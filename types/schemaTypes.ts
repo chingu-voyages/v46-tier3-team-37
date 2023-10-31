@@ -1,5 +1,4 @@
-// these imports prisma types created by the schema so we dont have to manually create new types every time the shcema changes
-
+// these imports prisma types created by the prisma schema so we dont have to manually create new types every time the shcema changes
 import { User as UserPrismaGeneratedType, Item as ItemPrismaGeneratedType, Prisma } from "@prisma/client";
 //create a default Tool type
 export type Item = ItemPrismaGeneratedType
