@@ -148,7 +148,7 @@ export const options: NextAuthOptions = {
       ...session,
       user: {
         ...session.user,
-        id: token.userId,
+        id: token.id,
         username: token.username,
       },
     }),
