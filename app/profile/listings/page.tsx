@@ -1,4 +1,3 @@
-'use client';
 import Button from "@/components/uiComponents/Button";
 import Card from "@/components/uiComponents/Card";
 
