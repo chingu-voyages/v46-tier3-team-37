@@ -22,7 +22,7 @@ export default async function () {
                 description: data.get('description')?.toString() ?? '',
                 price: Number(data.get('price')) ?? '',
                 owner: {
-                    connect: { 'username': session.user.username },
+                    connect: { 'id': session.user.id },
                 },
                 location: {
                     connect: { id: 'clo95y7ua00046xgfyv0ccp0a' },
