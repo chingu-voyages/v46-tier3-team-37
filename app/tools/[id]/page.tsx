@@ -1,3 +1,4 @@
+import Calendar from '@/components/DatePicker/DatePicker';
 import { ItemWithImages as Tool } from '@/types/schemaTypes';
 import Image from 'next/image';
 
@@ -32,20 +33,35 @@ export default async function Tool({
   params: { id: String };
 }) {
   const tool = await getTool(params.id);
-  console.log('we have a ', tool);
+  console.log('hey issssss a ', tool);
 
   return (
     <div className=''>
-      <Image
-        className=''
-        src={tool.images[0].url}
-        alt={tool.name}
-        height={100}
-        width={100}
-      />
-      <h1 className='font-bold'>{tool.name}</h1>
-      <p>{tool.description}</p>
-      <p className='font-bold'>${tool.price}/day</p>
+      <div className='flex justify-between px-4 py-4 '>
+        <p className='text-left'>Back Button</p>
+        <p className='text-right'>Heart</p>
+      </div>
+      <div className='flex flex-col items-center px-16 bg-slate-500'>
+        {tool.images && tool.images.length > 0 && (
+          <Image
+            className=''
+            src={tool.images[0].url}
+            alt={tool.name}
+            height={200}
+            width={200}
+          />
+        )}
+        <div className=''>
+          <h1 className='font-bold text-lg'>{tool.name}</h1>
+          <p className='pt-4'>{tool.description}</p>
+          <p className='font-bold pt-2'>
+            ${tool.price}/day
+          </p>
+        </div>
+        <Calendar
+          excludeDateRangeArray={tool.Transaction}
+        />
+      </div>
     </div>
   );
 }

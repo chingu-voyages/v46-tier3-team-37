@@ -7,7 +7,7 @@ export type User = UserPrismaGeneratedType
 
 // prisma helper function that creates and validates a joined type
 const itemWithImages = Prisma.validator<Prisma.ItemDefaultArgs>()({
-  include: { images: true }
+  include: { images: true, Transaction: true }
 })
 
 // create a type with another prisma helper function to create a join type for itemsWithImages
