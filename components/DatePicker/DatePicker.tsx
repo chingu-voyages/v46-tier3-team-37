@@ -1,34 +1,95 @@
 'use client';
 import { useState } from 'react';
 import DatePicker from 'react-datepicker';
-import { parseISO } from 'date-fns';
+import { parseJSON } from 'date-fns';
 import 'react-datepicker/dist/react-datepicker.css';
 import Button from '../uiComponents/Button';
 
 export default function Calendar({
   excludeDateRangeArray,
+  tool,
 }) {
-  const [beginDate, setBeginDate] = useState(new Date());
-  const [endingDate, setEndingDate] = useState(new Date());
+  const [beginDate, setBeginDate] = useState(null);
+  const [endingDate, setEndingDate] = useState(null);
 
   const onChange = (dates) => {
     const [start, end] = dates;
-    setBeginDate(start);
+    console.log(start, end);
+    setBeginDate(setBefore8AM(start));
     setEndingDate(end);
+  };
+
+  const setBefore8AM = (date) => {
+    console.log(date);
+    const adjustedDate = new Date(date);
+    console.log(adjustedDate);
+    adjustedDate.setHours(0, 0, 0, 0);
+    return adjustedDate;
+  };
+
+  const calculateFee = (start, end) => {
+    const MILLIS_PER_DAY = 24 * 60 * 60 * 1000;
+
+    const differenceInMillis =
+      end.getTime() - start.getTime();
+
+    const days = Math.round(
+      differenceInMillis / MILLIS_PER_DAY
+    );
+
+    const fee = days * tool.price;
+    return fee;
+  };
+
+  const addToCart = async () => {
+    try {
+      const response = await fetch(
+        '/api/create-transaction',
+        {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            startDate: beginDate.toISOString(),
+            endDate:
+              endingDate.toISOString() ||
+              beginDate.toISOString(),
+            itemId: tool.id,
+            renterId: 'clo95y6p900006xgfqz21fxk9', //hard code for testing
+            fee: calculateFee(beginDate, endingDate),
+          }),
+        }
+      );
+
+      if (response.ok) {
+        console.log('Transaction created successfully!');
+      } else {
+        console.error('Failed to create transaction');
+      }
+    } catch (error) {
+      console.error('Failed to create transaction:', error);
+    }
   };
 
   const updatedExcludeDateRangeArray =
     excludeDateRangeArray.map(({ startDate, endDate }) => ({
-      start: parseISO(startDate),
-      end: parseISO(endDate),
+      start: parseJSON(startDate),
+      end: parseJSON(endDate),
     }));
-  console.log('this is the ', updatedExcludeDateRangeArray);
+  console.log(
+    'here is the exclude ',
+    excludeDateRangeArray
+  );
 
+  console.log(
+    'here is the update ',
+    updatedExcludeDateRangeArray
+  );
   return (
     <>
-      <div>
+      <div className='flex flex-col items-center'>
         <DatePicker
-          selected={beginDate}
           startDate={beginDate}
           endDate={endingDate}
           onChange={onChange}
@@ -39,9 +100,15 @@ export default function Calendar({
           minDate={new Date()}
           selectsRange
           inline
-          placeholderText='Select a date other than the interval from 5 days ago to 5 days in the future'
+          fixedHeight
         />
-        {/* <Button onClick={}>Add to Cart</Button> */}
+        <div className='py-2 pb-8'>
+          {!endingDate ? (
+            <p>Select both a start and end date</p>
+          ) : (
+            <Button onClick={addToCart}>Add to Cart</Button>
+          )}
+        </div>
       </div>
     </>
   );

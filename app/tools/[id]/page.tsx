@@ -18,7 +18,6 @@ export async function generateStaticParams(): Promise<
 }
 
 async function getTool(id: String) {
-  console.log('we have an ID ', id);
   const res = await fetch(`${baseUrl}/api/tools/${id}`, {
     cache: 'no-store',
   });
@@ -33,7 +32,6 @@ export default async function Tool({
   params: { id: String };
 }) {
   const tool = await getTool(params.id);
-  console.log('hey issssss a ', tool);
 
   return (
     <div className=''>
@@ -58,9 +56,12 @@ export default async function Tool({
             ${tool.price}/day
           </p>
         </div>
-        <Calendar
-          excludeDateRangeArray={tool.Transaction}
-        />
+        <div className='py-4'>
+          <Calendar
+            excludeDateRangeArray={tool.Transaction}
+            tool={tool}
+          />
+        </div>
       </div>
     </div>
   );
