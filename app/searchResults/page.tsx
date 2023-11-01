@@ -15,10 +15,7 @@ const SearchResults: React.FC = () => {
 
     const [isLoading, setLoading] = React.useState<boolean>(true);
     const [toolsData, setToolsData] = React.useState<Tool[]>([]);
-    const [sortBy, setSortBy] = React.useState<string>("");
-    // const [sortByName, setSortByName] = React.useState<boolean>(true);
-    // const [availableTools, setAvailableTools] = React.useState<boolean>(false);
-    // const [sortByPrice, setSortByPrice] = React.useState<boolean>(false);
+    const [sortBy, setSortBy] = React.useState<string>("name");
 
     let tools: Tool[] = [];
 
@@ -54,36 +51,6 @@ const SearchResults: React.FC = () => {
                 })
         }
     }
-
-    // useEffect(() => {
-    //     if (sortBy == "name") {
-    //         tools = tools
-    //             .sort((toolA, toolB) => {
-    //                 const nameA = toolA.name.toLowerCase();
-    //                 const nameB = toolB.name.toLowerCase();
-
-    //                 if (nameA < nameB) {
-    //                     return -1
-    //                 }
-    //                 if (nameA > nameB) {
-    //                     return 1
-    //                 }
-    //                 return 0;
-    //             })
-    //     }
-
-    //     if (sortBy == "available") {
-    //         tools = tools
-    //             .filter(tool => tool.available === true)
-    //     }
-
-    //     if (sortBy == "price") {
-    //         tools = tools
-    //             .sort((toolA, toolB) => {
-    //                 return toolA.price - toolB.price;
-    //             })
-    //     }
-    // })
 
     console.log('tools', tools)
 
