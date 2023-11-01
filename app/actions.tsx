@@ -24,3 +24,47 @@ export async function getAllToolsWithImages() {
         throw new Error(e)
     }
 }
+
+export async function activeUserListings(id: string) {
+  const today = new Date().toISOString();
+    const rentedListings = await prisma.user.findUnique({
+        where: {
+          id,
+        },
+        select: {
+          items: {
+            where: {
+              AND: [
+                {
+                  ownerId: id,
+                },
+                {
+                  Transaction: {
+                    every: {
+                      AND: [
+                        {
+                          NOT: { status: "COMPLETED" },
+                        },
+                        {
+                          OR: [
+                            {
+                              startDate: { lte: today },
+                              endDate: { gte: today },
+                            },
+                          ],
+                        },
+                      ],
+                    },
+                  },
+                },
+              ],
+            },
+            include: {
+              images: true
+            }
+          },
+        }
+      });
+      if(!rentedListings) return null
+      return rentedListings;
+}

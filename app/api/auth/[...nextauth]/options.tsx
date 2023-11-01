@@ -122,7 +122,6 @@ export const options: NextAuthOptions = {
         //   return null
         // }
       }
-      console.log(token, 'test')
       return token
     },
     async signIn({ user, account, profile }) {
@@ -148,7 +147,7 @@ export const options: NextAuthOptions = {
       ...session,
       user: {
         ...session.user,
-        id: token.id,
+        id: token.userId ?? token.id,
         username: token.username,
       },
     }),
