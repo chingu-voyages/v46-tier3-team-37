@@ -138,7 +138,6 @@ const About = () => {
       <div className='w-full grid grid-cols-2 sm:grid-cols-4 gap-4 text-center py-8'>
         {techStack &&
           techStack.map((stack, i) => {
-            console.log(stack.url)
             return (
               <div className='m-4 hover:scale-125'>
                 <Image
