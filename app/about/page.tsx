@@ -49,7 +49,7 @@ const About = () => {
   return (
     <div className='max-w-[1000px] mx-auto p-4 flex flex-col items-center justify-center w-full h-full'>
       <div className='mt-12 flex flex-col items-center'>
-        <h1 className='text-2xl xl:text-3xl font-extrabold text-[#D3CAB0]'>
+        <h1 className='text-2xl xl:text-4xl font-extrabold text-[#D3CAB0]'>
           Meet Chingu Rent-a-Wrench Coders
         </h1>
         <p className='mt-4 mb-6 text-center text-lg text-[#D3CAB0] max-w'>
