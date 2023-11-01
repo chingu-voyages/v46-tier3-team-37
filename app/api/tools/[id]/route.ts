@@ -1,4 +1,4 @@
-import { Tool } from "@/types/schemaTypes";
+import { ItemWithImages as Tool } from "@/types/schemaTypes";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(
@@ -25,21 +25,6 @@ export async function GET(
         }
       }
     });
-
-    const hasTransactions = tool?.Transaction?.length ?? 0 > 0;
-
-    if (!hasTransactions) {
-      const toolWithAvailability = { ...tool, available: true };
-      return NextResponse.json(toolWithAvailability);
-    }
-
-    const activeTransactionExists = tool?.Transaction.some(
-      (transaction) => transaction.status !== 'ACTIVE'
-    );
-    const toolWithAvailability = {
-      ...tool,
-      available: activeTransactionExists
-    };
 
     return NextResponse.json(tool);
   } catch (error) {
