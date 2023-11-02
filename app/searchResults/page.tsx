@@ -77,7 +77,12 @@ const SearchResults: React.FC = () => {
                 ?
                 <div className={s.searchResults}>
                     <div className={s.searchResultsTop}>
-                        <div>Search results for &apos;&apos;{toolSearch}&apos;&apos;</div>
+                        {toolSearch !== ""
+                            ?
+                            <div>Search results for &apos;&apos;{toolSearch}&apos;&apos;</div>
+                            :
+                            <div>Displaying all tools:</div>
+                        }
                         <div className={s.sortOptionsContiner}>
                             <div className={s.sortOptions}>
                                 <div className={s.sortBy}>
