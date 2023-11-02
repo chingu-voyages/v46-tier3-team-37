@@ -4,7 +4,7 @@ import { useSearchParams } from 'next/navigation';
 import { useRouter } from 'next/navigation';
 import Button from "@/components/uiComponents/Button";
 import Card from "@/components/uiComponents/Card";
-import { itemComplete } from "@/types/schemaTypes";
+import { ItemComplete } from "@/types/schemaTypes";
 import s from "./page.module.css";
 
 
@@ -14,10 +14,10 @@ const SearchResults: React.FC = () => {
     const toolSearch = searchParams.get('toolName');
 
     const [isLoading, setLoading] = React.useState<boolean>(true);
-    const [toolsData, setToolsData] = React.useState<Tool[]>([]);
+    const [toolsData, setToolsData] = React.useState<ItemComplete[]>([]);
     const [sortBy, setSortBy] = React.useState<string>("name");
 
-    let toolsByName: itemComplete[] = [];
+    let tools: ItemComplete[] = [];
 
     if (toolSearch) {
         tools = toolsData
@@ -55,7 +55,7 @@ const SearchResults: React.FC = () => {
     useEffect(() => {
         fetch('api/tools')
             .then((res) => res.json())
-            .then((data: ItemWithImages[]) => {
+            .then((data: ItemComplete[]) => {
                 setToolsData(data)
                 setLoading(false)
             })
