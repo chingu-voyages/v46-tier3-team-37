@@ -23,6 +23,12 @@ const NavBar: React.FC = () => {
         setSearchInput("");
     }
 
+    const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+        if (e.key === 'Enter') {
+            routeToSearchResults(searchInput);
+        }
+    };
+
     const openToolBox = () => {
         setShowToolBox(true);
     }
@@ -70,6 +76,7 @@ const NavBar: React.FC = () => {
                                 placeholder="Search for tools"
                                 value={searchInput}
                                 onChange={(e) => setSearchInput(e.target.value)}
+                                onKeyPress={(e) => handleKeyPress(e)}
                             />
                             <div>
                                 <div onClick={() => routeToSearchResults(searchInput)}>
