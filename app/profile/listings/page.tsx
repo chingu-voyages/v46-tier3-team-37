@@ -1,4 +1,3 @@
-'use client';
 import Button from "@/components/uiComponents/Button";
 import Card from "@/components/uiComponents/Card";
 
@@ -22,7 +21,7 @@ export default function Listings() {
                     </Card>
                 </li>
             </ul>
-            <a className="w-full md:w-1/2" href="/profile/listings/newListing" ><Button className="w-full md:w-1/2">Create Listing</Button></a>
+            <a className="w-full flex justify-center  md:w-1/2" href="/profile/listings/newListing" ><Button className="w-full md:w-1/2">Create Listing</Button></a>
         </section>
     )
 }
