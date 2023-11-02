@@ -8,6 +8,7 @@ import Button from '../uiComponents/Button';
 export default function Calendar({
   excludeDateRangeArray,
   tool,
+  user,
 }) {
   const [beginDate, setBeginDate] = useState(null);
   const [endingDate, setEndingDate] = useState(null);
@@ -56,7 +57,7 @@ export default function Calendar({
               endingDate.toISOString() ||
               beginDate.toISOString(),
             itemId: tool.id,
-            renterId: 'clo95y6p900006xgfqz21fxk9', //hard code for testing
+            renterId: user,
             fee: calculateFee(beginDate, endingDate),
           }),
         }
@@ -77,15 +78,7 @@ export default function Calendar({
       start: parseJSON(startDate),
       end: parseJSON(endDate),
     }));
-  console.log(
-    'here is the exclude ',
-    excludeDateRangeArray
-  );
 
-  console.log(
-    'here is the update ',
-    updatedExcludeDateRangeArray
-  );
   return (
     <>
       <div className='flex flex-col items-center'>

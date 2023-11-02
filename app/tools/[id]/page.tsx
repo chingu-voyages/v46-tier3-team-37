@@ -36,7 +36,7 @@ export default async function Tool({
 }) {
   const tool = await getTool(params.id);
   const session = await getServerSession(options);
-  console.log('welcome to my session', session);
+
   return (
     <div className=''>
       <div className='flex justify-between px-4 py-4 '>
@@ -64,6 +64,7 @@ export default async function Tool({
           <Calendar
             excludeDateRangeArray={tool.Transaction}
             tool={tool}
+            user={session?.user.id}
           />
         </div>
       </div>
