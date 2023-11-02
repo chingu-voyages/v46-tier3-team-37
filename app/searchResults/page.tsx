@@ -19,14 +19,11 @@ const SearchResults: React.FC = () => {
 
     let tools: ItemComplete[] = [];
 
-
-    if (toolSearch == "") {
-        tools = toolsData;
-    }
-
     if (toolSearch) {
         tools = toolsData
             .filter(tool => tool.name.toLowerCase().includes(toolSearch.toLowerCase()));
+    } else if (toolSearch == "") {
+        tools = toolsData;
     }
 
     if (sortBy == "name") {
