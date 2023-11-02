@@ -1,3 +1,4 @@
+import BackButton from '@/components/DatePicker/BackButton';
 import Calendar from '@/components/DatePicker/DatePicker';
 import { ItemWithImages as Tool } from '@/types/schemaTypes';
 import Image from 'next/image';
@@ -36,7 +37,7 @@ export default async function Tool({
   return (
     <div className=''>
       <div className='flex justify-between px-4 py-4 '>
-        <p className='text-left'>Back Button</p>
+        <BackButton />
         <p className='text-right'>Heart</p>
       </div>
       <div className='flex flex-col items-center px-16 bg-slate-500'>
