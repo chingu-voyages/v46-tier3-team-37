@@ -2,6 +2,8 @@ import BackButton from '@/components/DatePicker/BackButton';
 import Calendar from '@/components/DatePicker/DatePicker';
 import { ItemWithImages as Tool } from '@/types/schemaTypes';
 import Image from 'next/image';
+import { options } from '@/app/api/auth/[...nextauth]/options';
+import { getServerSession } from 'next-auth';
 
 let baseUrl = ''; //to be the value of the deployed website base URL
 if (process.env.NODE_ENV === 'development') {
@@ -33,7 +35,8 @@ export default async function Tool({
   params: { id: String };
 }) {
   const tool = await getTool(params.id);
-
+  // const session = await getServerSession(options);
+  // console.log('welcome to my session', session);
   return (
     <div className=''>
       <div className='flex justify-between px-4 py-4 '>
