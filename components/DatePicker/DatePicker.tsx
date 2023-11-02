@@ -2,25 +2,42 @@
 import { useState } from 'react';
 import DatePicker from 'react-datepicker';
 import { parseJSON } from 'date-fns';
+import { ItemComplete as Tool } from '@/types/schemaTypes';
 import 'react-datepicker/dist/react-datepicker.css';
 import Button from '../uiComponents/Button';
+
+type DateRange = {
+  startDate: Date;
+  endDate: Date;
+};
 
 export default function Calendar({
   excludeDateRangeArray,
   tool,
   user,
+}: {
+  excludeDateRangeArray: DateRange[];
+  tool: Tool;
+  user: String;
 }) {
-  const [beginDate, setBeginDate] = useState(null);
-  const [endingDate, setEndingDate] = useState(null);
+  const [beginDate, setBeginDate] = useState<Date | null>(
+    null
+  );
+  const [endingDate, setEndingDate] = useState<Date | null>(
+    null
+  );
 
-  const onChange = (dates) => {
+  const onChange = (dates: [Date | null, Date | null]) => {
     const [start, end] = dates;
-    console.log(start, end);
-    setBeginDate(setBefore8AM(start));
-    setEndingDate(end);
+    if (start !== null) {
+      setBeginDate(setBefore8AM(start));
+    }
+    if (end !== null) {
+      setEndingDate(end);
+    }
   };
 
-  const setBefore8AM = (date) => {
+  const setBefore8AM = (date: Date) => {
     console.log(date);
     const adjustedDate = new Date(date);
     console.log(adjustedDate);
@@ -28,7 +45,7 @@ export default function Calendar({
     return adjustedDate;
   };
 
-  const calculateFee = (start, end) => {
+  const calculateFee = (start: Date, end: Date) => {
     const MILLIS_PER_DAY = 24 * 60 * 60 * 1000;
 
     const differenceInMillis =
@@ -44,29 +61,31 @@ export default function Calendar({
 
   const addToCart = async () => {
     try {
-      const response = await fetch(
-        '/api/create-transaction',
-        {
-          method: 'PUT',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            startDate: beginDate.toISOString(),
-            endDate:
-              endingDate.toISOString() ||
-              beginDate.toISOString(),
-            itemId: tool.id,
-            renterId: user,
-            fee: calculateFee(beginDate, endingDate),
-          }),
-        }
-      );
+      if (beginDate && endingDate) {
+        const response = await fetch(
+          '/api/create-transaction',
+          {
+            method: 'PUT',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              startDate: beginDate.toISOString(),
+              endDate:
+                endingDate.toISOString() ||
+                beginDate.toISOString(),
+              itemId: tool.id,
+              renterId: user,
+              fee: calculateFee(beginDate, endingDate),
+            }),
+          }
+        );
 
-      if (response.ok) {
-        console.log('Transaction created successfully!');
-      } else {
-        console.error('Failed to create transaction');
+        if (response.ok) {
+          console.log('Transaction created successfully!');
+        } else {
+          console.error('Failed to create transaction');
+        }
       }
     } catch (error) {
       console.error('Failed to create transaction:', error);
@@ -74,10 +93,18 @@ export default function Calendar({
   };
 
   const updatedExcludeDateRangeArray =
-    excludeDateRangeArray.map(({ startDate, endDate }) => ({
-      start: parseJSON(startDate),
-      end: parseJSON(endDate),
-    }));
+    excludeDateRangeArray.map(
+      ({
+        startDate,
+        endDate,
+      }: {
+        startDate: Date;
+        endDate: Date;
+      }) => ({
+        start: parseJSON(startDate),
+        end: parseJSON(endDate),
+      })
+    );
 
   return (
     <>
