@@ -29,6 +29,10 @@
     border-radius: 10px;
 }
 
+.logo:hover {
+    cursor: pointer;
+}
+
 .menuSearchBarContainer {
     display: flex;
     margin-left: 10px;
@@ -41,6 +45,10 @@
 .menuIcon {
     height: 15px;
     width: 15px;
+}
+
+.menuIcon:hover {
+    cursor: pointer;
 }
 
 .searchBarContainer {
@@ -98,6 +106,10 @@
     width: 10px;
 }
 
+.magnifyingGlassIcon:hover {
+    cursor: pointer;
+}
+
 .toolBoxContainer {
     margin-right: 10px;
     margin-left: 50px;
@@ -107,6 +119,10 @@
 .toolBoxIcon {
     height: 40px;
     width: 40px;
+}
+
+.toolBoxIcon:hover {
+    cursor: pointer;
 }
 
 .homeAboutContact {
