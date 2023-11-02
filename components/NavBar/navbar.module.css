@@ -20,6 +20,7 @@
 
 .logoContainer {
     width: 80px;
+    margin-left: -20px;
 }
 
 .logo {
@@ -43,23 +44,21 @@
 }
 
 .searchBarContainer {
-    margin-left: 20px;
-    width: 70px;
+    margin-left: 5px;
 }
 
 .searchBar {
-    width: 70px;
+    width: 110px;
     height: 20px;
     background-color:rgb(240, 239, 239);
     border-radius: 4px;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-around;
 }
 
 .searchInput {
     background-color:rgb(240, 239, 239);
-    width: 60px;
     padding-left: 5px;
 }
 
@@ -117,7 +116,6 @@
 
 .menuOptionsContainer {
     width: 120px;
-    /* height: 100px; */
     position: absolute;
     left: 0.5;
     border: 1px solid;
