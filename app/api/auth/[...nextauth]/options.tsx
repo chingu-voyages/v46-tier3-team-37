@@ -2,12 +2,11 @@ import type { NextAuthOptions } from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
 import GoogleProvider from 'next-auth/providers/google'
 import GitHubProvider from 'next-auth/providers/github'
-import { PrismaClient } from '@prisma/client'
+import prisma from '@/lib/prisma'
 import { PrismaAdapter } from '@next-auth/prisma-adapter'
 import { randomUUID } from 'crypto'
 const bcrypt = require('bcrypt')
 
-const prisma = new PrismaClient()
 
 export const options: NextAuthOptions = {
   adapter: PrismaAdapter(prisma),
@@ -122,7 +121,6 @@ export const options: NextAuthOptions = {
         //   return null
         // }
       }
-      console.log(token, 'test')
       return token
     },
     async signIn({ user, account, profile }) {
@@ -136,7 +134,6 @@ export const options: NextAuthOptions = {
               sessionToken: token,
             },
           })
-          console.log(user)
           user.sessionToken = token
         }
       } catch (error) {
@@ -148,7 +145,7 @@ export const options: NextAuthOptions = {
       ...session,
       user: {
         ...session.user,
-        id: token.id,
+        id: token.userId,
         username: token.username,
       },
     }),
