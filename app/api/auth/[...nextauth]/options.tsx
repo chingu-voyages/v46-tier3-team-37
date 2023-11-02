@@ -2,12 +2,11 @@ import type { NextAuthOptions } from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
 import GoogleProvider from 'next-auth/providers/google'
 import GitHubProvider from 'next-auth/providers/github'
-import { PrismaClient } from '@prisma/client'
+import prisma from '@/lib/prisma'
 import { PrismaAdapter } from '@next-auth/prisma-adapter'
 import { randomUUID } from 'crypto'
 const bcrypt = require('bcrypt')
 
-const prisma = new PrismaClient()
 
 export const options: NextAuthOptions = {
   adapter: PrismaAdapter(prisma),
