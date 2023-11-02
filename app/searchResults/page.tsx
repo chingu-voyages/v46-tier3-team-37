@@ -19,37 +19,42 @@ const SearchResults: React.FC = () => {
 
     let tools: ItemComplete[] = [];
 
+
+    if (toolSearch == "") {
+        tools = toolsData;
+    }
+
     if (toolSearch) {
         tools = toolsData
             .filter(tool => tool.name.toLowerCase().includes(toolSearch.toLowerCase()));
+    }
 
-        if (sortBy == "name") {
-            tools = tools
-                .sort((toolA, toolB) => {
-                    const nameA = toolA.name.toLowerCase();
-                    const nameB = toolB.name.toLowerCase();
+    if (sortBy == "name") {
+        tools = tools
+            .sort((toolA, toolB) => {
+                const nameA = toolA.name.toLowerCase();
+                const nameB = toolB.name.toLowerCase();
 
-                    if (nameA < nameB) {
-                        return -1
-                    }
-                    if (nameA > nameB) {
-                        return 1
-                    }
-                    return 0;
-                })
-        }
+                if (nameA < nameB) {
+                    return -1
+                }
+                if (nameA > nameB) {
+                    return 1
+                }
+                return 0;
+            })
+    }
 
-        if (sortBy == "available") {
-            tools = tools
-                .filter(tool => tool.available === true)
-        }
+    if (sortBy == "available") {
+        tools = tools
+            .filter(tool => tool.available === true)
+    }
 
-        if (sortBy == "price") {
-            tools = tools
-                .sort((toolA, toolB) => {
-                    return toolA.price - toolB.price;
-                })
-        }
+    if (sortBy == "price") {
+        tools = tools
+            .sort((toolA, toolB) => {
+                return toolA.price - toolB.price;
+            })
     }
 
     useEffect(() => {
