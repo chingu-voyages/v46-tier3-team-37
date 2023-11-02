@@ -62,8 +62,16 @@
         width: 300px;
     }
 
+    .searchInput {
+        width: 270px !important;
+    }
+
     .searchBarContainer {
         margin-left: 50px;
+    }
+
+    .magnifyingGlassIcon {
+        margin-left: 10px;
     }
 
     .logoContainer {
@@ -74,13 +82,15 @@
 .searchInput {
     background-color:rgb(240, 239, 239);
     padding-left: 5px;
+    font-size: 0.5rem;
+    width: 100px;
 }
 
-.searchIcon {
+.searchInputContainer {
     font-size: 0.4rem;;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-around;
 }
 
 .magnifyingGlassIcon {

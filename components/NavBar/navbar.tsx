@@ -70,7 +70,7 @@ const NavBar: React.FC = () => {
                 </li>
                 <li className={s.searchBarContainer}>
                     <div className={s.searchBar}>
-                        <div className={s.searchIcon}>
+                        <div className={s.searchInputContainer}>
                             <input className={s.searchInput}
                                 type="search"
                                 placeholder="Search for tools"
