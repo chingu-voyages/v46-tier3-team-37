@@ -15,6 +15,29 @@ export async function PUT(req: NextRequest) {
           fee,
         } = body;
 
+        const existingTransactions =
+          await prisma.transaction.findMany({
+            where: {
+              itemId,
+              OR: [
+                {
+                  startDate: { lte: new Date(endDate) },
+                  endDate: { gte: new Date(startDate) },
+                },
+                {
+                  startDate: { lte: new Date(startDate) },
+                  endDate: { gte: new Date(endDate) },
+                },
+              ],
+            },
+          });
+
+        if (existingTransactions.length > 0) {
+          return NextResponse.json({
+            error: 'Transaction dates are not available',
+          });
+        }
+
         const transaction = await prisma.transaction.create(
           {
             data: {

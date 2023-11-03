@@ -6,6 +6,7 @@ import { ItemComplete as Tool } from '@/types/schemaTypes';
 import 'react-datepicker/dist/react-datepicker.css';
 import Button from '../uiComponents/Button';
 import Link from 'next/link';
+import toast, { Toaster } from 'react-hot-toast';
 
 type DateRange = {
   startDate: Date;
@@ -50,6 +51,7 @@ export default function Calendar({
   };
 
   const calculateFee = (start: Date, end: Date) => {
+    if (tool.ownerId === user) return 0;
     const MILLIS_PER_DAY = 24 * 60 * 60 * 1000;
 
     const differenceInMillis =
@@ -66,9 +68,8 @@ export default function Calendar({
   const addToCart = async () => {
     try {
       if (beginDate && endingDate) {
-        const response = await fetch(
-          '/api/create-transaction',
-          {
+        toast.promise(
+          fetch('/api/create-transaction', {
             method: 'PUT',
             headers: {
               'Content-Type': 'application/json',
@@ -80,17 +81,40 @@ export default function Calendar({
               renterId: user,
               fee: calculateFee(beginDate, endingDate),
             }),
+          })
+            .then(async (response) => {
+              if (response.ok) {
+                return response.json().then((data) => {
+                  if (data.error) {
+                    toast.error(data.error);
+                    return Promise.reject(data.error);
+                  } else {
+                    toast.success(
+                      'Your order is now on hold in checkout!'
+                    );
+                    return 'Successful';
+                  }
+                });
+              } else {
+                return Promise.reject(
+                  'Failed to create transaction'
+                );
+              }
+            })
+            .catch((error) => {
+              return Promise.reject(
+                'Oops! Something went wrong.'
+              );
+            }),
+          {
+            loading: 'Loading...',
+            success: 'Successful',
+            error: 'Oops! Something went wrong.',
           }
         );
-
-        if (response.ok) {
-          console.log('Transaction created successfully!');
-        } else {
-          console.error('Failed to create transaction');
-        }
       }
     } catch (error) {
-      console.error('Failed to create transaction:', error);
+      toast.error('Oops! Something went wrong.');
     }
   };
 
@@ -125,13 +149,12 @@ export default function Calendar({
           fixedHeight
         />
         <div className='py-2 pb-8 items-center flex flex-col'>
-          <Button variant={'icon'} onClick={clearDates}>
-            Clear Date Selection
-          </Button>
-          {!user && (
+          {!user ? (
             <div className='flex flex-col'>
-              <p>Users must be signed in to rent items</p>
-              <div className='flex space-between'>
+              <h1 className='font-bold'>
+                Users must be signed in to rent items
+              </h1>
+              <div className='flex justify-between'>
                 <Link href={'/login'}>
                   <Button>Login</Button>
                 </Link>
@@ -140,12 +163,21 @@ export default function Calendar({
                 </Link>
               </div>
             </div>
-          )}
-          {!endingDate ? (
-            <p>Select both a start and end date</p>
           ) : (
-            <Button onClick={addToCart}>Add to Cart</Button>
+            <div className='flex flex-col space-y-2'>
+              <Button variant={'icon'} onClick={clearDates}>
+                Clear Date Selection
+              </Button>
+              {!endingDate ? (
+                <p>Select both a start and end date</p>
+              ) : (
+                <Button onClick={addToCart}>
+                  Add to Cart
+                </Button>
+              )}
+            </div>
           )}
+          <Toaster />
         </div>
       </div>
     </>
