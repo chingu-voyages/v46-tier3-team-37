@@ -3,176 +3,200 @@
 @tailwind utilities; */
 
 .navbarContainer {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  background-color: white;
-  color: black;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  border-bottom: 1px solid;
-  position: sticky;
-  top: 0;
-  z-index: 5;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    background-color: white;
+    color: black;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid;
+    position: sticky;
+    top: 0;
+    z-index: 5;
 }
 
 .logoContainer {
-  width: 80px;
-  margin-left: -30px;
+    width: 80px;
+    margin-left: -30px;
 }
 
 .logo {
-  height: 80px;
-  width: 80px;
-  border-radius: 10px;
+    height: 80px;
+    width: 80px;
+    border-radius: 10px;
 }
 
 .logo:hover {
-  cursor: pointer;
+    cursor: pointer;
 }
 
 .menuSearchBarContainer {
-  display: flex;
-  margin-left: 10px;
+    display: flex;
+    margin-left: 5px;
 }
 
 .menu-container {
-  width: 10px;
+    width: 10px;
 }
 
 .menuIcon {
-  height: 15px;
-  width: 15px;
+    height: 15px;
+    width: 15px;
 }
 
 .menuIcon:hover {
-  cursor: pointer;
+    cursor: pointer;
 }
 
 .searchBarContainer {
-  margin-left: 7px;
+    margin-left: 7px;
 }
 
 .searchBar {
-  width: 110px;
-  height: 20px;
-  background-color: rgb(240, 239, 239);
-  border-radius: 4px;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
+    width: 110px;
+    height: 20px;
+    background-color: rgb(240, 239, 239);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
 }
 
 @media (min-width: 870px) {
-  .searchBar {
-    width: 300px;
-    height: 35px;
-  }
+    .searchBar {
+        width: 300px;
+        height: 35px;
+    }
 
-  .searchInput {
-    width: 270px !important;
-    font-size: 0.8rem !important;
-  }
+    .searchInput {
+        width: 270px !important;
+        font-size: 0.8rem !important;
+    }
 
-  .searchBarContainer {
-    margin-left: 50px;
-  }
+    .searchBarContainer {
+        margin-left: 50px;
+    }
 
-  .magnifyingGlassIcon {
-    margin-left: 10px;
-  }
+    .magnifyingGlassIcon {
+        margin-left: 10px;
+    }
 
-  .logoContainer {
-    margin-left: -165px;
-  }
+    .logoContainer {
+        margin-left: -255px;
+    }
 
-  .magnifyingGlassIcon {
-    height: 15px !important;
-    width: 15px !important;
-    margin-right: 5px;
-  }
+    .magnifyingGlassIcon {
+        height: 15px !important;
+        width: 15px !important;
+        margin-right: 5px;
+    }
+
+    .loginButtonContainer {
+        margin-left: -50px !important;
+    }
 }
 
-.login-button {
-    height: 30px !important;
-    width: 30px !important;
+.loginButtonContainer {
+    display: flex;
+}
+
+.loginButton {
+    font-size: 0.8rem !important;
+    font-weight: 400 !important;
+}
+
+@media (max-width: 480px) {
+    .loginButton {
+        height: 20px;
+        width: 77px;
+        font-size: 0.4rem !important;
+        font-weight: 400 !important;
+        border: 0.1px solid;
+        border-width: thin;
+        display: flex;
+    }
+
+    .logoContainer {
+        margin-right: -25px;
+    }
+    
 }
 
 .searchInput {
-  background-color: rgb(240, 239, 239);
-  padding-left: 5px;
-  font-size: 0.5rem;
-  width: 100px;
+    background-color: rgb(240, 239, 239);
+    padding-left: 5px;
+    font-size: 0.5rem;
+    width: 100px;
 }
 
 .searchInputContainer {
-  font-size: 0.4rem;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
+    font-size: 0.4rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
 }
 
 .magnifyingGlassIcon {
-  height: 10px;
-  width: 10px;
+    height: 10px;
+    width: 10px;
 }
 
 .magnifyingGlassIcon:hover {
-  cursor: pointer;
+    cursor: pointer;
 }
 
 .toolBoxContainer {
-  margin-right: 10px;
-  margin-left: 50px;
-  width: 50px;
+    margin-left: 10px;
+    width: 50px;
 }
 
 .toolBoxIcon {
-  height: 40px;
-  width: 40px;
+    height: 40px;
+    width: 40px;
 }
 
 .toolBoxIcon:hover {
-  cursor: pointer;
+    cursor: pointer;
 }
 
 .homeAboutContact {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  border-color: red;
-  width: 70px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border-color: red;
+    width: 70px;
 }
 
 .home {
-  font-size: 0.4rem;
+    font-size: 0.4rem;
 }
 
 .about {
-  font-size: 0.4rem;
+    font-size: 0.4rem;
 }
 
 .contact {
-  font-size: 0.4rem;
+    font-size: 0.4rem;
 }
 
 .toolBoxDropDownContainer {
-  border: 1px solid;
-  position: absolute;
-  z-index: 10;
-  background-color: white;
-  width: 150px;
-  right: 0;
+    border: 1px solid;
+    position: absolute;
+    z-index: 10;
+    background-color: white;
+    width: 150px;
+    right: 0;
 }
 
 .menuOptionsContainer {
-  width: 120px;
-  position: absolute;
-  left: 0.5;
-  border: 1px solid;
-  margin-top: 30px;
-  background-color: white;
-  z-index: 10;
+    width: 120px;
+    position: absolute;
+    left: 0.5;
+    border: 1px solid;
+    margin-top: 30px;
+    background-color: white;
+    z-index: 10;
 }

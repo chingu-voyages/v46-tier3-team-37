@@ -120,15 +120,15 @@ const NavBar: React.FC = () => {
           alt=''
         />
       </div>
-      <div className='flex items-center justify-center'>
+      <div className={s.loginButtonContainer}>
         {session ? (
           <div>
-            <Button onClick={() => signOut()} size={"sm"}>Logout</Button>
+            <Button onClick={() => signOut()} className={s.loginButton}>Logout</Button>
           </div>
         ) : (
           <div>
             <Link href='/login'>
-              <Button>Log In</Button>
+              <Button className={s.loginButton}>Log In</Button>
             </Link>
           </div>
         )}
