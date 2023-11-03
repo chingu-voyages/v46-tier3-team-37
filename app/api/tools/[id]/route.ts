@@ -7,7 +7,6 @@ export async function GET(
   { params }: { params: { id: string } }
 ) {
   try {
-    console.log('the params.id ', params.id)
     const tool = await prisma.item.findUnique({
       where: {
         id: params.id,
@@ -26,7 +25,6 @@ export async function GET(
         }
       }
     });
-    console.log(tool)
 
     return NextResponse.json(tool);
   } catch (error) {

@@ -37,10 +37,7 @@ export default async function Tool({
 }) {
   const tool = await getTool(params.id);
   const session = await getServerSession(options);
-  console.log(
-    'here is a tooooooooooSgiolusderngeiorugnerluig ',
-    tool
-  );
+
   return (
     <div className=''>
       <div className='flex justify-between px-4 py-4 '>

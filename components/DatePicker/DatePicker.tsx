@@ -5,6 +5,7 @@ import { parseJSON } from 'date-fns';
 import { ItemComplete as Tool } from '@/types/schemaTypes';
 import 'react-datepicker/dist/react-datepicker.css';
 import Button from '../uiComponents/Button';
+import Link from 'next/link';
 
 type DateRange = {
   startDate: Date;
@@ -127,6 +128,19 @@ export default function Calendar({
           <Button variant={'icon'} onClick={clearDates}>
             Clear Date Selection
           </Button>
+          {!user && (
+            <div className='flex flex-col'>
+              <p>Users must be signed in to rent items</p>
+              <div className='flex space-between'>
+                <Link href={'/login'}>
+                  <Button>Login</Button>
+                </Link>
+                <Link href={'/signup'}>
+                  <Button>Signup</Button>
+                </Link>
+              </div>
+            </div>
+          )}
           {!endingDate ? (
             <p>Select both a start and end date</p>
           ) : (
