@@ -74,7 +74,7 @@ const SearchResults: React.FC = () => {
         <section className={s.searchResults}>
             {isLoading
                 ?
-                <div>
+                <div className={s.searchingForTools}>
                     Searching for tools...
                 </div>
                 :
