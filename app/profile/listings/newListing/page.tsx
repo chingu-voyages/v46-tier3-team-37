@@ -2,7 +2,7 @@ import { getServerSession } from "next-auth";
 import CreateListingForm from "./CreateListingForm";
 import { options } from "@/app/api/auth/[...nextauth]/options";
 
-export default async function () {
+export default async function newListing () {
     
     return (
         <section className="w-full my-8 text-center">
