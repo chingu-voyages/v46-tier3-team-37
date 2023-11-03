@@ -1,4 +1,4 @@
-import { Tool } from "@/types/schemaTypes";
+import { Item } from "@/types/schemaTypes";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(
@@ -51,7 +51,7 @@ export async function PUT(
     req: NextRequest,
     { params }: { params: { id: string } }
   ) {
-    const data: Partial<Tool> = await req.json();
+    const data: Partial<Item> = await req.json();
     const column = Object.keys(data);
     try {
       const tool: number = await prisma!.$executeRaw`UPDATE public."Item" SET name = ${data.name}, description = ${data.description}, price = ${data.price}, "locationId" = 'clnyrowxr0004um24xcchp04w', "ownerId" = 'clnyrovuc0000um24rxym2fm3' WHERE id = ${params.id}`
