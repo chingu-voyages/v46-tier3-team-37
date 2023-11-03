@@ -1,4 +1,4 @@
-import { ItemWithImages as Tool } from "@/types/schemaTypes";
+
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
 
@@ -7,7 +7,8 @@ export async function GET(
   { params }: { params: { id: string } }
 ) {
   try {
-    const tool = await prisma?.item.findUnique({
+    console.log('the params.id ', params.id)
+    const tool = await prisma.item.findUnique({
       where: {
         id: params.id,
       }, include: {
@@ -25,6 +26,7 @@ export async function GET(
         }
       }
     });
+    console.log(tool)
 
     return NextResponse.json(tool);
   } catch (error) {
@@ -36,7 +38,7 @@ export async function PUT(
     req: NextRequest,
     { params }: { params: { id: string } }
   ) {
-    const data: Partial<Tool> = await req.json();
+    const data = await req.json();
     const column = Object.keys(data);
     try {
       const tool: number = await prisma!.$executeRaw`UPDATE public."Item" SET name = ${data.name}, description = ${data.description}, price = ${data.price}, "locationId" = 'clnyrowxr0004um24xcchp04w', "ownerId" = 'clnyrovuc0000um24rxym2fm3' WHERE id = ${params.id}`

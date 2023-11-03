@@ -18,7 +18,7 @@ export default function Calendar({
 }: {
   excludeDateRangeArray: DateRange[];
   tool: Tool;
-  user: String;
+  user: String | undefined | null;
 }) {
   const [beginDate, setBeginDate] = useState<Date | null>(
     null
@@ -37,10 +37,13 @@ export default function Calendar({
     }
   };
 
+  const clearDates = () => {
+    setBeginDate(null);
+    setEndingDate(null);
+  };
+
   const setBefore8AM = (date: Date) => {
-    console.log(date);
     const adjustedDate = new Date(date);
-    console.log(adjustedDate);
     adjustedDate.setHours(0, 0, 0, 0);
     return adjustedDate;
   };
@@ -71,9 +74,7 @@ export default function Calendar({
             },
             body: JSON.stringify({
               startDate: beginDate.toISOString(),
-              endDate:
-                endingDate.toISOString() ||
-                beginDate.toISOString(),
+              endDate: endingDate.toISOString(),
               itemId: tool.id,
               renterId: user,
               fee: calculateFee(beginDate, endingDate),
@@ -116,13 +117,16 @@ export default function Calendar({
           excludeDateIntervals={
             updatedExcludeDateRangeArray
           }
-          showDisabledMonthNavigation
           minDate={new Date()}
+          showDisabledMonthNavigation
           selectsRange
           inline
           fixedHeight
         />
-        <div className='py-2 pb-8'>
+        <div className='py-2 pb-8 items-center flex flex-col'>
+          <Button variant={'icon'} onClick={clearDates}>
+            Clear Date Selection
+          </Button>
           {!endingDate ? (
             <p>Select both a start and end date</p>
           ) : (

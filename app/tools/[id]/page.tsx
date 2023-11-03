@@ -1,6 +1,6 @@
 import BackButton from '@/components/DatePicker/BackButton';
 import Calendar from '@/components/DatePicker/DatePicker';
-import { ItemComplete as Tool } from '@/types/schemaTypes';
+import { Tool } from '@/types/schemaTypes';
 import Image from 'next/image';
 import { options } from '@/app/api/auth/[...nextauth]/options';
 import { getServerSession } from 'next-auth';
@@ -24,6 +24,7 @@ async function getTool(id: String) {
   const res = await fetch(`${baseUrl}/api/tools/${id}`, {
     cache: 'no-store',
   });
+
   const tool = await res.json();
 
   return tool;
@@ -36,7 +37,10 @@ export default async function Tool({
 }) {
   const tool = await getTool(params.id);
   const session = await getServerSession(options);
-
+  console.log(
+    'here is a tooooooooooSgiolusderngeiorugnerluig ',
+    tool
+  );
   return (
     <div className=''>
       <div className='flex justify-between px-4 py-4 '>
@@ -53,20 +57,26 @@ export default async function Tool({
             width={200}
           />
         )}
-        <div className=''>
-          <h1 className='font-bold text-lg'>{tool.name}</h1>
-          <p className='pt-4'>{tool.description}</p>
-          <p className='font-bold pt-2'>
-            ${tool.price}/day
-          </p>
-        </div>
-        <div className='py-4'>
-          <Calendar
-            excludeDateRangeArray={tool.Transaction}
-            tool={tool}
-            user={session?.user.id}
-          />
-        </div>
+        {tool && (
+          <div className=''>
+            <h1 className='font-bold text-lg'>
+              {tool.name}
+            </h1>
+            <p className='pt-4'>{tool.description}</p>
+            <p className='font-bold pt-2'>
+              ${tool.price}/day
+            </p>
+          </div>
+        )}
+        {tool && (
+          <div className='py-4'>
+            <Calendar
+              excludeDateRangeArray={tool.Transaction}
+              tool={tool}
+              user={session?.user.id}
+            />
+          </div>
+        )}
       </div>
     </div>
   );

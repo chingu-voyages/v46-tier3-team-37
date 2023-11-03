@@ -14,7 +14,7 @@ const itemComplete = Prisma.validator<Prisma.ItemDefaultArgs>()({
   include: { images: true, Transaction: true }
 })
 
-
+export type Tool = Prisma.ItemGetPayload<typeof itemComplete>;
 
 // create a type with another prisma helper function to create a join type for itemsWithImages
 export interface ItemComplete extends Prisma.ItemGetPayload<typeof itemComplete>{
