@@ -6,7 +6,7 @@ import Card from "@/components/uiComponents/Card";
  * Items in section tags need to be broken into components in /app/checkout/component
  */
 
-export default function () {
+export default function CheckoutPage () {
     return (
         <main className="dark flex flex-col gap-4 dark text-center bg-opacity-5 bg-[black] dark:bg-backgroundPrimary dark:text-fontSecondary h-full w-screen md:px-48">
             <section className=" w-full p-4 bg-[white] dark:bg-foregroundPrimary">

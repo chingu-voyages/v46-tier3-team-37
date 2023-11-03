@@ -10,7 +10,6 @@ export async function GET(
             id: params.id
         },
         select: {
-            name: true,
             email: true,
             username: true,
             image: true,

@@ -59,7 +59,7 @@ const About = () => {
       </div>
       <div className='grid grid-cols-1 gap-6 md:grid-cols-2'>
         <div className='flex flex-col w-[240px]'>
-          <Link href='https://www.linkedin.com/in/lynchharrison/'>
+           href='https://www.linkedin.com/in/lynchharrison/'>
             <Image
               src='https://media.licdn.com/dms/image/D5603AQEFQ9bPMTJ2Yw/profile-displayphoto-shrink_800_800/0/1686068486077?e=1703721600&v=beta&t=eh1PM9yuBTXKrlLBFtOqQcnQGOV5UpUnaHWqIQ1bO3o'
               width={240}
@@ -139,7 +139,7 @@ const About = () => {
         {techStack &&
           techStack.map((stack, i) => {
             return (
-              <div className='m-4 hover:scale-125'>
+              <div key={i} className='m-4 hover:scale-125'>
                 <Image
                   width={150}
                   height={150}
