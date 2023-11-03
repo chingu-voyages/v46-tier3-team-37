@@ -123,7 +123,7 @@ const NavBar: React.FC = () => {
       <div className='flex items-center justify-center'>
         {session ? (
           <div>
-            <Button onClick={() => signOut()}>Logout</Button>
+            <Button onClick={() => signOut()} size={"sm"}>Logout</Button>
           </div>
         ) : (
           <div>
