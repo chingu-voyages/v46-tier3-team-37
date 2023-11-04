@@ -1,62 +1,48 @@
-import { Item } from "@/types/schemaTypes";
-import { NextRequest, NextResponse } from "next/server";
+import { NextRequest, NextResponse } from 'next/server'
+import prisma from '@/lib/prisma'
 
 export async function GET(
   req: NextRequest,
   { params }: { params: { id: string } }
 ) {
   try {
-    const tool = await prisma?.item.findUnique({
+    const tool = await prisma.item.findUnique({
       where: {
         id: params.id,
-      }, include: {
+      },
+      include: {
         images: true,
         Transaction: {
           select: {
-            status: true,
             startDate: true,
-            endDate: true
+            endDate: true,
           },
           where: {
             NOT: {
-              status: 'COMPLETED'
-            }
-          }
-        }
-      }
-    });
+              status: 'COMPLETED',
+            },
+          },
+        },
+      },
+    })
 
-    const hasTransactions = tool?.Transaction?.length ?? 0 > 0;
-
-    if (!hasTransactions) {
-      const toolWithAvailability = { ...tool, available: true };
-      return NextResponse.json(toolWithAvailability);
-    }
-
-    const activeTransactionExists = tool?.Transaction.some(
-      (transaction) => transaction.status !== 'ACTIVE'
-    );
-    const toolWithAvailability = {
-      ...tool,
-      available: activeTransactionExists
-    };
-
-    return NextResponse.json(tool);
+    return NextResponse.json(tool)
   } catch (error) {
-    return NextResponse.json({ error });
+    return NextResponse.json({ error })
   }
 }
 
 export async function PUT(
-    req: NextRequest,
-    { params }: { params: { id: string } }
-  ) {
-    const data: Partial<Item> = await req.json();
-    const column = Object.keys(data);
-    try {
-      const tool: number = await prisma!.$executeRaw`UPDATE public."Item" SET name = ${data.name}, description = ${data.description}, price = ${data.price}, "locationId" = 'clnyrowxr0004um24xcchp04w', "ownerId" = 'clnyrovuc0000um24rxym2fm3' WHERE id = ${params.id}`
-      return NextResponse.json(tool);
-    } catch (error) {
-      return NextResponse.json({ error });
-    }
+  req: NextRequest,
+  { params }: { params: { id: string } }
+) {
+  const data = await req.json()
+  const column = Object.keys(data)
+  try {
+    const tool: number = await prisma!
+      .$executeRaw`UPDATE public."Item" SET name = ${data.name}, description = ${data.description}, price = ${data.price}, "locationId" = 'clnyrowxr0004um24xcchp04w', "ownerId" = 'clnyrovuc0000um24rxym2fm3' WHERE id = ${params.id}`
+    return NextResponse.json(tool)
+  } catch (error) {
+    return NextResponse.json({ error })
   }
+}
