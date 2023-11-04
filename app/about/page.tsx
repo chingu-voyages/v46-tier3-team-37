@@ -139,7 +139,7 @@ const About = () => {
         {techStack &&
           techStack.map((stack, i) => {
             return (
-              <div className='m-4 hover:scale-125'>
+              <div key={i} className='m-4 hover:scale-125'>
                 <Image
                   width={150}
                   height={150}
