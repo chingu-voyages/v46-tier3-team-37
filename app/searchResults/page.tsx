@@ -54,8 +54,6 @@ const SearchResults: React.FC = () => {
             })
     }
 
-    console.log('tools', tools)
-
     useEffect(() => {
         fetch('api/tools')
             .then((res) => res.json())
