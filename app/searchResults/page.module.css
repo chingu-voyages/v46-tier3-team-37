@@ -29,3 +29,9 @@
     flex-direction: row;
     font-size: 0.6rem;
 }
+
+.searchingForTools {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
