@@ -59,7 +59,7 @@ export async function getUserRentals() {
         where: {
             renterId: session.user.id
         }, include: {
-            item: true
+            item: {'include': {images: true}}
         }
     })
     if (!rentals) {
