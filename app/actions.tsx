@@ -57,7 +57,11 @@ export async function getUserRentals() {
     if(!session) redirect('/login');
     const rentals = await prisma.transaction.findMany({
         where: {
-            renterId: session.user.id
+            AND: [
+                { renterId: session.user.id },
+                { NOT: { status: 'HOLD'}}
+            ]
+
         }, include: {
             item: {'include': {images: true}}
         }
