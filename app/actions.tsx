@@ -95,3 +95,17 @@ export async function createListing(data: FormData) {
         redirect('/profile')
     }
 }
+
+export default async function getRenterById(id: string) {
+    const user = await prisma.user.findUnique({
+        where: {
+            id
+        },
+        select: {
+            username: true,
+            email: true,
+            id: true
+        }
+    })
+    return user;
+}

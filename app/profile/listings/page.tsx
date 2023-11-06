@@ -10,14 +10,13 @@ export default async function Listings() {
         const isActive = item.Transaction.some(t => t.status === 'ACTIVE')
         return isActive;
     }
-
     return (
         <section className="flex flex-col items-center gap-5 mt-4">
             <ul className="flex gap-2 flex-col md:w-1/2">
                 {
                     listings && listings.items.map((item, index) => (
                         <li key={index}>
-                            <Card active={hasActive(item)} imageSrc={item.images[0] && item.images[0].url} variant={'detailed'} title={item.name} description={item.description} price={item.price.toString()}>
+                            <Card active={hasActive(item)} imageSrc={item.images[0] && item.images[0].url} variant={'detailed'} title={item.name} description={item.description} transactions={item.Transaction} price={item.price.toString()}>
                                 <Button variant={'thin'} size={'sm'} cardType='detailed'>edit</Button>
                             </Card>
                         </li>
