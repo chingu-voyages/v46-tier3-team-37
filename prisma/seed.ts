@@ -27,6 +27,7 @@ twoDaysAfterOneWeek.setDate(oneWeekLater.getDate() + 2);
     data: {
       email: 'james@raw.com',
       username: 'james',
+      name: 'james',
       password: '$2b$10$051D0g/g47D.DlM6IxgNHumZu6wiSMqda8AlOCluL/19X5oivIDby',
     },
   });
@@ -35,6 +36,7 @@ twoDaysAfterOneWeek.setDate(oneWeekLater.getDate() + 2);
     data: {
       email: 'sean@raw.com',
       username: 'sean',
+      name: 'sean',
       password: '$2b$10$051D0g/g47D.DlM6IxgNHumZu6wiSMqda8AlOCluL/19X5oivIDby',
     },
   });
@@ -43,6 +45,7 @@ twoDaysAfterOneWeek.setDate(oneWeekLater.getDate() + 2);
     data: {
       email: 'yong@raw.com',
       username: 'yong',
+      name: 'yong',
       password: '$2b$10$051D0g/g47D.DlM6IxgNHumZu6wiSMqda8AlOCluL/19X5oivIDby',
     },
   });
@@ -51,6 +54,7 @@ twoDaysAfterOneWeek.setDate(oneWeekLater.getDate() + 2);
     data: {
       email: 'harrison@raw.com',
       username: 'harrison',
+      name: 'harrison',
       password: '$2b$10$051D0g/g47D.DlM6IxgNHumZu6wiSMqda8AlOCluL/19X5oivIDby',
     },
   });
