@@ -10,6 +10,7 @@ import s from './navbar.module.css'
 import Link from 'next/link'
 import { signOut, useSession } from 'next-auth/react'
 import Button from '@/components/uiComponents/Button'
+import { ItemComplete } from '@/types/schemaTypes'
 
 const NavBar: React.FC = () => {
   const { data: session } = useSession()
@@ -17,6 +18,7 @@ const NavBar: React.FC = () => {
   const router = useRouter()
 
   const [searchInput, setSearchInput] = React.useState<string>('')
+  const [cartItems, setCartItems] = React.useState<ItemComplete[]>([])
   const [showToolBox, setShowToolBox] = React.useState<boolean>(false)
   const [showMenu, setShowMenu] = React.useState<boolean>(false)
 
@@ -50,6 +52,18 @@ const NavBar: React.FC = () => {
   const routeToLandingPage = () => {
     router.push('/')
   }
+
+  useEffect(() => {
+    if (session && session.user && session.user.id) {
+      fetch(`/api/shopping-cart?userId=${session?.user.id}`)
+        .then((res) => res.json())
+        .then((data: ItemComplete[]) => {
+          setCartItems(data)
+        })
+    }
+  }, [session])
+
+  console.log('cartItems', cartItems)
 
   useEffect(() => {
     if (!showToolBox) return
@@ -139,9 +153,12 @@ const NavBar: React.FC = () => {
           {showToolBox && (
             <div className={s.toolBoxDropDownContainer}>
               <ul>
-                <ul>Item1 - price</ul>
+                {cartItems.map(item => (
+                  <li key={item.id}></li>
+                ))}
+                {/* <ul>Item1 - price</ul>
                 <ul>Item2 - price</ul>
-                <ul>Item3 - price</ul>
+                <ul>Item3 - price</ul> */}
               </ul>
             </div>
           )}
