@@ -82,7 +82,6 @@ export async function createListing(data: FormData) {
     if (!session) {
         redirect('/login')
     }
-    console.log(session.user)
     const newListing = await prisma.item.create({
         data: {
             name: data.get('name')?.toString() ?? '',

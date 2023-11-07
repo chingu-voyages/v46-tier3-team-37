@@ -26,7 +26,7 @@ interface CardFooterVariantProps
     extends React.HTMLAttributes<HTMLImageElement>,
     VariantProps<typeof CardFooterVariants> {
     price?: string,
-    show: boolean,
+    show?: boolean,
     parentVariant?: "default" | "detailed" | null | undefined,
     transactions?: Transaction[],
     activeRenters?: Array<{
@@ -37,7 +37,7 @@ interface CardFooterVariantProps
     children: React.ReactNode | React.ReactNode[]
 }
 
-export default async function CardFooter({ variant, parentVariant, size, price, children, show, transactions, activeRenters }: CardFooterVariantProps) {
+export default function CardFooter({ variant, parentVariant, size, price, children, show, transactions, activeRenters }: CardFooterVariantProps) {
     variant = parentVariant;
     let btnChildren: React.ReactNode | React.ReactNode[];;
 
@@ -47,8 +47,7 @@ export default async function CardFooter({ variant, parentVariant, size, price, 
         if (child.type === 'button') {
             btnChildren = children;
         } else { return }
-    })
-
+})
     return (
         <div className={CardFooterVariants({ variant, size })}>
             <span className={`${show && variant === 'detailed' ? 'self-start px-4' : 'hidden self-start'} `}>
