@@ -29,6 +29,7 @@ export async function getAllToolsWithImages() {
 }
 
 export async function getUserListings() {
+try {
 
     const session = await getServerSession(options);
     if (!session) {
@@ -50,6 +51,10 @@ export async function getUserListings() {
         throw new Error('no listings found')
     }
     return listings;
+} catch (error: any) {
+    console.log({message: error})
+    return null
+}
 }
 
 export async function getUserRentals() {
