@@ -1,5 +1,4 @@
-import getRenterById from "@/app/actions";
-import { Transaction, User } from "@/types/schemaTypes";
+import { Transaction } from "@/types/schemaTypes";
 import { cva, type VariantProps } from "class-variance-authority";
 import React from 'react';
 

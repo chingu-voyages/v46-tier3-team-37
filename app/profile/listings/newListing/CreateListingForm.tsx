@@ -1,8 +1,4 @@
-import { options } from "@/app/api/auth/[...nextauth]/options";
 import Button from "@/components/uiComponents/Button";
-import { getServerSession } from "next-auth";
-import prisma from "@/lib/prisma";
-import { redirect } from "next/navigation";
 import { createListing } from "@/app/actions";
 
 

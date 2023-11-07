@@ -1,8 +1,7 @@
 'use client'
-import getRenterById, { getUserRentals } from "@/app/actions";
+import { getUserRentals } from "@/app/actions";
 import Button from "@/components/uiComponents/Button";
 import Card from "@/components/uiComponents/Card";
-import { Transaction } from "@/types/schemaTypes";
 import { useState } from "react";
 
 export default function RentalList({ transactions }: { transactions: Awaited<ReturnType<typeof getUserRentals>> }) {
@@ -25,7 +24,7 @@ export default function RentalList({ transactions }: { transactions: Awaited<Ret
                 {transactions.map(t => (
                     <li key={t.id}>
                         <Card variant={'default'} title={t.item.name} imageSrc={t.item.images[0].url} description={t.item.description}>
-                            <Button onClick={(e) => { console.log(e);showDetails(t)}} variant={'thin'} size={'sm'} cardType="default">More Info</Button>
+                            <Button onClick={(e) => {showDetails(t)}} variant={'thin'} size={'sm'} cardType="default">More Info</Button>
                             <Button variant={'thin'} size={'sm'} cardType="default">cancel</Button>
                         </Card>
                     </li>

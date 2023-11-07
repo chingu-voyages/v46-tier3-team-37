@@ -5,7 +5,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 import CardImage from "./CardImage";
 import CardBody from "./CardBody";
 import CardFooter from "./CardFooter";
-import { Transaction, User } from "@/types/schemaTypes";
+import { Transaction } from "@/types/schemaTypes";
 import getRenterById from "@/app/actions";
 // import { twMerge as cnm } from "tailwind-merge";
 
