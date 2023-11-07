@@ -3,7 +3,7 @@ import { createListing } from "@/app/actions";
 
 
 
-export default async function ListingForm () {
+export default function ListingForm () {
     return (
         <form action={createListing} className="flex flex-col gap-12 items-center m-auto md:w-1/2 w-100">
             <ul className="flex flex-col w-full gap-5">
