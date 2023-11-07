@@ -2,6 +2,7 @@ import Card from '@/components/uiComponents/Card'
 import Button from '@/components/uiComponents/Button'
 import Image from 'next/image'
 import { getFeaturedTools } from './actions';
+import HomePgForm from '@/components/forms/HomePgForm';
 
 export default async function Home() {
 
@@ -16,15 +17,7 @@ export default async function Home() {
         <h1 className='font-bold text-center text-lg'>Find tools to rent here on Rent A Wrench!</h1>
         {/* <search by location and date form component will need to be split into a separate Component */}
         <div >
-          <form className='flex flex-col gap-6 justify-center my-4'>
-            <input readOnly type='text' value={'Texas'} className='border border-[lightgray] rounded-sm w-full' placeholder='Location' />
-            <div className='flex justify-center gap-4 bg-[lightgray] h-16 p-2 '>
-              <input className='rounded-sm' type='date' min={new Date().toISOString().split('T')[0]} required />
-              <p className='self-center text-[gray] h-full border border-[gray]'></p>
-              <input className='rounded-sm' type='date' min={new Date().toISOString().split('T')[0]} required />
-            </div>
-            <Button className='font-bold text-xl' size='lg'>Search</Button>
-          </form>
+         <HomePgForm />
         </div>
       </section>
         
