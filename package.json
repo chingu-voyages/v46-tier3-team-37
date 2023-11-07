@@ -21,6 +21,7 @@
     "class-variance-authority": "^0.7.0",
     "crypto-randomuuid": "^1.0.0",
     "date-fns": "^2.30.0",
+    "dayjs": "^1.11.10",
     "next": "13.5.4",
     "next-auth": "^4.24.3",
     "react": "^18",
