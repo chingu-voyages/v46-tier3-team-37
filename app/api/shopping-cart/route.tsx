@@ -15,9 +15,10 @@ export async function GET (req: NextRequest) {
                 renter: true,
                 item: {
                     include: {
-                        owner: true
+                        owner: true,
+                        images: true
                     }
-                }
+                },
             }
         })
 
