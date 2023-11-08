@@ -6,12 +6,15 @@ import Button from "@/components/uiComponents/Button";
 import Card from "@/components/uiComponents/Card";
 import { ItemComplete } from "@/types/schemaTypes";
 import s from "./page.module.css";
+import dayjs from 'dayjs';
 
 
 const SearchResults: React.FC = () => {
     const router = useRouter();
     const searchParams = useSearchParams();
     const toolSearch = searchParams.get('toolName');
+    const startDate = searchParams.get('startDate');
+    const endDate = searchParams.get('endDate');
 
     const [isLoading, setLoading] = React.useState<boolean>(true);
     const [toolsData, setToolsData] = React.useState<ItemComplete[]>([]);
@@ -23,6 +26,8 @@ const SearchResults: React.FC = () => {
         tools = toolsData
             .filter(tool => tool.name.toLowerCase().includes(toolSearch.toLowerCase()));
     } else if (toolSearch == "") {
+        tools = toolsData;
+    } else {
         tools = toolsData;
     }
 
@@ -55,13 +60,24 @@ const SearchResults: React.FC = () => {
     }
 
     useEffect(() => {
-        fetch('api/tools')
-            .then((res) => res.json())
-            .then((data: ItemComplete[]) => {
-                setToolsData(data)
-                setLoading(false)
+        if (startDate && endDate) {
+            fetch(`api/s?startDate=${startDate}&endDate=${endDate}`, {
+                method: 'POST'
             })
-    }, []);
+                .then((res) => res.json())
+                .then((data: ItemComplete[]) => {
+                    setToolsData(data);
+                    setLoading(false)
+                })
+        } else {
+            fetch('api/tools')
+                .then((res) => res.json())
+                .then((data: ItemComplete[]) => {
+                    setToolsData(data)
+                    setLoading(false)
+                })
+        }
+    }, [startDate, endDate]);
 
 
     const routeToItemPage = (toolId: string) => {
@@ -81,11 +97,20 @@ const SearchResults: React.FC = () => {
                         ?
                         <div className={s.searchResults}>
                             <div className={s.searchResultsTop}>
-                                {toolSearch !== ""
-                                    ?
-                                    <div>Search results for &apos;&apos;{toolSearch}&apos;&apos;</div>
-                                    :
-                                    <div>Displaying all tools:</div>
+                                {toolSearch &&
+                                    <div>
+                                        {toolSearch !== ""
+                                            ?
+                                            <div>Search results for &apos;&apos;{toolSearch}&apos;&apos;</div>
+                                            :
+                                            <div>Displaying all tools:</div>
+                                        }
+                                    </div>
+                                }
+                                {startDate && endDate &&
+                                    <div>
+                                        <div>Tools available: {dayjs(startDate).format("MMM D")} - {dayjs(endDate).format("MMM D")}</div>
+                                    </div>
                                 }
                                 <div className={s.sortOptionsContiner}>
                                     <div className={s.sortOptions}>
@@ -118,7 +143,7 @@ const SearchResults: React.FC = () => {
                             ))}
                         </div>
                         :
-                        <div>No tools found for `{toolSearch}`</div>
+                        <div>No tools found</div>
                     }
                 </div>
             }
