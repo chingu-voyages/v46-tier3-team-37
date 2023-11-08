@@ -460,6 +460,24 @@ twoDaysAfterOneWeek.setDate(oneWeekLater.getDate() + 2);
     }
   })
 
+  const update_transaction_status = async () => {
+    const transactions = await prisma.transaction.findMany();
+  
+    for (const transaction of transactions) {
+      if (new Date() >= transaction.endDate) {
+        await prisma.transaction.update({
+          where: { id: transaction.id },
+          data: { status: 'COMPLETED' },
+        });
+      } else if (new Date() >= transaction.startDate && new Date() <= transaction.endDate) {
+        await prisma.transaction.update({
+          where: { id: transaction.id },
+          data: { status: 'ACTIVE' },
+        });
+      }
+    }
+  };
+
   console.log('the data is seeded!')
 }
 main()
