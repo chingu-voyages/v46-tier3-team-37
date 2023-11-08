@@ -64,6 +64,7 @@ const Login = () => {
                   type='text'
                   className='rounded-md w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 sm:text-sm'
                   placeholder='Enter your username'
+                  required
                 />
               </div>
             </div>
@@ -84,6 +85,7 @@ const Login = () => {
                   type='password'
                   className='rounded-md w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 sm:text-sm'
                   placeholder='Enter your password'
+                  required
                 />
               </div>
             </div>
