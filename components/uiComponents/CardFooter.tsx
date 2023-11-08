@@ -1,3 +1,4 @@
+import { Transaction } from "@/types/schemaTypes";
 import { cva, type VariantProps } from "class-variance-authority";
 import React from 'react';
 
@@ -24,12 +25,18 @@ interface CardFooterVariantProps
     extends React.HTMLAttributes<HTMLImageElement>,
     VariantProps<typeof CardFooterVariants> {
     price?: string,
-    show: boolean,
+    show?: boolean,
     parentVariant?: "default" | "detailed" | null | undefined,
+    transactions?: Transaction[],
+    activeRenters?: Array<{
+        email: string | null;
+        username: string;
+        id: string,
+    }> | null,
     children: React.ReactNode | React.ReactNode[]
 }
 
-export default function CardFooter({ variant, parentVariant, size, price, children, show }: CardFooterVariantProps) {
+export default function CardFooter({ variant, parentVariant, size, price, children, show, transactions, activeRenters }: CardFooterVariantProps) {
     variant = parentVariant;
     let btnChildren: React.ReactNode | React.ReactNode[];;
 
@@ -39,12 +46,30 @@ export default function CardFooter({ variant, parentVariant, size, price, childr
         if (child.type === 'button') {
             btnChildren = children;
         } else { return }
-    })
+})
     return (
         <div className={CardFooterVariants({ variant, size })}>
-            <span className={`${show && variant === 'detailed' ? 'self-start' : 'hidden self-start'} `}>
+            <span className={`${show && variant === 'detailed' ? 'self-start px-4' : 'hidden self-start'} `}>
                 <p><b>price:</b> {price}</p>
-                <p>other details TODO</p>
+                <div>
+                    {transactions && transactions.map((t) => (
+                        t.status === 'ACTIVE' &&
+                            <ul key={t.id}>
+                                { activeRenters && activeRenters.map(user => (
+                                    <li>
+                                        <b>Current renter: </b>{user?.id === t.renterId && user.username}
+                                    </li>
+                                ))
+                                }
+                                <li>
+                                    <b>start Date:</b> {t.startDate.toISOString().split('T')[0]}
+                                </li>
+                                <li>
+                                    <b>end date:</b> {t.endDate.toISOString().split('T')[0]}
+                                </li>
+                            </ul>
+                    ))}
+                </div>
             </span>
             <div className="flex justify-end gap-3">
                 {React.Children.map(btnChildren, (child) => <>{child}</>)}
