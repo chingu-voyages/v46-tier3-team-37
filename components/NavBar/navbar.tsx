@@ -152,13 +152,18 @@ const NavBar: React.FC = () => {
           </div>
           {showToolBox && (
             <div className={s.toolBoxDropDownContainer}>
-              <div className={s.cartItemsContainer}>
-                {cartItems.map(cartItem => (
-                  <div key={cartItem.id} className={s.cartItem}>
-                    <span>{cartItem.item.name} - ${cartItem.item.price}</span>
-                  </div>
-                ))}
-              </div>
+              {cartItems.length
+                ?
+                <div className={s.cartItemsContainer}>
+                  {cartItems.map(cartItem => (
+                    <div key={cartItem.id} className={s.cartItem}>
+                      <span>{cartItem.item.name} - ${cartItem.item.price}</span>
+                    </div>
+                  ))}
+                </div>
+                :
+                <div>Your toolbox is empty</div>
+              }
             </div>
           )}
         </div>
