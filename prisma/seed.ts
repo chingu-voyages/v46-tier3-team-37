@@ -460,23 +460,39 @@ twoDaysAfterOneWeek.setDate(oneWeekLater.getDate() + 2);
     }
   })
 
-  const update_transaction_status = async () => {
-    const transactions = await prisma.transaction.findMany();
+  await prisma.$queryRaw`
+
+  DROP PROCEDURE IF EXISTS public.update_transaction_status();
   
-    for (const transaction of transactions) {
-      if (new Date() >= transaction.endDate) {
-        await prisma.transaction.update({
-          where: { id: transaction.id },
-          data: { status: 'COMPLETED' },
-        });
-      } else if (new Date() >= transaction.startDate && new Date() <= transaction.endDate) {
-        await prisma.transaction.update({
-          where: { id: transaction.id },
-          data: { status: 'ACTIVE' },
-        });
-      }
-    }
-  };
+  CREATE OR REPLACE PROCEDURE public.update_transaction_status(
+    )
+  LANGUAGE 'plpgsql'
+  AS $BODY$
+  DECLARE transaction RECORD;
+  BEGIN
+  RAISE NOTICE 'updating transaction.status';
+  FOR transaction IN
+  SELECT * FROM public."Transaction"
+    LOOP
+      IF CURRENT_DATE >= transaction."endDate" THEN
+        UPDATE public."Transaction"
+        SET status = 'COMPLETED'
+        WHERE id = transaction.id;
+        RAISE NOTICE 'transaction % updated to completed!', transaction.id;
+      END IF;
+      IF CURRENT_DATE >= transaction."startDate" AND CURRENT_DATE <= transaction."endDate" THEN
+        UPDATE public."Transaction"
+        SET status = 'ACTIVE'
+        WHERE id = transaction.id;
+        RAISE NOTICE 'transaction % updated to active!', transaction.id;
+      END IF;
+    END LOOP;
+  END
+  
+  $BODY$;
+  ALTER PROCEDURE public.update_transaction_status()
+      OWNER TO postgres;
+  `
 
   console.log('the data is seeded!')
 }
