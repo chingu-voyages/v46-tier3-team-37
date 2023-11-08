@@ -6,7 +6,7 @@ import { ItemComplete as Tool } from '@/types/schemaTypes';
 import 'react-datepicker/dist/react-datepicker.css';
 import Button from '../uiComponents/Button';
 import Link from 'next/link';
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 
 type DateRange = {
   startDate: Date;
@@ -177,7 +177,6 @@ export default function Calendar({
               )}
             </div>
           )}
-          <Toaster />
         </div>
       </div>
     </>

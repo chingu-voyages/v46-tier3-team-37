@@ -6,6 +6,8 @@ import { Lexend_Deca } from 'next/font/google';
 import { getServerSession } from 'next-auth';
 import { options } from './api/auth/[...nextauth]/options';
 import AuthProvider from '@/context/AuthProvider';
+import { Toaster } from 'react-hot-toast';
+import CartToast from '@/components/cartToast/CartToast';
 
 const inter = Lexend_Deca({
   subsets: ['latin'],
@@ -32,8 +34,10 @@ export default async function RootLayout({
       >
         <AuthProvider session={session}>
           <NavBar />
+          <CartToast />
           {children}
         </AuthProvider>
+        <Toaster />
       </body>
     </html>
   );
