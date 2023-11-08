@@ -1,4 +1,3 @@
-import { Prisma } from '@prisma/client';
 import prisma from '../lib/prisma'
 
 async function main() {
@@ -464,6 +463,40 @@ twoDaysAfterOneWeek.setDate(oneWeekLater.getDate() + 2);
       }
     }
   })
+
+  await prisma.$queryRaw`
+
+  DROP PROCEDURE IF EXISTS public.update_transaction_status();
+  
+  CREATE OR REPLACE PROCEDURE public.update_transaction_status(
+    )
+  LANGUAGE 'plpgsql'
+  AS $BODY$
+  DECLARE transaction RECORD;
+  BEGIN
+  RAISE NOTICE 'updating transaction.status';
+  FOR transaction IN
+  SELECT * FROM public."Transaction"
+    LOOP
+      IF CURRENT_DATE >= transaction."endDate" THEN
+        UPDATE public."Transaction"
+        SET status = 'COMPLETED'
+        WHERE id = transaction.id;
+        RAISE NOTICE 'transaction % updated to completed!', transaction.id;
+      END IF;
+      IF CURRENT_DATE >= transaction."startDate" AND CURRENT_DATE <= transaction."endDate" THEN
+        UPDATE public."Transaction"
+        SET status = 'ACTIVE'
+        WHERE id = transaction.id;
+        RAISE NOTICE 'transaction % updated to active!', transaction.id;
+      END IF;
+    END LOOP;
+  END
+  
+  $BODY$;
+  ALTER PROCEDURE public.update_transaction_status()
+      OWNER TO postgres;
+  `
 
   console.log('the data is seeded!')
 }
