@@ -1,10 +1,14 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useState, FormEvent } from 'react'
 import { signIn } from 'next-auth/react'
 import Button from '@/components/uiComponents/Button'
+import { useRouter } from 'next/navigation'
 
 const Login = () => {
+  const [errorMsg, setErrorMsg] = useState('')
+  const router = useRouter()
+
   const [formValue, setFormValue] = useState({
     username: '',
     password: '',
@@ -15,15 +19,21 @@ const Login = () => {
     setFormValue((prevFormValue) => ({ ...prevFormValue, [name]: value }))
   }
 
-  const handleLogin = async (e: React.FormEvent) => {
+  const handleLogin = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    await signIn('credentials', {
+
+    const response = await signIn('credentials', {
       username: formValue.username,
       password: formValue.password,
-      callbackUrl: '/',
+      redirect: false,
     })
+    console.log({ response })
+    setErrorMsg(Object.assign({ response }))
+    if (!response?.error) {
+      router.push('/')
+      router.refresh()
+    }
   }
-
   const loginWithOAuth = async (provider: string) => {
     try {
       await signIn(provider, { callbackUrl: '/' })
@@ -89,6 +99,13 @@ const Login = () => {
                 />
               </div>
             </div>
+            {errorMsg && (
+              <div>
+                <p className='text-sm font-medium text-[#FF0000]'>
+                  Incorrect login credentials
+                </p>
+              </div>
+            )}
             <div>
               <Button className='w-full flex justify-center rounded-md'>
                 Sign In

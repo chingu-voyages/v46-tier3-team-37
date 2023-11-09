@@ -46,7 +46,7 @@ export const options: NextAuthOptions = {
 
         if (!passwordIsCorrect || !(credentials?.username === user.username)) {
           console.log(user, 'User not found in db')
-          return null
+          throw new Error('Password is incorrect')
         }
 
         const token = randomUUID()
