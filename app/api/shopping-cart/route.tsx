@@ -3,26 +3,31 @@ import prisma from '@/lib/prisma';
 import { getServerSession } from 'next-auth';
 import { options } from '../auth/[...nextauth]/options';
 
-export async function GET (req: NextRequest) {
+export async function GET(req: NextRequest) {
     const session = await getServerSession(options);
     try {
-        const holdTransactions = await prisma.transaction.findMany({
+        const holdItems = await prisma.item.findMany({
             where: {
-                status: 'HOLD',
-                renterId: session?.user.id
+                Transaction: {
+                    some: {
+                        status: 'HOLD',
+                        renterId: session?.user.id
+                    }
+                }
             },
             include: {
-                renter: true,
-                item: {
-                    include: {
-                        owner: true,
-                        images: true
+                Transaction: {
+                    where: {
+                        status: 'HOLD',
+                        renterId: session?.user.id
                     }
                 },
+                owner: true,
+                images: true
             }
         })
 
-        return NextResponse.json(holdTransactions);
+        return NextResponse.json(holdItems);
     } catch (error) {
         console.log(error);
         return NextResponse.json({ error })

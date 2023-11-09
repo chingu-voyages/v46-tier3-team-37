@@ -14,11 +14,10 @@ import { ItemComplete } from '@/types/schemaTypes'
 
 const NavBar: React.FC = () => {
   const { data: session } = useSession()
-  console.log('session', session)
   const router = useRouter()
 
   const [searchInput, setSearchInput] = React.useState<string>('')
-  const [cartItems, setCartItems] = React.useState<ItemComplete[]>([])
+  const [cartItems, setCartItems] = React.useState<unknown>([])
   const [showToolBox, setShowToolBox] = React.useState<boolean>(false)
   const [showMenu, setShowMenu] = React.useState<boolean>(false)
 
@@ -57,7 +56,7 @@ const NavBar: React.FC = () => {
     if (session && session.user && session.user.id) {
       fetch(`/api/shopping-cart?userId=${session?.user.id}`)
         .then((res) => res.json())
-        .then((data) => {
+        .then((data: unknown) => {
           setCartItems(data)
         })
     }
