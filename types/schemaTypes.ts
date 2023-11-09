@@ -7,7 +7,15 @@ export interface Item extends ItemPrismaGeneratedType{
 
 export type User = UserPrismaGeneratedType 
 
-export type Transaction = TransactionPrismaGeneratedType
+// export type Transaction = TransactionPrismaGeneratedType
+
+const transactionComplete = Prisma.validator<Prisma.TransactionDefaultArgs>()({
+  include: { item: { include: {
+    images: true
+  }}}
+})
+
+export type transactionComplete = Prisma.TransactionGetPayload<typeof transactionComplete>
 
 // prisma helper function that creates and validates a joined type
 const itemComplete = Prisma.validator<Prisma.ItemDefaultArgs>()({

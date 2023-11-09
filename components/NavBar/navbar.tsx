@@ -10,14 +10,15 @@ import s from './navbar.module.css'
 import Link from 'next/link'
 import { signOut, useSession } from 'next-auth/react'
 import Button from '@/components/uiComponents/Button'
-import { ItemComplete } from '@/types/schemaTypes'
+import { CartItem } from '@/types/cartItemType'
+
 
 const NavBar: React.FC = () => {
   const { data: session } = useSession()
   const router = useRouter()
 
   const [searchInput, setSearchInput] = React.useState<string>('')
-  const [cartItems, setCartItems] = React.useState<unknown>([])
+  const [cartItems, setCartItems] = React.useState<CartItem[]>([])
   const [showToolBox, setShowToolBox] = React.useState<boolean>(false)
   const [showMenu, setShowMenu] = React.useState<boolean>(false)
 
@@ -56,7 +57,7 @@ const NavBar: React.FC = () => {
     if (session && session.user && session.user.id) {
       fetch(`/api/shopping-cart?userId=${session?.user.id}`)
         .then((res) => res.json())
-        .then((data: unknown) => {
+        .then((data: CartItem[]) => {
           setCartItems(data)
         })
     }
@@ -151,7 +152,7 @@ const NavBar: React.FC = () => {
           </div>
           {showToolBox && (
             <div className={s.toolBoxDropDownContainer}>
-              {cartItems.length
+              {cartItems && cartItems.length > 0
                 ?
                 <div className={s.cartItemsContainer}>
                   {cartItems.map(cartItem => (
