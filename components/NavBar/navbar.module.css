@@ -186,7 +186,7 @@
     position: absolute;
     z-index: 10;
     background-color: white;
-    width: 200px;
+    width: 150px;
     right: 0;
 }
 
@@ -208,4 +208,8 @@
 .cartItem {
     overflow: hidden;
     border-bottom: solid;
+}
+
+.cartItemImage {
+    object-fit: cover;
 }

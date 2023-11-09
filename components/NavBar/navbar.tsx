@@ -157,7 +157,9 @@ const NavBar: React.FC = () => {
                 <div className={s.cartItemsContainer}>
                   {cartItems.map(cartItem => (
                     <div key={cartItem.id} className={s.cartItem}>
-                      <span>{cartItem.item.name} - ${cartItem.item.price}</span>
+                      <span><Image src={cartItem.item.images[0].url} width={40} height={40} className={s.cartItemImage} alt="" />
+
+                      </span>
                     </div>
                   ))}
                 </div>
