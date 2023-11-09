@@ -101,7 +101,7 @@ const NavBar: React.FC = () => {
               <Link href='/profile'>My profile</Link>
             </li>
             <li>
-              <Link href='/list'>List a tool</Link>
+              <Link href='/profile/listings/newListing'>List a tool</Link>
             </li>
             <li>
               <Link href='/about'>About</Link>
