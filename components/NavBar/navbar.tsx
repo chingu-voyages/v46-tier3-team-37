@@ -57,7 +57,7 @@ const NavBar: React.FC = () => {
     if (session && session.user && session.user.id) {
       fetch(`/api/shopping-cart?userId=${session?.user.id}`)
         .then((res) => res.json())
-        .then((data: ItemComplete[]) => {
+        .then((data) => {
           setCartItems(data)
         })
     }
