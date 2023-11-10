@@ -1,9 +1,10 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Card from '@/components/uiComponents/Card';
 import { CartItem } from '@/types/cartItemType';
-import Button from '@/components/uiComponents/Button';
+import RemoveButton from './RemoveButton';
+import CompleteButton from './CompleteButton';
 
 export function CheckoutTransactions({
   transactions,
@@ -14,6 +15,15 @@ export function CheckoutTransactions({
 
   const handleRemove = async (id: string) => {
     await removeTransaction(id);
+    setHolds((prevTransactions) =>
+      prevTransactions.filter(
+        (transaction) => transaction.id !== id
+      )
+    );
+  };
+
+  const handleComplete = async (id: string) => {
+    await completeTransaction(id);
     setHolds((prevTransactions) =>
       prevTransactions.filter(
         (transaction) => transaction.id !== id
@@ -33,6 +43,21 @@ export function CheckoutTransactions({
       );
     } catch (error) {
       console.error('Error deleting transaction:', error);
+    }
+  };
+
+  const completeTransaction = async (
+    transactionId: String
+  ) => {
+    try {
+      const res = await fetch(
+        `/api/shopping-cart/${transactionId}`,
+        {
+          method: 'POST',
+        }
+      );
+    } catch (error) {
+      console.error('Error completing transaction:', error);
     }
   };
 
@@ -65,6 +90,10 @@ export function CheckoutTransactions({
                     <RemoveButton
                       id={hold.id}
                       handleRemove={handleRemove}
+                    />
+                    <CompleteButton
+                      id={hold.id}
+                      handleComplete={handleComplete}
                     />
                   </li>
                   <li className='flex justify-between py-1'>
@@ -102,39 +131,6 @@ export function CheckoutTransactions({
             </div>
           );
         })}
-    </>
-  );
-}
-
-function RemoveButton({
-  id,
-  handleRemove,
-}: {
-  id: string;
-  handleRemove: (id: string) => void;
-}) {
-  const [showConfirm, setShowConfirm] = useState(false);
-
-  const handleCancelRemove = () => {
-    setShowConfirm(false);
-  };
-
-  return (
-    <>
-      <Button onClick={() => setShowConfirm(true)}>
-        Remove
-      </Button>
-      {showConfirm && (
-        <div>
-          <p>Are you sure you want to remove this item?</p>
-          <Button onClick={() => handleRemove(id)}>
-            Confirm
-          </Button>
-          <Button onClick={handleCancelRemove}>
-            Cancel
-          </Button>
-        </div>
-      )}
     </>
   );
 }
