@@ -208,8 +208,10 @@
 .cartItem {
     overflow: hidden;
     border-bottom: solid;
+    cursor: pointer;
 }
 
 .cartItemImage {
+    margin-left: 15px;
     object-fit: cover;
 }

@@ -27,6 +27,10 @@ const NavBar: React.FC = () => {
     setSearchInput('')
   }
 
+  const routeToCheckoutPage = () => {
+    router.push(`/checkout`)
+  }
+
   const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
       routeToSearchResults(searchInput)
@@ -108,21 +112,11 @@ const NavBar: React.FC = () => {
         </li>
         {showMenu && (
           <ul className={s.menuOptionsContainer}>
-            <li>
-              <Link href='/'>Home</Link>
-            </li>
-            <li>
-              <Link href='/profile'>My profile</Link>
-            </li>
-            <li>
-              <Link href='/list'>List a tool</Link>
-            </li>
-            <li>
-              <Link href='/about'>About</Link>
-            </li>
-            <li>
-              <Link href='/contact'>Contact</Link>
-            </li>
+            <li><Link href='/'>Home</Link></li>
+            <li><Link href='/profile'>My profile</Link></li>
+            <li><Link href='/list'>List a tool</Link></li>
+            <li><Link href='/about'>About</Link></li>
+            <li><Link href='/contact'>Contact</Link></li>
           </ul>
         )}
       </ul>
@@ -156,9 +150,16 @@ const NavBar: React.FC = () => {
                 ?
                 <div className={s.cartItemsContainer}>
                   {cartItems.map(cartItem => (
-                    <div key={cartItem.id} className={s.cartItem}>
-                      <span><Image src={cartItem.item.images[0].url} width={40} height={40} className={s.cartItemImage} alt="" />
-
+                    <div onClick={() => routeToCheckoutPage()} key={cartItem.id} className={s.cartItem}>
+                      <span>
+                        <Image
+                          src={cartItem.item.images.length ? cartItem.item.images[0].url : 'https://www.harborfreight.com/media/catalog/product/cache/9fc4a8332f9638515cd199dd0f9238da/6/7/67716_W3.jpg'}
+                          width={40}
+                          height={40}
+                          className={s.cartItemImage}
+                          alt=""
+                        />
+                        {/* Timer will display here */}
                       </span>
                     </div>
                   ))}
