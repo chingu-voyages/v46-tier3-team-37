@@ -115,9 +115,18 @@ const NavBar: React.FC = () => {
             <li>
               <Link href='/'>Home</Link>
             </li>
-            <li>
-              <Link href='/profile'>My profile</Link>
-            </li>
+            {session && (
+              <>
+                <li>
+                  <Link href='/profile'>My profile</Link>
+                </li>
+                <li>
+                  <Link href='/' onClick={() => signOut()}>
+                    Log out
+                  </Link>
+                </li>
+              </>
+            )}
             <li>
               <Link href='/profile/listings/newListing'>List a tool</Link>
             </li>
@@ -141,7 +150,9 @@ const NavBar: React.FC = () => {
       <div className={s.loginButtonContainer}>
         {session ? (
           <div>
-            <Button onClick={() => signOut()} className={s.loginButton}>Logout</Button>
+            <Button onClick={() => signOut()} className={s.loginButton}>
+              Logout
+            </Button>
           </div>
         ) : (
           <div>
