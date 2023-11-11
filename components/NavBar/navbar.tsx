@@ -112,11 +112,21 @@ const NavBar: React.FC = () => {
         </li>
         {showMenu && (
           <ul className={s.menuOptionsContainer}>
-            <li><Link href='/'>Home</Link></li>
-            <li><Link href='/profile'>My profile</Link></li>
-            <li><Link href='/list'>List a tool</Link></li>
-            <li><Link href='/about'>About</Link></li>
-            <li><Link href='/contact'>Contact</Link></li>
+            <li>
+              <Link href='/'>Home</Link>
+            </li>
+            <li>
+              <Link href='/profile'>My profile</Link>
+            </li>
+            <li>
+              <Link href='/profile/listings/newListing'>List a tool</Link>
+            </li>
+            <li>
+              <Link href='/about'>About</Link>
+            </li>
+            <li>
+              <Link href='/contact'>Contact</Link>
+            </li>
           </ul>
         )}
       </ul>
