@@ -10,19 +10,25 @@ import s from './navbar.module.css'
 import Link from 'next/link'
 import { signOut, useSession } from 'next-auth/react'
 import Button from '@/components/uiComponents/Button'
+import { CartItem } from '@/types/cartItemType'
+
 
 const NavBar: React.FC = () => {
   const { data: session } = useSession()
-  console.log('session', session)
   const router = useRouter()
 
   const [searchInput, setSearchInput] = React.useState<string>('')
+  const [cartItems, setCartItems] = React.useState<CartItem[]>([])
   const [showToolBox, setShowToolBox] = React.useState<boolean>(false)
   const [showMenu, setShowMenu] = React.useState<boolean>(false)
 
   const routeToSearchResults = (toolName: string) => {
     router.push(`/searchResults?toolName=${toolName}`)
     setSearchInput('')
+  }
+
+  const routeToCheckoutPage = () => {
+    router.push(`/checkout`)
   }
 
   const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -50,6 +56,18 @@ const NavBar: React.FC = () => {
   const routeToLandingPage = () => {
     router.push('/')
   }
+
+  useEffect(() => {
+    if (session && session.user && session.user.id) {
+      fetch(`/api/shopping-cart?userId=${session?.user.id}`)
+        .then((res) => res.json())
+        .then((data: CartItem[]) => {
+          setCartItems(data)
+        })
+    }
+  }, [session])
+
+  console.log('cartItems', cartItems)
 
   useEffect(() => {
     if (!showToolBox) return
@@ -97,11 +115,20 @@ const NavBar: React.FC = () => {
             <li>
               <Link href='/'>Home</Link>
             </li>
+            {session && (
+              <>
+                <li>
+                  <Link href='/profile'>My profile</Link>
+                </li>
+                <li>
+                  <Link href='/' onClick={() => signOut()}>
+                    Log out
+                  </Link>
+                </li>
+              </>
+            )}
             <li>
-              <Link href='/profile'>My profile</Link>
-            </li>
-            <li>
-              <Link href='/list'>List a tool</Link>
+              <Link href='/profile/listings/newListing'>List a tool</Link>
             </li>
             <li>
               <Link href='/about'>About</Link>
@@ -143,11 +170,27 @@ const NavBar: React.FC = () => {
           </div>
           {showToolBox && (
             <div className={s.toolBoxDropDownContainer}>
-              <ul>
-                <ul>Item1 - price</ul>
-                <ul>Item2 - price</ul>
-                <ul>Item3 - price</ul>
-              </ul>
+              {cartItems && cartItems.length > 0
+                ?
+                <div className={s.cartItemsContainer}>
+                  {cartItems.map(cartItem => (
+                    <div onClick={() => routeToCheckoutPage()} key={cartItem.id} className={s.cartItem}>
+                      <span>
+                        <Image
+                          src={cartItem.item.images.length ? cartItem.item.images[0].url : 'https://www.harborfreight.com/media/catalog/product/cache/9fc4a8332f9638515cd199dd0f9238da/6/7/67716_W3.jpg'}
+                          width={40}
+                          height={40}
+                          className={s.cartItemImage}
+                          alt=""
+                        />
+                        {/* Timer will display here */}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+                :
+                <div>Your toolbox is empty</div>
+              }
             </div>
           )}
         </div>

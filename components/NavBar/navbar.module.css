@@ -199,3 +199,19 @@
     background-color: white;
     z-index: 10;
 }
+
+.cartItemsContainer {
+    display: flex;
+    flex-direction: column;
+}
+
+.cartItem {
+    overflow: hidden;
+    border-bottom: solid;
+    cursor: pointer;
+}
+
+.cartItemImage {
+    margin-left: 15px;
+    object-fit: cover;
+}
