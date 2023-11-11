@@ -6,6 +6,8 @@ import { Lexend_Deca } from 'next/font/google';
 import { getServerSession } from 'next-auth';
 import { options } from './api/auth/[...nextauth]/options';
 import AuthProvider from '@/context/AuthProvider';
+import Test from './Test';
+import { TimerProvider } from '@/components/cartToast/useTimer';
 
 const inter = Lexend_Deca({
   subsets: ['latin'],
@@ -24,15 +26,17 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   const session = await getServerSession(options);
-
   return (
     <html lang='en'>
       <body
         className={`dark:bg-backgroundPrimary ${inter.variable} font-sans`}
       >
         <AuthProvider session={session}>
-          <NavBar />
-          {children}
+          <TimerProvider>
+            <NavBar />
+            <Test />
+            {children}
+          </TimerProvider>
         </AuthProvider>
       </body>
     </html>

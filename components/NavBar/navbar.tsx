@@ -11,6 +11,7 @@ import Link from 'next/link'
 import { signOut, useSession } from 'next-auth/react'
 import Button from '@/components/uiComponents/Button'
 import { CartItem } from '@/types/cartItemType'
+import Test from '@/app/Test'
 
 
 const NavBar: React.FC = () => {
@@ -180,7 +181,7 @@ const NavBar: React.FC = () => {
                           className={s.cartItemImage}
                           alt=""
                         />
-                        {/* Timer will display here */}
+                        <Test />
                       </span>
                     </div>
                   ))}
