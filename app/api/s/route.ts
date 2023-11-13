@@ -3,7 +3,6 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(request: NextRequest) {
   try {
-    if (request.method === "POST") {
       const searchParams = request.nextUrl.searchParams;
       const startDate = searchParams.get("startDate");
       const endDate = searchParams.get("endDate");
@@ -51,11 +50,6 @@ export async function POST(request: NextRequest) {
 
         return NextResponse.json(tools);
       }
-    } else {
-      return NextResponse.json({
-        error: "there was an error in your request.",
-      });
-    }
   } catch (error: any) {
     console.log(error);
     return NextResponse.json({ error });
