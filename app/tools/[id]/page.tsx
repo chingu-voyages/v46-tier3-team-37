@@ -13,7 +13,7 @@ if (process.env.NODE_ENV === 'development') {
 export async function generateStaticParams(): Promise<
   { params: { id: string } }[]
 > {
-  const res = await fetch(`https://v46-tier3-team-37-puce.vercel.app/api/tools`);
+  const res = await fetch(`http://localhost:3000/api/tools`);
   const tools = await res.json();
 
   return tools.map((tool: Tool) => ({
@@ -22,7 +22,7 @@ export async function generateStaticParams(): Promise<
 }
 
 async function getTool(id: String) {
-  const res = await fetch(`https://v46-tier3-team-37-puce.vercel.app/api/tools/${id}`, {
+  const res = await fetch(`http://localhost:3000/api/tools/${id}`, {
     cache: 'no-store',
   });
 
