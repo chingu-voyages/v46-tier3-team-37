@@ -4,6 +4,40 @@ import { options } from "./api/auth/[...nextauth]/options";
 import { redirect } from "next/navigation";
 import { getServerSession } from "next-auth";
 
+export async function getAllToolsData() {
+    const tools = await prisma?.item.findMany({ 
+        include: {
+          images: true,
+          Transaction: {
+            select: {
+              status: true,
+              startDate: true,
+              endDate: true
+            },
+            where: {
+              NOT: {
+                status: 'COMPLETED'
+              }
+            }
+          }
+        }
+      });
+    
+      const toolsWithAvailability = tools.map(tool => {
+        const hasTransactions = tool.Transaction.length > 0;
+    
+        if (!hasTransactions) {
+          return { ...tool, available: true };
+        }
+        const activeTransactionExists = hasTransactions && tool.Transaction.some(
+          transaction => transaction.status !== 'ACTIVE'
+        );
+        return { ...tool, available: activeTransactionExists };
+      });
+    
+      return toolsWithAvailability;
+}
+
 export async function getToolById(id: string) {
     try {
         const tool = await prisma.item.findUnique({

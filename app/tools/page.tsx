@@ -2,30 +2,31 @@ import Button from '@/components/uiComponents/Button';
 import Card from '@/components/uiComponents/Card';
 import { ItemComplete as Tool } from '@/types/schemaTypes';
 import Link from 'next/link';
+import { getAllToolsData } from '../actions';
 let baseUrl: string; //to be the value of the deployed website base URL
 if (process.env.NODE_ENV === 'development') {
   baseUrl = 'http://localhost:3000';
 }
-async function getAllToolsInfo() {
-  try { 
-    const res = await fetch(`https://v46-tier3-team-37-edshmiu6y-sean-paulsons-projects.vercel.app/?vercelToolbarCode=Xo2dVAIBRm-vEun/api/tools`);
-    if (!res.ok) {
-      throw new Error('Failed to fetch data');
-    }
-    return res.json();
-  } catch (error) {
-    console.log(error);
-  }
-}
+// async function getAllToolsInfo() {
+//   try { 
+//     const res = await fetch(`https://v46-tier3-team-37-puce.vercel.app/api/tools`);
+//     if (!res.ok) {
+//       throw new Error('Failed to fetch data');
+//     }
+//     return res.json();
+//   } catch (error) {
+//     console.log(error);
+//   }
+// }
 
 export default async function Tools() {
-  const toolsData = await getAllToolsInfo();
+  const toolsData = await getAllToolsData();
 console.log(toolsData);
   return (
     <div className='pt-[5px] px-[10px]'>
       {toolsData && (
         <div className='mx-auto'>
-          {toolsData.map((tool: Tool) => (
+          {toolsData.map((tool) => (
             <div
               className='flex justify-center mt-4'
               key={tool.id}
