@@ -91,7 +91,7 @@ export async function createListing(data: FormData) {
                 connect: { 'id': session.user.id },
             },
             location: {
-                connect: { id: 'clooxwgzr00046xtit1xk6um5' },
+                connect: { id: 'clotd6f5z00046x1oi1omty5y' },
             },
         },
     })

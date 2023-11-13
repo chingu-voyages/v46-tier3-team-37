@@ -2,13 +2,13 @@ import Button from '@/components/uiComponents/Button';
 import Card from '@/components/uiComponents/Card';
 import { ItemComplete as Tool } from '@/types/schemaTypes';
 import Link from 'next/link';
-
+let baseUrl: string; //to be the value of the deployed website base URL
+if (process.env.NODE_ENV === 'development') {
+  baseUrl = 'http://localhost:3000';
+}
 async function getAllToolsInfo() {
-  let baseUrl = ''; //to be the value of the deployed website base URL
-  if (process.env.NODE_ENV === 'development') {
-    baseUrl = 'http://localhost:3000';
-  }
-  const res = await fetch(`${baseUrl}/api/tools`);
+
+  const res = await fetch(`http://localhost:3000/api/tools`);
   if (!res.ok) {
     throw new Error('Failed to fetch data');
   }

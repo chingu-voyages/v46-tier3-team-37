@@ -4,15 +4,16 @@ import { Tool } from '@/types/schemaTypes';
 import Image from 'next/image';
 import { options } from '@/app/api/auth/[...nextauth]/options';
 import { getServerSession } from 'next-auth';
+export const dynamic = "force-dynamic"
 
-let baseUrl = ''; //to be the value of the deployed website base URL
+let baseUrl: string; //to be the value of the deployed website base URL
 if (process.env.NODE_ENV === 'development') {
   baseUrl = 'http://localhost:3000';
 }
 export async function generateStaticParams(): Promise<
   { params: { id: string } }[]
 > {
-  const res = await fetch(`${baseUrl}/api/tools`);
+  const res = await fetch(`http://localhost:3000/api/tools`);
   const tools = await res.json();
 
   return tools.map((tool: Tool) => ({
@@ -21,7 +22,7 @@ export async function generateStaticParams(): Promise<
 }
 
 async function getTool(id: String) {
-  const res = await fetch(`${baseUrl}/api/tools/${id}`, {
+  const res = await fetch(`http://localhost:3000/api/tools/${id}`, {
     cache: 'no-store',
   });
 

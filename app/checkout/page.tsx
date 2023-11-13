@@ -3,6 +3,7 @@ import { options } from '../api/auth/[...nextauth]/options';
 import prisma from '@/lib/prisma';
 import { redirect } from 'next/navigation';
 import { CheckoutTransactions } from '@/components/checkoutPage/CheckoutTransactions';
+export const dynamic = "force-dynamic"
 
 async function getUsersHoldTransactions() {
   const session = await getServerSession(options);
