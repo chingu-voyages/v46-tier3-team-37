@@ -8,7 +8,7 @@ if (process.env.NODE_ENV === 'development') {
 }
 async function getAllToolsInfo() {
 
-  const res = await fetch(`http://localhost:3000/api/tools`);
+  const res = await fetch(`https://v46-tier3-team-37-edshmiu6y-sean-paulsons-projects.vercel.app/?vercelToolbarCode=Xo2dVAIBRm-vEun/api/tools`);
   if (!res.ok) {
     throw new Error('Failed to fetch data');
   }
