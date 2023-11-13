@@ -5,29 +5,6 @@ import Image from 'next/image';
 import { options } from '@/app/api/auth/[...nextauth]/options';
 import { getServerSession } from 'next-auth';
 
-export async function generateStaticParams(): Promise<
-  { params: { id: string } }[]
-> {
-  const res = await fetch(`api/tools`);
-
-  if (!res.ok) {
-    console.error(
-      `Failed to fetch data. Status: ${res.status}`
-    );
-    console.error('Response:', await res.text());
-    throw new Error(
-      `Failed to fetch data. Status: ${res.status}`
-    );
-  }
-
-  const tools = await res.json();
-  console.log('Fetched tools:', tools);
-
-  return tools.map((tool: Tool) => ({
-    params: { id: tool.id },
-  }));
-}
-
 async function getTool(id: String) {
   const res = await fetch(`api/tools/${id}`, {
     cache: 'no-store',

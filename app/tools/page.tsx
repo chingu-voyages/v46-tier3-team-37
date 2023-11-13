@@ -1,4 +1,3 @@
-import Button from '@/components/uiComponents/Button';
 import Card from '@/components/uiComponents/Card';
 import { ItemComplete as Tool } from '@/types/schemaTypes';
 import Link from 'next/link';
