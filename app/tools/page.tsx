@@ -4,7 +4,8 @@ import { ItemComplete as Tool } from '@/types/schemaTypes';
 import Link from 'next/link';
 
 async function getAllToolsInfo() {
-  let baseUrl = ''; //to be the value of the deployed website base URL
+  let baseUrl =
+    'https://v46-tier3-team-37-chingu-rent-a-wrench.vercel.app'; //to be the value of the deployed website base URL
   if (process.env.NODE_ENV === 'development') {
     baseUrl = 'http://localhost:3000';
   }
