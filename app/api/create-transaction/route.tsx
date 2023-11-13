@@ -1,11 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server';
 import prisma from '@/lib/prisma';
 
-export async function PUT(req: NextRequest) {
+export async function PUT(request: NextRequest) {
   try {
-    const contentType = req.headers.get('content-type');
+    const contentType = request.headers.get('content-type');
     if (contentType?.includes('application/json')) {
-      const body = await req.json();
+      const body = await (request as any).json();
       const { startDate, endDate, itemId, renterId, fee } =
         body;
 

@@ -36,7 +36,7 @@ export async function PUT(
   req: NextRequest,
   { params }: { params: { id: string } }
 ) {
-  const data = await req.json();
+  const data = await (req as any).json();
   const column = Object.keys(data);
 
   try {
