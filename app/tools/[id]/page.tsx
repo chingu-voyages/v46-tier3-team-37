@@ -29,7 +29,7 @@ export async function generateStaticParams(): Promise<
 }
 
 async function getTool(id: String) {
-  const res = await fetch(`${baseUrl}/api/tools/${id}`, {
+  const res = await fetch(`api/tools/${id}`, {
     cache: 'no-store',
   });
 
