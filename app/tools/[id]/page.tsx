@@ -5,8 +5,7 @@ import Image from 'next/image';
 import { options } from '@/app/api/auth/[...nextauth]/options';
 import { getServerSession } from 'next-auth';
 
-let baseUrl =
-  'v46-tier3-team-37-24ed-i03b1rmtj-rent-a-tool.vercel.app'; //to be the value of the deployed website base URL
+let baseUrl = 'v46-tier3-team-37-puce.vercel.app'; //to be the value of the deployed website base URL
 if (process.env.NODE_ENV === 'development') {
   baseUrl = 'http://localhost:3000';
 }

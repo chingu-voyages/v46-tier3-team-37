@@ -4,8 +4,7 @@ import { ItemComplete as Tool } from '@/types/schemaTypes';
 import Link from 'next/link';
 
 async function getAllToolsInfo() {
-  let baseUrl =
-    'v46-tier3-team-37-24ed-i03b1rmtj-rent-a-tool.vercel.app'; //to be the value of the deployed website base URL
+  let baseUrl = 'v46-tier3-team-37-puce.vercel.app'; //to be the value of the deployed website base URL
   if (process.env.NODE_ENV === 'development') {
     baseUrl = 'http://localhost:3000';
   }
