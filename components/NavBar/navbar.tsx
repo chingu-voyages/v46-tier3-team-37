@@ -65,9 +65,7 @@ const NavBar: React.FC = () => {
           setCartItems(data)
         })
     }
-  }, [session])
-
-  console.log('cartItems', cartItems)
+  }, [session, cartItems])
 
   useEffect(() => {
     if (!showToolBox) return
