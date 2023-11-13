@@ -5,6 +5,10 @@ import { signIn } from 'next-auth/react'
 import Button from '@/components/uiComponents/Button'
 import { useRouter } from 'next/navigation'
 
+interface ErrorMessage {
+  res: string
+}
+
 const Login = () => {
   const [errorMsg, setErrorMsg] = useState('')
   const router = useRouter()
@@ -22,14 +26,15 @@ const Login = () => {
   const handleLogin = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
-    const response = await signIn('credentials', {
+    const res = await signIn('credentials', {
       username: formValue.username,
       password: formValue.password,
       redirect: false,
     })
-    console.log({ response })
-    setErrorMsg(Object.assign({ response }))
-    if (!response?.error) {
+
+    setErrorMsg(res.error)
+
+    if (!res?.error) {
       router.push('/')
       router.refresh()
     }
@@ -99,13 +104,19 @@ const Login = () => {
                 />
               </div>
             </div>
-            {errorMsg && (
+            {errorMsg === 'CredentialsSignin' ? (
+              <div>
+                <p className='text-sm font-medium text-[#FF0000]'>
+                  User does not exist
+                </p>
+              </div>
+            ) : errorMsg === 'Password is incorrect' ? (
               <div>
                 <p className='text-sm font-medium text-[#FF0000]'>
                   Incorrect login credentials
                 </p>
               </div>
-            )}
+            ) : null}
             <div>
               <Button className='w-full flex justify-center rounded-md'>
                 Sign In
