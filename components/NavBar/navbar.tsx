@@ -150,7 +150,10 @@ const NavBar: React.FC = () => {
       <div className={s.loginButtonContainer}>
         {session ? (
           <div>
-            <Button onClick={() => signOut()} className={s.loginButton}>
+            <Button
+              onClick={() => signOut({ redirect: true, callbackUrl: '/login' })}
+              className={s.loginButton}
+            >
               Logout
             </Button>
           </div>

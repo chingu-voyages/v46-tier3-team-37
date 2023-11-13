@@ -9,7 +9,21 @@ const SignUp = () => {
     username: '',
     email: '',
     password: '',
+    confirmPassword: '',
   })
+
+  const [error, setError] = useState('')
+
+  const validatePassword = () => {
+    let isValid = true
+    if (formValue.password !== '' && formValue.confirmPassword !== '') {
+      if (formValue.password !== formValue.confirmPassword) {
+        isValid = false
+        setError('Password and confirm password does not match')
+      }
+    }
+    return isValid
+  }
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target
@@ -18,29 +32,32 @@ const SignUp = () => {
 
   const handleSignup = async (event: React.FormEvent) => {
     event.preventDefault()
+    setError('')
     console.log(event)
     if (event.currentTarget.getAttribute('name') === 'oauth') return
 
-    const newUser = {
-      username: formValue.username,
-      email: formValue.email,
-      password: formValue.password,
-    }
-
-    const response = await fetch('/api/signup', {
-      method: 'POST',
-      body: JSON.stringify(newUser),
-    })
-
-    const user = await response.json()
-    if (user) {
-      await signIn('credentials', {
+    if (validatePassword()) {
+      const newUser = {
         username: formValue.username,
+        email: formValue.email,
         password: formValue.password,
-        callbackUrl: '/',
+      }
+
+      const response = await fetch('/api/signup', {
+        method: 'POST',
+        body: JSON.stringify(newUser),
       })
+
+      const user = await response.json()
+
+      if (user) {
+        await signIn('credentials', {
+          username: formValue.username,
+          password: formValue.password,
+          callbackUrl: '/',
+        })
+      }
     }
-    console.log(user)
   }
 
   const signUpWithOAuth = async (provider: string) => {
@@ -113,30 +130,86 @@ const SignUp = () => {
                     </div>
                   </div>
                   <div className='mx-auto max-w-xs'>
-                    <input
-                      className='w-full px-6 py-3 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white'
-                      type='text'
-                      name='username'
-                      placeholder='Username'
-                      onChange={handleChange}
-                      value={formValue.username}
-                    />
-                    <input
-                      className='w-full px-6 py-3 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white mt-5'
-                      type='email'
-                      name='email'
-                      placeholder='e-mail'
-                      onChange={handleChange}
-                      value={formValue.email}
-                    />
-                    <input
-                      className='w-full px-6 py-3 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white mt-5'
-                      type='password'
-                      name='password'
-                      placeholder='Password'
-                      onChange={handleChange}
-                      value={formValue.password}
-                    />
+                    <div>
+                      <label
+                        htmlFor='username'
+                        className='block text-sm font-medium text-[#D3CAB0]'
+                      >
+                        Username
+                      </label>
+                      <div className='mt-1'>
+                        <input
+                          className='w-full p-3 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white'
+                          type='text'
+                          name='username'
+                          placeholder='Enter Username'
+                          onChange={handleChange}
+                          value={formValue.username}
+                        />
+                      </div>
+                    </div>
+                    <div className='mt-2'>
+                      <label
+                        htmlFor='email'
+                        className='block text-sm font-medium text-[#D3CAB0]'
+                      >
+                        E-mail
+                      </label>
+                      <div className='mt-1'>
+                        <input
+                          className='w-full p-3 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white'
+                          type='email'
+                          name='email'
+                          placeholder='Enter e-mail'
+                          onChange={handleChange}
+                          value={formValue.email}
+                        />
+                      </div>
+                    </div>
+                    <div className='mt-2'>
+                      <label
+                        htmlFor='password'
+                        className='block text-sm font-medium text-[#D3CAB0]'
+                      >
+                        Pasword
+                      </label>
+                      <div className='mt-1'>
+                        <input
+                          className='w-full p-3 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white'
+                          type='password'
+                          name='password'
+                          placeholder='Enter Password'
+                          onChange={handleChange}
+                          value={formValue.password}
+                        />
+                      </div>
+                    </div>
+                    <div className='mt-2'>
+                      <label
+                        htmlFor='password'
+                        className='block text-sm font-medium text-[#D3CAB0]'
+                      >
+                        Confirm Pasword
+                      </label>
+                      <div className='mt-1'>
+                        <input
+                          className='w-full p-3 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white'
+                          type='password'
+                          name='confirmPassword'
+                          placeholder='Confirm Password'
+                          onChange={handleChange}
+                          value={formValue.confirmPassword}
+                          required
+                        />
+                      </div>
+                      {error && (
+                        <div className='mt-1'>
+                          <p className='text-sm font-medium text-[#FF0000]'>
+                            {error}
+                          </p>
+                        </div>
+                      )}
+                    </div>
                     <Button className='mt-5 w-full py-4 rounded-lg flex items-center justify-center'>
                       <span className='ml-3'>Sign Up</span>
                     </Button>

@@ -7,7 +7,6 @@ import { PrismaAdapter } from '@next-auth/prisma-adapter'
 import { randomUUID } from 'crypto'
 const bcrypt = require('bcrypt')
 
-
 export const options: NextAuthOptions = {
   adapter: PrismaAdapter(prisma),
 
@@ -26,62 +25,51 @@ export const options: NextAuthOptions = {
           placeholder: 'Enter password',
         },
       },
+
       async authorize(credentials) {
-      /**this try catch block is going to try and change the return type of credentials
-       * its expecting a return type of awaitable<User | null>
-       */
-        // try {
-          if (!credentials || !credentials.username) {
-            return null
-          }
-          const user = await prisma.user.findUnique({
-            where: {
-              username: credentials.username,
-            },
-          })
-          /**this is to let typescript know that the user exists so that you dont have to do
-           * user?.property <-- This can cause unexpected errors if it does not exist. 
-           */
-          if (!user) {
-            return null
-          }
+        if (!credentials || !credentials.username) {
+          return null
+        }
+        const user = await prisma.user.findUnique({
+          where: {
+            username: credentials.username,
+          },
+        })
+        if (!user) {
+          return null
+        }
 
-          const passwordIsCorrect = await bcrypt.compare(
-            credentials.password,
-            user.password
-          )
+        const passwordIsCorrect = await bcrypt.compare(
+          credentials.password,
+          user.password
+        )
 
-          if (
-            !passwordIsCorrect ||
-            !(credentials?.username === user.username)
-          ) {
-            console.log(user, 'User no found in db')
-            return null
-          }
+        if (!passwordIsCorrect || !(credentials?.username === user.username)) {
+          console.log(user, 'User not found in db')
+          throw new Error('Password is incorrect')
+        }
 
-          const token = randomUUID()
-          /**prisma create() expects a return of type Session */
-          const userSession = await prisma.session.create({
-                        data: {
-                          userId: user.id,
-                          expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
-                          sessionToken: token,
-                        }
-                      })
+        const token = randomUUID()
 
-          return {
-            id: user.id,
-            name: null, //name is no longer a type on our user schema but it is expected by the nextAuth User type
-            username: user.username,
-            email: user.email,
-            image: user.image,
-            sessionToken: userSession.sessionToken,
-          }
-        // } catch (error) {
-        //   console.log(error)
-        // }
+        const userSession = await prisma.session.create({
+          data: {
+            userId: user.id,
+            expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
+            sessionToken: token,
+          },
+        })
+
+        return {
+          id: user.id,
+          name: null,
+          username: user.username,
+          email: user.email,
+          image: user.image,
+          sessionToken: userSession.sessionToken,
+        }
       },
     }),
+
     GoogleProvider({
       clientId: process.env.GOOGLE_ID as string,
       clientSecret: process.env.GOOGLE_SECRET as string,
@@ -91,10 +79,9 @@ export const options: NextAuthOptions = {
       clientSecret: process.env.GITHUB_SECRET as string,
     }),
   ],
-
   session: {
     strategy: 'jwt',
-    maxAge: 30 * 24 * 60 * 60, // 30 days
+    maxAge: 7 * 24 * 60 * 60, // 7 days
     updateAge: 24 * 60 * 60, // 24 hours
   },
   callbacks: {
@@ -113,24 +100,17 @@ export const options: NextAuthOptions = {
             user: true,
           },
         })
-        /***The jwt callback cannot return null it must return a type Token
-         * Im not sure what this conditional is trying to accomplish so i didn't delete it.
-         * You could return a invalidated token?
-         */
-        // if (!session) {
-        //   return null
-        // }
       }
       return token
     },
-    async signIn({ user, account, profile }) {
+    async signIn({ user, account }) {
       try {
         if (account?.type === 'oauth') {
           const token = randomUUID()
           await prisma.session.create({
             data: {
               userId: user.id,
-              expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
+              expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
               sessionToken: token,
             },
           })

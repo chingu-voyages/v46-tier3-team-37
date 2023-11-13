@@ -1,10 +1,18 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useState, FormEvent } from 'react'
 import { signIn } from 'next-auth/react'
 import Button from '@/components/uiComponents/Button'
+import { useRouter } from 'next/navigation'
+
+interface ErrorMessage {
+  res: string
+}
 
 const Login = () => {
+  const [errorMsg, setErrorMsg] = useState('')
+  const router = useRouter()
+
   const [formValue, setFormValue] = useState({
     username: '',
     password: '',
@@ -15,15 +23,22 @@ const Login = () => {
     setFormValue((prevFormValue) => ({ ...prevFormValue, [name]: value }))
   }
 
-  const handleLogin = async (e: React.FormEvent) => {
+  const handleLogin = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    await signIn('credentials', {
+
+    const res = await signIn('credentials', {
       username: formValue.username,
       password: formValue.password,
-      callbackUrl: '/',
+      redirect: false,
     })
-  }
 
+    setErrorMsg(res.error)
+
+    if (!res?.error) {
+      router.push('/')
+      router.refresh()
+    }
+  }
   const loginWithOAuth = async (provider: string) => {
     try {
       await signIn(provider, { callbackUrl: '/' })
@@ -64,6 +79,7 @@ const Login = () => {
                   type='text'
                   className='rounded-md w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 sm:text-sm'
                   placeholder='Enter your username'
+                  required
                 />
               </div>
             </div>
@@ -84,9 +100,23 @@ const Login = () => {
                   type='password'
                   className='rounded-md w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 sm:text-sm'
                   placeholder='Enter your password'
+                  required
                 />
               </div>
             </div>
+            {errorMsg === 'CredentialsSignin' ? (
+              <div>
+                <p className='text-sm font-medium text-[#FF0000]'>
+                  User does not exist
+                </p>
+              </div>
+            ) : errorMsg === 'Password is incorrect' ? (
+              <div>
+                <p className='text-sm font-medium text-[#FF0000]'>
+                  Incorrect login credentials
+                </p>
+              </div>
+            ) : null}
             <div>
               <Button className='w-full flex justify-center rounded-md'>
                 Sign In
