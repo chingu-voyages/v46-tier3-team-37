@@ -1,10 +1,12 @@
 'use client';
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { cva, type VariantProps } from "class-variance-authority";
 import CardImage from "./CardImage";
 import CardBody from "./CardBody";
 import CardFooter from "./CardFooter";
+import { Transaction } from "@/types/schemaTypes";
+import getRenterById from "@/app/actions";
 // import { twMerge as cnm } from "tailwind-merge";
 
 
@@ -14,12 +16,12 @@ import CardFooter from "./CardFooter";
  * If you need to make changes or create a new button add a variant with the tailwind classes you need the warning variant is there as an example. feel free to add more sizes also. 
  */
 const cardVariants = cva(
-    "group flex h-auto flex-wrap text-sm font-semibold text-black shadow-md shadow-[#797979] dark:shadow-[#0b0b0b] bg-[#f6f6f6] dark:text-[#FFFFFF] dark:bg-foregroundPrimary",
+    'flex flex-col dark:bg-foregroundPrimary shadow-md shadow-[#797979] dark:shadow-[#0b0b0b] bg-[#f6f6f6] dark:text-[#FFFFFF] h-fit hover:cursor-pointer ',
     {
         variants: {
             variant: {
-                default: "items-center my-2",
-                detailed: "justify-center"
+                default: "",
+                detailed: ""
             },
             size: {
                 default: "w-full",
@@ -54,6 +56,13 @@ interface cardProps
     active?: boolean,
     price?: string,
     description?: string,
+    transactions?: Transaction[]
+}
+
+type ActiveUser = {
+    email: string | null;
+    username: string;
+    id: string;
 }
 
 
@@ -83,7 +92,7 @@ export default function Card({
     active = false,
     price,
     children,
-
+    transactions,
     ...props
 }: cardProps) {
 
@@ -94,15 +103,40 @@ export default function Card({
         setShow(!show)
     }
 
+    const [activeRenters, setActiveRenters] = useState<Array<ActiveUser>>([])
+   
+   useEffect(() => {
   
-
+    if (transactions) {
+        transactions.forEach(async (t) => {
+            if (t.status === 'ACTIVE'){
+                const user = await getRenterById(t.renterId);
+                if (user) {
+                    setActiveRenters([
+                        ...activeRenters,
+                        { 
+                            id: user.id, 
+                            username: user.username,
+                            email: user.email,
+                        }
+                    ])
+                }
+            }
+        })
+        
+     }
+   
+   },[])
     return (
         <>
-            <div onClick={handleClick} className={`${variant === 'detailed' && 'hover:cursor-pointer'} ${cardVariants({ className, variant, size })}`} {...props}>
-                <CardImage variant={variant} size={'default'} imageSrc={imageSrc} />
-                <CardBody active={active} variant={variant} size={'default'} description={description} title={title} />
-                <CardFooter parentVariant={variant} show={show} >
+            <div onClick={handleClick} className={cardVariants({ className, variant, size })} {...props}>
+                <div className={`${variant === 'detailed' ? 'flex' : 'flex flex-col'}`}>
+                    <CardImage variant={variant} size={'default'} imageSrc={imageSrc} />
+                    <CardBody active={active} variant={variant} size={'default'} description={description} title={title} />
+                </div>
+                <CardFooter price={price} parentVariant={variant} show={show} transactions={transactions} activeRenters={activeRenters}>
                     {children}
+                    <button style={{ display: 'none' }}></button>
                 </CardFooter>
             </div >
 

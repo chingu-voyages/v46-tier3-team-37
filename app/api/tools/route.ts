@@ -1,14 +1,42 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
-import { Tool } from "@/types/schemaTypes";
 
 export async function GET(req: NextRequest) {
-  const tools:Tool[] = await prisma?.item.findMany({ take: 10 });
-  return NextResponse.json(tools);
+  const tools = await prisma?.item.findMany({ 
+    include: {
+      images: true,
+      Transaction: {
+        select: {
+          status: true,
+          startDate: true,
+          endDate: true
+        },
+        where: {
+          NOT: {
+            status: 'COMPLETED'
+          }
+        }
+      }
+    }
+  });
+
+  const toolsWithAvailability = tools.map(tool => {
+    const hasTransactions = tool.Transaction.length > 0;
+
+    if (!hasTransactions) {
+      return { ...tool, available: true };
+    }
+    const activeTransactionExists = hasTransactions && tool.Transaction.some(
+      transaction => transaction.status !== 'ACTIVE'
+    );
+    return { ...tool, available: activeTransactionExists };
+  });
+
+  return NextResponse.json(toolsWithAvailability);
 }
 
 export async function POST(req: NextRequest) {
-  const data: Tool = await req.json();
+  const data = await req.json();
 
   try {
     const newTool = await prisma?.item.create({ data });

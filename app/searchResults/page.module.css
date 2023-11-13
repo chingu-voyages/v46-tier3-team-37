@@ -1,7 +1,37 @@
 .searchResultsContainer {
-    /* margin-top: 115px; */
+    padding-top: 5px;
+    padding-right: 10px;
+    padding-left: 5px;
 }
 
 .searchResults {
     margin-left: 5px;
+}
+
+.searchResultsTop {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+
+.sortOptions {
+    display: flex;
+    flex-direction: column;
+}
+
+.sortBy {
+    font-size: 0.7rem;
+}
+
+.sortByOptions {
+    display: flex;
+    flex-direction: row;
+    font-size: 0.6rem;
+}
+
+.searchingForTools {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
 }

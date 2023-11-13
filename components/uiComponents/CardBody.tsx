@@ -1,7 +1,7 @@
 import { cva, type VariantProps } from "class-variance-authority";
 
 const CardBodyVariants = cva(
-    "flex flex-row justify-center shrink-0 basis-3/4 grow text-center text-clip bg-[#F6F6F6] dark:bg-foregroundPrimary w-full border-b-1 border-[black]",
+    "flex flex-row justify-center max-h-[160px] text-ellipsis overflow-hidden shrink-0 basis-3/4 grow text-center text-clip bg-[#F6F6F6] dark:bg-foregroundPrimary w-full border-b-1 border-[black]",
     {
         variants: {
             variant: {
@@ -11,9 +11,6 @@ const CardBodyVariants = cva(
             size: {
                 default: "w-full",
             },
-            // active: {
-
-            // }
         },
         defaultVariants: {
             variant: "default",
@@ -27,16 +24,16 @@ interface CardBodyVariantProps
     VariantProps<typeof CardBodyVariants> {
     active: boolean,
     title: string,
-    description: string
+    description: string,
 }
 
 export default function CardBody({ variant, size, active, title, description }: CardBodyVariantProps) {
     return (
         <div className={CardBodyVariants({ variant, size })}>
-            {variant === 'detailed' ? <div className={`m-1 p-1 h-2 w-2 rounded-full ${active ? 'bg-[#12ad12]' : 'bg-[red]'}`} /> : null}
-            <span >
+            {variant === 'detailed' ? <div className={`mr-auto p-1 h-2 w-2 rounded-full ${active ? 'bg-[#12ad12]' : 'bg-[red]'}`} /> : null}
+            <span className="mr-auto">
                 <h4>{title}</h4>
-                <p className="font-normal text-xs text-ellipsis text-[black] dark:text-[white] ">{description}</p>
+                <p className="font-normal m-2 max-h-4 text-xs text-ellipsis text-[black] dark:text-[white] ">{description}</p>
             </span>
         </div>
     )
