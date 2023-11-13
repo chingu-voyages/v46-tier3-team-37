@@ -14,6 +14,13 @@ export async function generateStaticParams(): Promise<
   { params: { id: string } }[]
 > {
   const res = await fetch(`${baseUrl}/api/tools`);
+
+  if (!res.ok) {
+    throw new Error(
+      `Failed to fetch data. Status: ${res.status}`
+    );
+  }
+
   const tools = await res.json();
 
   return tools.map((tool: Tool) => ({
