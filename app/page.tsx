@@ -3,7 +3,6 @@ import Button from '@/components/uiComponents/Button'
 import Image from 'next/image'
 import { getFeaturedTools } from './actions';
 import HomePgForm from '@/components/forms/HomePgForm';
-import { Link } from 'react-router-dom';
 
 export default async function Home() {
 
