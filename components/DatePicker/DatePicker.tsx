@@ -7,6 +7,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import Button from '../uiComponents/Button';
 import Link from 'next/link';
 import toast, { Toaster } from 'react-hot-toast';
+import { getToolById } from '@/app/actions';
 
 type DateRange = {
   startDate: Date;
@@ -19,7 +20,7 @@ export default function Calendar({
   user,
 }: {
   excludeDateRangeArray: DateRange[];
-  tool: Tool;
+  tool: Awaited<ReturnType<typeof getToolById>>;
   user: String | undefined | null;
 }) {
   const [beginDate, setBeginDate] = useState<Date | null>(
@@ -51,7 +52,7 @@ export default function Calendar({
   };
 
   const calculateFee = (start: Date, end: Date) => {
-    if (tool.ownerId === user) return 0;
+    if (tool!.ownerId === user) return 0;
     const MILLIS_PER_DAY = 24 * 60 * 60 * 1000;
 
     const differenceInMillis =
@@ -61,7 +62,7 @@ export default function Calendar({
       differenceInMillis / MILLIS_PER_DAY
     );
 
-    const fee = days * tool.price;
+    const fee = days * tool!.price;
     return fee;
   };
 
@@ -77,7 +78,7 @@ export default function Calendar({
             body: JSON.stringify({
               startDate: beginDate.toISOString(),
               endDate: endingDate.toISOString(),
-              itemId: tool.id,
+              itemId: tool!.id,
               renterId: user,
               fee: calculateFee(beginDate, endingDate),
             }),

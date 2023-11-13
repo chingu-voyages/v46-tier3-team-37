@@ -4,6 +4,34 @@ import { options } from "./api/auth/[...nextauth]/options";
 import { redirect } from "next/navigation";
 import { getServerSession } from "next-auth";
 
+export async function getToolById(id: string) {
+    try {
+        const tool = await prisma.item.findUnique({
+          where: {
+            id,
+          },
+          include: {
+            images: true,
+            Transaction: {
+              select: {
+                startDate: true,
+                endDate: true,
+              },
+              where: {
+                NOT: {
+                  status: 'COMPLETED',
+                },
+              },
+            },
+          },
+        })
+    
+        if (tool) return tool
+      } catch (error) {
+        console.log(error);
+      }
+}
+
 export async function getFeaturedTools() {
     try {
         const tools = await prisma?.item.findMany({
