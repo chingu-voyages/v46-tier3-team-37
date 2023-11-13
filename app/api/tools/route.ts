@@ -1,7 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
-import { Item } from "@/types/schemaTypes";
-import { getAllToolsWithImages, getFeaturedTools } from "@/app/actions";
 
 export async function GET(req: NextRequest) {
   const tools = await prisma?.item.findMany({ 
@@ -38,7 +36,7 @@ export async function GET(req: NextRequest) {
 }
 
 export async function POST(req: NextRequest) {
-  const data:Item = await req.json();
+  const data = await req.json();
 
   try {
     const newTool = await prisma?.item.create({ data });
