@@ -5,14 +5,10 @@ import Image from 'next/image';
 import { options } from '@/app/api/auth/[...nextauth]/options';
 import { getServerSession } from 'next-auth';
 
-let baseUrl = ''; //to be the value of the deployed website base URL
-if (process.env.NODE_ENV === 'development') {
-  baseUrl = 'http://localhost:3000';
-}
 export async function generateStaticParams(): Promise<
   { params: { id: string } }[]
 > {
-  const res = await fetch(`${baseUrl}/api/tools`);
+  const res = await fetch(`api/tools`);
 
   if (!res.ok) {
     console.error(

@@ -4,11 +4,7 @@ import { ItemComplete as Tool } from '@/types/schemaTypes';
 import Link from 'next/link';
 
 async function getAllToolsInfo() {
-  let baseUrl = ''; //to be the value of the deployed website base URL
-  if (process.env.NODE_ENV === 'development') {
-    baseUrl = 'http://localhost:3000';
-  }
-  const res = await fetch(`${baseUrl}/api/tools`);
+  const res = await fetch(`api/tools`);
   if (!res.ok) {
     throw new Error('Failed to fetch data');
   }
