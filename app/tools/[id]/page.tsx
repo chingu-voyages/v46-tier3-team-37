@@ -4,39 +4,49 @@ import { Tool } from '@/types/schemaTypes';
 import Image from 'next/image';
 import { options } from '@/app/api/auth/[...nextauth]/options';
 import { getServerSession } from 'next-auth';
+import { getToolById } from '@/app/actions';
+export const dynamic = "force-dynamic"
 
-let baseUrl = ''; //to be the value of the deployed website base URL
+let baseUrl: string; //to be the value of the deployed website base URL
 if (process.env.NODE_ENV === 'development') {
   baseUrl = 'http://localhost:3000';
 }
-export async function generateStaticParams(): Promise<
-  { params: { id: string } }[]
-> {
-  const res = await fetch(`${baseUrl}/api/tools`);
-  const tools = await res.json();
+// export async function generateStaticParams() {
+//   try {
+//     const res = await fetch(`https://v46-tier3-team-37-edshmiu6y-sean-paulsons-projects.vercel.app/?vercelToolbarCode=Xo2dVAIBRm-vEun/api/tools`);
+//   const tools = await res.json();
 
-  return tools.map((tool: Tool) => ({
-    params: { id: tool.id },
-  }));
-}
+//   return tools.map((tool: Tool) => ({
+//     params: { id: tool.id },
+//   }));
+//   }catch (error) {
+//     console.log(error);
+//   }
+// }
 
-async function getTool(id: String) {
-  const res = await fetch(`${baseUrl}/api/tools/${id}`, {
-    cache: 'no-store',
-  });
+// async function getTool(id: String) {
+//  try {
+//   const res = await fetch(`https://v46-tier3-team-37-edshmiu6y-sean-paulsons-projects.vercel.app/?vercelToolbarCode=Xo2dVAIBRm-vEun/api/tools/${id}`, {
+//     cache: 'no-store',
+//   });
 
-  const tool = await res.json();
+//   const tool = await res.json();
 
-  return tool;
-}
+//   return tool;
+//  }catch (error) {
+//   console.log(error)
+//  }
+// }
 
 export default async function Tool({
   params,
 }: {
-  params: { id: String };
+  params: { id: string };
 }) {
-  const tool = await getTool(params.id);
+  console.log(params.id)
+  const tool = await getToolById(params.id);
   const session = await getServerSession(options);
+  if (!tool) return (<>error no tool found</>)
 
   return (
     <div className=''>

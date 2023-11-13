@@ -59,9 +59,9 @@ interface cardProps
     transactions?: Transaction[]
 }
 
-type ActiveUser = {
+export type ActiveUser = {
     email: string | null;
-    username: string;
+    username: string | null;
     id: string;
 }
 

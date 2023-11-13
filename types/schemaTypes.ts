@@ -7,7 +7,7 @@ export interface Item extends ItemPrismaGeneratedType{
 
 export type User = UserPrismaGeneratedType 
 
-// export type Transaction = TransactionPrismaGeneratedType
+export type Transaction = TransactionPrismaGeneratedType
 
 const transactionComplete = Prisma.validator<Prisma.TransactionDefaultArgs>()({
   include: { item: { include: {

@@ -82,7 +82,7 @@ const NavBar: React.FC = () => {
   }, [showMenu])
 
   return (
-    <section className={s.navbarContainer}>
+    <section className={`dark:bg-backgroundPrimary bg-[white] ${s.navbarContainer}`}>
       <ul className={s.menuSearchBarContainer}>
         <li className={s.menuContainer} onClick={openMenu}>
           <Image src={menu} className={s.menuIcon} alt='' />

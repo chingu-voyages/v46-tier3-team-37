@@ -23,7 +23,7 @@ export default function RentalList({ transactions }: { transactions: Awaited<Ret
             <ul className={`${isExpanded ? 'flex w-1/2 gap-2 m-auto flex-col' : 'flex lg:w-1/2 gap-2 m-auto flex-col'}`}>
                 {transactions.map(t => (
                     <li key={t.id}>
-                        <Card variant={'default'} title={t.item.name} imageSrc={t.item.images[0].url} description={t.item.description}>
+                        <Card variant={'default'} title={t.item.name} imageSrc={t.item.images[0]?.url ?? '/2516402-21-base-v2.webp'} description={t.item.description}>
                             <Button onClick={(e) => {showDetails(t)}} variant={'thin'} size={'sm'} cardType="default">More Info</Button>
                             <Button variant={'thin'} size={'sm'} cardType="default">cancel</Button>
                         </Card>

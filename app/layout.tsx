@@ -6,6 +6,7 @@ import { Lexend_Deca } from 'next/font/google';
 import { getServerSession } from 'next-auth';
 import { options } from './api/auth/[...nextauth]/options';
 import AuthProvider from '@/context/AuthProvider';
+export const dynamic = "force-dynamic"
 
 const inter = Lexend_Deca({
   subsets: ['latin'],

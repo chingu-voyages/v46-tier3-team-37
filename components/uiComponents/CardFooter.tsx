@@ -1,6 +1,7 @@
 import { Transaction } from "@/types/schemaTypes";
 import { cva, type VariantProps } from "class-variance-authority";
 import React from 'react';
+import { ActiveUser } from "./Card";
 
 const CardFooterVariants = cva(
     "flex dark:bg-foregroundPrimary",
@@ -28,11 +29,7 @@ interface CardFooterVariantProps
     show?: boolean,
     parentVariant?: "default" | "detailed" | null | undefined,
     transactions?: Transaction[],
-    activeRenters?: Array<{
-        email: string | null;
-        username: string;
-        id: string,
-    }> | null,
+    activeRenters?: Array<ActiveUser> | null,
     children: React.ReactNode | React.ReactNode[]
 }
 
@@ -55,8 +52,8 @@ export default function CardFooter({ variant, parentVariant, size, price, childr
                     {transactions && transactions.map((t) => (
                         t.status === 'ACTIVE' &&
                             <ul key={t.id}>
-                                { activeRenters && activeRenters.map(user => (
-                                    <li>
+                                { activeRenters && activeRenters.map((user, index) => (
+                                    <li key={index}>
                                         <b>Current renter: </b>{user?.id === t.renterId && user.username}
                                     </li>
                                 ))
